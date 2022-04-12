@@ -57,6 +57,9 @@ Route::get('/purchase-confirmation', function () {
     return view ('purchase-confirmation');
 });
 
+Route::get('admin/index', function () {
+    return view('admin.index');
+});
 
 
 
