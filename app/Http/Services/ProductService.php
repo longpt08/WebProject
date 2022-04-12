@@ -1,0 +1,27 @@
+<?php
+
+
+namespace App\Http\Services;
+
+
+use App\Models\Product;
+use Illuminate\Database\Eloquent\Collection;
+
+class ProductService
+{
+    public function getProducts(?int $limit = null): Collection
+    {
+        $query = Product::query()->orderByDesc('average_rating');
+        if ($limit) {
+            $query->limit($limit);
+        }
+        return $query->get();
+    }
+
+    public function getProductById(int $id): Product
+    {
+        return Product::query()
+            ->where('id', $id)
+            ->first();
+    }
+}
