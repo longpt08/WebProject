@@ -2717,4 +2717,16 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
     display: flex;
 }
 
+.filter {
+    display: flex;
+    padding-bottom: 10px;
+}
+#from {
+    width: 120px;
+    height: 30px;
+}
+#to {
+    width: 120px;
+    height: 30px;
+}
 /*# sourceMappingURL=style.css.map */

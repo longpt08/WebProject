@@ -4,7 +4,7 @@
 namespace App\Http\Enums;
 
 
-class Status
+class UserStatus
 {
     const ACTIVE = 1;
     const INACTIVE = 0;

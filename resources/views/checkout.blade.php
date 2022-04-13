@@ -78,58 +78,62 @@ $user = session()->get('user');
 	</div>
 </section>
 <div class="page-wrapper">
-   <div class="checkout shopping">
-      <div class="container">
-         <div class="row">
-            <div class="col-md-8">
-               <div class="block billing-details">
-                   <h4 class="widget-title">Billing Details</h4>
-                   <div id="default-address">
-                       <input type="checkbox" name="default-address" checked="true">
-                       <p style="padding-left: 10px">Default Address</p>
-                   </div>
-                  <form class="checkout-form" method="POST" href="/confirm">
-                     <div class="form-group">
-                        <label for="full_name">Full Name</label>
-                        <input type="text" class="form-control" name="full_name" placeholder="{{$user->first_name . " " . $user->last_name}}">
-                     </div>
-                     <div class="form-group">
-                        <label for="user_address">Address</label>
-                        <input type="text" class="form-control" name="user_address" placeholder="{{$user->address}}">
-                     </div>
-                     <div class="form-group">
-                        <label for="user_country">Phone Number</label>
-                        <input type="text" class="form-control" name="phone_number" placeholder="{{$user->phone_number}}">
-                     </div>
-                  </form>
-               </div>
-               <div class="block">
-                  <h4 class="widget-title">Payment Method</h4>
-                  <p>Credit Cart Details (Secure payment)</p>
-                  <div class="checkout-product-details">
-                     <div class="payment">
-                        <div class="card-details">
-                           <form  class="checkout-form" method="POST" href="/confirm">
-                               @csrf
-                              <div class="form-group">
-                                 <label for="card-number">Card Number <span class="required">*</span></label>
-                                 <input  id="card-number" class="form-control"  name="card_number" type="tel" placeholder="•••• •••• •••• ••••">
-                              </div>
-                              <div class="form-group half-width padding-right">
-                                 <label for="card-expiry">Expiry (MM/YY) <span class="required">*</span></label>
-                                 <input id="card-expiry" class="form-control" name="expiry" type="tel" placeholder="MM / YY">
-                              </div>
-                              <div class="form-group half-width padding-left">
-                                 <label for="card-cvc">Card Code <span class="required">*</span></label>
-                                 <input id="card-cvc" class="form-control" name="cvc" type="tel" maxlength="4" placeholder="CVC" >
-                              </div>
-                              <button type="submit" class="btn btn-main mt-20" id="confirm">Place Order</button>
-                           </form>
+    <div class="checkout shopping">
+        <div class="container">
+            <div class="row">
+                <form method="POST" action="/confirm">
+                    @csrf
+                    <div class="col-md-8">
+                        <div class="block billing-details">
+                            <h4 class="widget-title">Billing Details</h4>
+                            <div id="default-address">
+                            </div>
+                            <div class="form-group">
+                                <label for="full_name">Full Name</label>
+                                <input type="text" class="form-control" name="full_name"
+                                       placeholder="{{$user->first_name . " " . $user->last_name}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="user_address">Address</label>
+                                <input type="text" class="form-control" name="user_address"
+                                       placeholder="{{$user->address}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="user_country">Phone Number</label>
+                                <input type="text" class="form-control" name="phone_number"
+                                       placeholder="{{$user->phone_number}}">
+                            </div>
                         </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
+                        <div class="block">
+                            <h4 class="widget-title">Payment Method</h4>
+                            <p>Credit Cart Details (Secure payment)</p>
+                            <div class="checkout-product-details">
+                                <div class="payment">
+                                    <div class="card-details">
+                                        <div class="form-group">
+                                            <label for="card-number">Card Number <span class="required">*</span></label>
+                                            <input id="card-number" class="form-control" name="card_number" type="tel"
+                                                   placeholder="•••• •••• •••• ••••">
+                                        </div>
+                                        <div class="form-group half-width padding-right">
+                                            <label for="card-expiry">Expiry (MM/YY) <span
+                                                    class="required">*</span></label>
+                                            <input id="card-expiry" class="form-control" name="expiry" type="tel"
+                                                   placeholder="MM / YY">
+                                        </div>
+                                        <div class="form-group half-width padding-left">
+                                            <label for="card-cvc">Card Code <span class="required">*</span></label>
+                                            <input id="card-cvc" class="form-control" name="cvc" type="tel"
+                                                   maxlength="4"
+                                                   placeholder="CVC">
+                                        </div>
+                                        <button type="submit" class="btn btn-main mt-20" >Place Order</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             <div class="col-md-4">
                <div class="product-checkout-details">
                   <div class="block">

@@ -76,7 +76,7 @@
                             </div>
                             <ul class="text-center cart-buttons">
                                 <li><a href="/cart" class="btn btn-small">View Cart</a></li>
-                                <li><a href="/checkout" class="btn btn-small btn-solid-border">Checkout</a></li>
+                                    <li><a href="/checkout" class="btn btn-small btn-solid-border">Checkout</a></li>
                             </ul>
                         </div>
 
@@ -88,7 +88,7 @@
                                 class="tf-ion-ios-search-strong"></i> Search</a>
                         <ul class="dropdown-menu search-dropdown">
                             <li>
-                                <form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
+                                <form action="/shop-sidebar" method="GET"><input type="search" name="search" class="form-control" placeholder="Search..."></form>
                             </li>
                         </ul>
                     </li><!-- / Search -->
@@ -104,13 +104,11 @@
                                     <ul>
                                         <li class="dropdown-header">Personal</li>
                                         <li role="separator" class="divider"></li>
-                                        @if (!isset($user->first_name))
+                                        @if (!\Illuminate\Support\Facades\Auth::check())
                                             <li><a href="/login">Log In</a></li>
                                             <li><a href="/sign-up">Sign Up</a></li>
                                         @else
-                                            <li><a href="/dash-board">User Interface</a></li>
                                             <li><a href="/order">Orders</a></li>
-                                            <li><a href="/address">Address</a></li>
                                             <li><a href="/profile-detail">Profile Details</a></li>
                                             <li><a href="/log-out">Log Out</a></li>
                                         @endif

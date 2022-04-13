@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Services\UserService;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -39,6 +40,7 @@ class UserController extends Controller
     {
         $user = $this->userService->checkIfExistedAccount($request['email'], $request['password']);
         if ($user) {
+            Auth::login($user);
             session()->put(['user' => $user]);
             return redirect()->route('index');
         } else {
@@ -49,6 +51,7 @@ class UserController extends Controller
     public function logOut()
     {
         session()->flush();
+        Auth::logout();
         return redirect()->route('index');
     }
 }

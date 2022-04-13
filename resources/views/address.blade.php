@@ -11,15 +11,8 @@ WEBSITE: https://themefisher.com
 TWITTER: https://twitter.com/themefisher
 FACEBOOK: https://www.facebook.com/themefisher
 -->
-<?php
-$productCarts = session()->get('product_cart');
-if ($productCarts) {
-    $productCounts = array_count_values(array_column(session()->get('product_cart'), 'id'));
-    $total = array_sum(array_column(session()->get('product_cart'), 'price'));
-} else {
-    $total = 0;
-}
-?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,91 +50,97 @@ if ($productCarts) {
 </head>
 
 <body id="body">
-
 @include('layout.header')
 @include('layout.navigator')
+
 
 <section class="page-header">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="content">
-					<h1 class="page-name">Cart</h1>
+					<h1 class="page-name">Dashboard</h1>
 					<ol class="breadcrumb">
 						<li><a href="/">Home</a></li>
-						<li class="active">cart</li>
+						<li class="active">my account</li>
 					</ol>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-
-
-
-<div class="page-wrapper">
-  <div class="cart shopping">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <div class="block">
-            <div class="product-list">
-              <form method="post">
-                <table class="table">
-                  <thead>
-                    <tr>
-                        <th class="">Item Name</th>
-                        <th class="">Item Price</th>
-                        <th class="">Amount</th>
-                        <th class="">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @if($productCarts)
-                        @foreach($productCounts as $key => $value)
-                            @foreach($productCarts as $productCart)
-                                @if($key == $productCart['id'])
-                                    <tr class="">
-                                        <td class="">
-                                            <div class="product-info">
-                                                <img width="80" src="images/shop/cart/cart-1.jpg" alt="" />
-                                                <a href="#!">{{$productCart['name']}}</a>
-                                            </div>
-                                        </td>
-                                        <td class="">${{$productCart['price']}}</td>
-                                        <td class="">{{$value}}</td>
-                                        <td class="">
-                                            <ul class="action">
-                                                <li><i class="tf-ion-plus"></i></li>
-                                                <li><i class="tf-ion-minus"></i></li>
-                                                <li><i class="tf-ion-close"></i></li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    @break
-                                @endif
-                            @endforeach
-                        @endforeach
-                    @endif
-                  </tbody>
-                </table>
-                  @if (session()->get('user'))
-                      <a href="/checkout" class="btn btn-main pull-right">Checkout</a>
-                  @else
-                      <a href="/login" class="btn btn-main pull-right">Checkout</a>
-                  @endif
-              </form>
-            </div>
+<section class="user-dashboard page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <ul class="list-inline dashboard-menu text-center">
+              <li><a href="/dashboard">Dashboard</a></li>
+              <li><a href="/order">Orders</a></li>
+              <li><a class="active" href="/address">Address</a></li>
+              <li><a href="/profile-details">Profile Details</a></li>
+          </ul>
+        <div class="dashboard-wrapper user-dashboard">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Company</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Country</th>
+                  <th class="col-md-2 col-sm-3">Phone</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Nokia</td>
+                  <td>Adam Smith</td>
+                  <td>9/4 C Babor Road, Mohammad Pur, Dhaka</td>
+                  <td>Bangladesh</td>
+                  <td>+884 5452 6452</td>
+                  <td>
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-default"><i class="tf-pencil2" aria-hidden="true"></i></button>
+                      <button type="button" class="btn btn-default"><i class="tf-ion-close" aria-hidden="true"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Samsung</td>
+                  <td>Adam Smith</td>
+                  <td>9/4 C Babor Road, Mohammad Pur, Dhaka</td>
+                  <td>Bangladesh</td>
+                  <td>+884 5452 6452</td>
+                  <td>
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-default"><i class="tf-pencil2" aria-hidden="true"></i></button>
+                      <button type="button" class="btn btn-default"><i class="tf-ion-close" aria-hidden="true"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Motorola</td>
+                  <td>Adam Smith</td>
+                  <td>9/4 C Babor Road, Mohammad Pur, Dhaka</td>
+                  <td>Bangladesh</td>
+                  <td>+884 5452 6452</td>
+                  <td>
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-default"><i class="tf-pencil2" aria-hidden="true"></i></button>
+                      <button type="button" class="btn btn-default"><i class="tf-ion-close" aria-hidden="true"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-
+</section>
 @include('layout.footer')
-
     <!--
     Essential Scripts
     =====================================-->

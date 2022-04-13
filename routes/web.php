@@ -14,12 +14,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::group([
+    'middleware' => 'auth',
+],function(){
+    Route::get('/order-detail/{id}', [\App\Http\Controllers\OrderController::class, 'detail'])->middleware(\App\Http\Middleware\Authenticate::class);
+
+    Route::get('/profile-details', function() {
+        return view('profile-details');
+    });
+
+    Route::get('/order', function() {
+        return view('order');
+    });
+
+    Route::get('/checkout', [\App\Http\Controllers\ShopController::class, 'checkout']);
+
+    Route::post('/confirm', [\App\Http\Controllers\ShopController::class, 'confirm']);
+
+    Route::get('/purchase-confirmation', function () {
+        return view ('purchase-confirmation');
+    });
+});
+
+Route::get('/', [IndexController::class, 'index'])->name('home');
 
 //login
 Route::get('/login', function () {
     return view('login');
-});
+})->name('login');
+
 Route::post('/login/login', [\App\Http\Controllers\UserController::class, 'login']);
 
 //sign up
@@ -31,16 +54,8 @@ Route::post('/sign-up/create', [\App\Http\Controllers\UserController::class, 'cr
 //log out
 Route::get('/log-out', [\App\Http\Controllers\UserController::class, 'logOut']);
 
-//dashboard
-Route::get('/dash-board', function() {
-    return view('dashboard');
-});
-
 Route::get('/shop-sidebar', [\App\Http\Controllers\ShopController::class, 'index'])->name('shop');
 
-Route::get('product-single', function() {
-    return view('product-single');
-});
 Route::get('/product-single/{id}', [\App\Http\Controllers\ProductController::class, 'index'])->name('product-single');
 
 Route::get('/add-cart/{id}', [\App\Http\Controllers\ShopController::class, 'addCart']);
@@ -49,17 +64,12 @@ Route::get('/remove-cart/{id}', [\App\Http\Controllers\ShopController::class, 'r
 
 Route::get('/cart', [\App\Http\Controllers\ShopController::class, 'getCart']);
 
-Route::get('/checkout', [\App\Http\Controllers\ShopController::class, 'checkout']);
-
-Route::post('/confirm', [\App\Http\Controllers\ShopController::class, 'confirm']);
-
-Route::get('/purchase-confirmation', function () {
-    return view ('purchase-confirmation');
-});
-
 Route::get('admin/index', function () {
     return view('admin.index');
 });
+
+
+
 
 
 

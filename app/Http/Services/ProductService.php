@@ -24,4 +24,19 @@ class ProductService
             ->where('id', $id)
             ->first();
     }
+
+    public function search(string $search): Collection
+    {
+        return Product::query()->whereRaw("name like '%".$search."%'")->get();
+    }
+
+    public function filterPrice(int $from, int $to): Collection
+    {
+        return Product::query()->whereBetween('price', [$from, $to])->get();
+    }
+
+    public function reduceQuantity(Product $product, int $quantity): bool
+    {
+        
+    }
 }
