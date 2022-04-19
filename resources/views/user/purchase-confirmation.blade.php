@@ -11,15 +11,8 @@ WEBSITE: https://themefisher.com
 TWITTER: https://twitter.com/themefisher
 FACEBOOK: https://www.facebook.com/themefisher
 -->
-<?php
-$productCarts = session()->get('product_cart');
-if ($productCarts) {
-    $productCounts = array_count_values(array_column(session()->get('product_cart'), 'id'));
-    $total = array_sum(array_column(session()->get('product_cart'), 'price'));
-} else {
-    $total = 0;
-}
-?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,18 +51,18 @@ if ($productCarts) {
 
 <body id="body">
 
-@include('layout.header')
-@include('layout.navigator')
+@include('user.layout.header')
+@include('user.layout.navigator')
 
 <section class="page-header">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="content">
-					<h1 class="page-name">Cart</h1>
+					<h1 class="page-name">Purchase Confirmation</h1>
 					<ol class="breadcrumb">
 						<li><a href="/">Home</a></li>
-						<li class="active">cart</li>
+						<li class="active">purchase confirmation</li>
 					</ol>
 				</div>
 			</div>
@@ -78,69 +71,60 @@ if ($productCarts) {
 </section>
 
 
-
 <div class="page-wrapper">
-  <div class="cart shopping">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <div class="block">
-            <div class="product-list">
-              <form method="post">
-                <table class="table">
-                  <thead>
-                    <tr>
-                        <th class="">Item Name</th>
-                        <th class="">Item Price</th>
-                        <th class="">Amount</th>
-                        <th class="">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @if($productCarts)
-                        @foreach($productCounts as $key => $value)
-                            @foreach($productCarts as $productCart)
-                                @if($key == $productCart['id'])
-                                    <tr class="">
-                                        <td class="">
-                                            <div class="product-info">
-                                                <img width="80" src="images/shop/cart/cart-1.jpg" alt="" />
-                                                <a href="#!">{{$productCart['name']}}</a>
-                                            </div>
-                                        </td>
-                                        <td class="">${{$productCart['price']}}</td>
-                                        <td class="">{{$value}}</td>
-                                        <td class="">
-                                            <ul class="action">
-                                                <li><i class="tf-ion-plus"></i></li>
-                                                <li><i class="tf-ion-minus"></i></li>
-                                                <li><i class="tf-ion-close"></i></li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    @break
-                                @endif
-                            @endforeach
-                        @endforeach
-                    @endif
-                  </tbody>
-                </table>
-                  @if (session()->get('user'))
-                      <a href="/checkout" class="btn btn-main pull-right">Checkout</a>
-                  @else
-                      <a href="/login" class="btn btn-main pull-right">Checkout</a>
-                  @endif
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+  	<div class="purchase-confirmation shopping">
+    	<div class="container">
+      		<div class="row">
+        		<div class="col-md-8 col-md-offset-2">
+          			<div class="block ">
+            			<div class="purchase-confirmation-details">
+				            <table id="purchase-receipt" class="table">
+				                <thead>
+									<tr>
+					                    <th><strong>Payment:</strong></th>
+					                    <th>33056</th>
+				                  	</tr>
+				                </thead>
+
+				                <tbody>
+
+				                  	<tr>
+				                    	<td class=""><strong>Payment Status:</strong></td>
+				                    	<td class="">Complete</td>
+				                  	</tr>
+
+
+				                  	<tr>
+				                    	<td><strong>Payment Method:</strong></td>
+				                    	<td>Free Purchase</td>
+				                  	</tr>
+				                  	<tr>
+				                    	<td><strong>Date:</strong></td>
+				                    	<td>December 20, 2016</td>
+				                  	</tr>
+				                  	<tr>
+				                    	<td><strong>Subtotal</strong></td>
+				                    	<td>
+				                      	$18.00        </td>
+				                    </tr>
+
+				                    <tr>
+				                      	<td><strong>Total Price:</strong></td>
+				                      	<td>$18.00</td>
+				                    </tr>
+				                </tbody>
+				            </table>
+              			</div>
+            		</div>
+          		</div>
+        	</div>
+      	</div>
     </div>
-  </div>
 </div>
 
 
-@include('layout.footer')
+
+@include('user.layout.footer')
 
     <!--
     Essential Scripts

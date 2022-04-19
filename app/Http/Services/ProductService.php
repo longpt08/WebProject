@@ -37,6 +37,7 @@ class ProductService
 
     public function reduceQuantity(Product $product, int $quantity): bool
     {
-        
+        $product->quantity -= $quantity;
+        return $product->save();
     }
 }

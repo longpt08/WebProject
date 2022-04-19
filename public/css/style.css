@@ -1287,6 +1287,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 
 .product-category ul {
   padding-left: 15px;
+
 }
 
 .product-category ul li {
@@ -2729,4 +2730,10 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
     width: 120px;
     height: 30px;
 }
+
+.product-price {
+    font-size: 50px;
+}
+
+
 /*# sourceMappingURL=style.css.map */

@@ -18,7 +18,6 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->tinyInteger('status');
-            $table->tinyInteger('gender')->default(0);
             $table->timestamps();
         });
     }

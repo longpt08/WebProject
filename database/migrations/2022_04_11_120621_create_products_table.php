@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('detail');
             $table->tinyInteger('status')->default(1);
             $table->float('average_rating')->default(5);
-            $table->tinyInteger('gender')->default(0);
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

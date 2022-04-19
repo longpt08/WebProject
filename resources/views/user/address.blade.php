@@ -50,8 +50,8 @@ FACEBOOK: https://www.facebook.com/themefisher
 </head>
 
 <body id="body">
-@include('layout.header')
-@include('layout.navigator')
+@include('user.layout.header')
+@include('user.layout.navigator')
 
 
 <section class="page-header">
@@ -140,7 +140,7 @@ FACEBOOK: https://www.facebook.com/themefisher
     </div>
   </div>
 </section>
-@include('layout.footer')
+@include('user.layout.footer')
     <!--
     Essential Scripts
     =====================================-->

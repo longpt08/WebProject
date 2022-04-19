@@ -39,8 +39,8 @@
 </head>
 
 <body id="body">
-@include('layout.header')
-@include('layout.navigator')
+@include('user.layout.header')
+@include('user.layout.navigator')
 
 <div class="hero-slider">
   <div class="slider-item th-fullpage hero-area" style="background-image: url(images/slider/slider-1.jpg);">
@@ -196,7 +196,7 @@ Start Call To Action
 		</div>
 	</div>
 </section>
-@include('layout.footer')
+@include('user.layout.footer')
 
     <!--
     Essential Scripts

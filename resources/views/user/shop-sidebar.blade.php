@@ -40,8 +40,8 @@
 
 <body id="body">
 
-@include('layout.header')
-@include('layout.navigator')
+@include('user.layout.header')
+@include('user.layout.navigator')
 
 <section class="page-header">
 	<div class="container">
@@ -182,7 +182,7 @@
 
 
 
-@include('layout.footer')
+@include('user.layout.footer')
 
     <!--
     Essential Scripts
@@ -212,7 +212,7 @@
     <!-- Main Js File -->
     <script src="{{asset('js/script.js')}}"></script>
 
-@include('layout.footer')
+@include('user.layout.footer')
 
   </body>
   </html>

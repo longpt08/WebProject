@@ -20,11 +20,6 @@ class Product extends Model
         'gender',
     ];
 
-    public function productSizes()
-    {
-        return $this->hasMany(ProductSize::class, 'product_id', 'id');
-    }
-
     public function categoryProducts()
     {
         return $this->belongsToMany(Category::class, 'category_products');

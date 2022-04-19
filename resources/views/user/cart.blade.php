@@ -11,8 +11,15 @@ WEBSITE: https://themefisher.com
 TWITTER: https://twitter.com/themefisher
 FACEBOOK: https://www.facebook.com/themefisher
 -->
-
-
+<?php
+$productCarts = session()->get('product_cart');
+if ($productCarts) {
+    $productCounts = array_count_values(array_column(session()->get('product_cart'), 'id'));
+    $total = array_sum(array_column(session()->get('product_cart'), 'price'));
+} else {
+    $total = 0;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,97 +57,91 @@ FACEBOOK: https://www.facebook.com/themefisher
 </head>
 
 <body id="body">
-@include('layout.header')
-@include('layout.navigator')
+
+@include('user.layout.header')
+@include('user.layout.navigator')
+
 <section class="page-header">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="content">
-					<h1 class="page-name">Dashboard</h1>
+					<h1 class="page-name">Cart</h1>
 					<ol class="breadcrumb">
 						<li><a href="/">Home</a></li>
-						<li class="active">my account</li>
+						<li class="active">cart</li>
 					</ol>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-<section class="user-dashboard page-wrapper">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <ul class="list-inline dashboard-menu text-center">
-          <li><a href="/order">Orders</a></li>
-          <li><a class="active"  href="/profile-details">Profile Details</a></li>
-        </ul>
-        <div class="dashboard-wrapper dashboard-user-profile">
-          <div class="media">
-            <div class="pull-left text-center" href="#!">
-              <img class="media-object user-img" src="images/avater.jpg" alt="Image">
-              <a href="#x" class="btn btn-transparent mt-20">Change Image</a>
-            </div>
-            <div class="media-body">
-              <ul class="user-profile-list">
-                <li><span>Full Name:</span>Johanna Doe</li>
-                <li><span>Country:</span>USA</li>
-                <li><span>Email:</span>mail@gmail.com</li>
-                <li><span>Phone:</span>+880123123</li>
-                <li><span>Date of Birth:</span>Dec , 22 ,1991</li>
-              </ul>
+
+
+
+<div class="page-wrapper">
+  <div class="cart shopping">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="block">
+            <div class="product-list">
+              <form method="post">
+                <table class="table">
+                  <thead>
+                    <tr>
+                        <th class="">Item Name</th>
+                        <th class="">Item Price</th>
+                        <th class="">Amount</th>
+                        <th class="">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @if($productCarts)
+                        @foreach($productCounts as $key => $value)
+                            @foreach($productCarts as $productCart)
+                                @if($key == $productCart['id'])
+                                    <tr class="">
+                                        <td class="">
+                                            <div class="product-info">
+                                                <img width="80" src="images/shop/cart/cart-1.jpg" alt="" />
+                                                <a href="#!">{{$productCart['name']}}</a>
+                                            </div>
+                                        </td>
+                                        <td class="">${{$productCart['price']}}</td>
+                                        <td class="">{{$value}}</td>
+                                        <td class="">
+                                            <ul class="action">
+                                                <li><i class="tf-ion-plus"></i></li>
+                                                <li><i class="tf-ion-minus"></i></li>
+                                                <li><i class="tf-ion-close"></i></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    @break
+                                @endif
+                            @endforeach
+                        @endforeach
+                    @endif
+                  </tbody>
+                </table>
+                  @if (session()->get('user'))
+                      <a href="/checkout" class="btn btn-main pull-right">Checkout</a>
+                  @else
+                      <a href="/login" class="btn btn-main pull-right">Checkout</a>
+                  @endif
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
-<footer class="footer section text-center">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<ul class="social-media">
-					<li>
-						<a href="https://www.facebook.com/themefisher">
-							<i class="tf-ion-social-facebook"></i>
-						</a>
-					</li>
-					<li>
-						<a href="https://www.instagram.com/themefisher">
-							<i class="tf-ion-social-instagram"></i>
-						</a>
-					</li>
-					<li>
-						<a href="https://www.twitter.com/themefisher">
-							<i class="tf-ion-social-twitter"></i>
-						</a>
-					</li>
-					<li>
-						<a href="https://www.pinterest.com/themefisher/">
-							<i class="tf-ion-social-pinterest"></i>
-						</a>
-					</li>
-				</ul>
-				<ul class="footer-menu text-uppercase">
-					<li>
-						<a href="contact.html">CONTACT</a>
-					</li>
-					<li>
-						<a href="shop.blade.php">SHOP</a>
-					</li>
-					<li>
-						<a href="pricing.blade.php">Pricing</a>
-					</li>
-					<li>
-						<a href="contact.html">PRIVACY POLICY</a>
-					</li>
-				</ul>
-				<p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a></p>
-			</div>
-		</div>
-	</div>
-</footer>
+</div>
+
+
+@include('user.layout.footer')
+
     <!--
     Essential Scripts
     =====================================-->

@@ -1,16 +1,3 @@
-<!--
-THEME: Aviato | E-commerce template
-VERSION: 1.0.0
-AUTHOR: Themefisher
-
-HOMEPAGE: https://themefisher.com/products/aviato-e-commerce-template/
-DEMO: https://demo.themefisher.com/aviato/
-GITHUB: https://github.com/themefisher/Aviato-E-Commerce-Template/
-
-WEBSITE: https://themefisher.com
-TWITTER: https://twitter.com/themefisher
-FACEBOOK: https://www.facebook.com/themefisher
--->
 <?php
 session()->put('current','product-single')
 ?>
@@ -51,8 +38,8 @@ session()->put('current','product-single')
 </head>
 
 <body id="body">
-@include('layout.header')
-@include('layout.navigator')
+@include('user.layout.header')
+@include('user.layout.navigator')
 <section class="single-product">
 	<div class="container">
 		<div class="row">
@@ -132,23 +119,17 @@ session()->put('current','product-single')
 			<div class="col-md-7">
 				<div class="single-product-details">
 					<h2>{{$product->name}}</h2>
+                    <p class="product-rating">{{$product->average_rating}}<i class="tf-ion-android-star"></i></p>
 					<p class="product-price">${{$product->price}}</p>
-
 					<p class="product-description mt-20">
                         {{$product->detail}}
 					</p>
-					<div class="product-size">
-						<span>Size:</span>
-						<select class="form-control" id="size">
-                            @foreach($product->productSizes as $size)
-							<option>{{$size->size}}</option>
-                            @endforeach
-						</select>
-					</div>
-					<div class="product-quantity">
-						<span>Quantity:</span>
-                        <span id="quantity">{{$size->quantity}}</span>
-					</div>
+                    <div class="product-quantity">
+                        <span>Quantity:</span>
+                        <div class="product-quantity-slider">
+                            <input id="product-quantity" type="text" value="0" name="product-quantity">
+                        </div>
+                    </div>
 					<div class="product-category">
 						<span>Categories:</span>
 						<ul>
@@ -209,7 +190,7 @@ session()->put('current','product-single')
 	</div>
 </section>
 
-@include('layout.footer')
+@include('user.layout.footer')
     <!--
     Essential Scripts
     =====================================-->

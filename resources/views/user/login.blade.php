@@ -56,7 +56,7 @@ FACEBOOK: https://www.facebook.com/themefisher
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="block text-center">
-          <a class="logo" href="index.html">
+          <a class="logo" href="../index.html">
             <img src="images/logo.png" alt="">
           </a>
           <h2 class="text-center">Welcome Back</h2>

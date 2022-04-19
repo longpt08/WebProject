@@ -50,82 +50,94 @@ FACEBOOK: https://www.facebook.com/themefisher
 </head>
 
 <body id="body">
-
-@include('layout.header')
-@include('layout.navigator')
-
+@include('user.layout.header')
+@include('user.layout.navigator')
 <section class="page-header">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="content">
-					<h1 class="page-name">Purchase Confirmation</h1>
+					<h1 class="page-name">Dashboard</h1>
 					<ol class="breadcrumb">
-						<li><a href="/">Home</a></li>
-						<li class="active">purchase confirmation</li>
+						<li><a href="../index.html">Home</a></li>
+						<li class="active">my account</li>
 					</ol>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-
-
-<div class="page-wrapper">
-  	<div class="purchase-confirmation shopping">
-    	<div class="container">
-      		<div class="row">
-        		<div class="col-md-8 col-md-offset-2">
-          			<div class="block ">
-            			<div class="purchase-confirmation-details">
-				            <table id="purchase-receipt" class="table">
-				                <thead>
-									<tr>
-					                    <th><strong>Payment:</strong></th>
-					                    <th>33056</th>
-				                  	</tr>
-				                </thead>
-
-				                <tbody>
-
-				                  	<tr>
-				                    	<td class=""><strong>Payment Status:</strong></td>
-				                    	<td class="">Complete</td>
-				                  	</tr>
-
-
-				                  	<tr>
-				                    	<td><strong>Payment Method:</strong></td>
-				                    	<td>Free Purchase</td>
-				                  	</tr>
-				                  	<tr>
-				                    	<td><strong>Date:</strong></td>
-				                    	<td>December 20, 2016</td>
-				                  	</tr>
-				                  	<tr>
-				                    	<td><strong>Subtotal</strong></td>
-				                    	<td>
-				                      	$18.00        </td>
-				                    </tr>
-
-				                    <tr>
-				                      	<td><strong>Total Price:</strong></td>
-				                      	<td>$18.00</td>
-				                    </tr>
-				                </tbody>
-				            </table>
-              			</div>
-            		</div>
-          		</div>
-        	</div>
-      	</div>
-    </div>
-</div>
-
-
-
-@include('layout.footer')
-
+<section class="user-dashboard page-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-inline dashboard-menu text-center">
+					<li><a class="active" href="/order">Orders</a></li>
+					<li><a href="/profile-details">Profile Details</a></li>
+				</ul>
+				<div class="dashboard-wrapper user-dashboard">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Order ID</th>
+									<th>Date</th>
+									<th>Items</th>
+									<th>Total Price</th>
+									<th>Status</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>#451231</td>
+									<td>Mar 25, 2016</td>
+									<td>2</td>
+									<td>$99.00</td>
+									<td><span class="label label-primary">Processing</span></td>
+									<td><a href="order.blade.php" class="btn btn-default">View</a></td>
+								</tr>
+								<tr>
+									<td>#451231</td>
+									<td>Mar 25, 2016</td>
+									<td>3</td>
+									<td>$150.00</td>
+									<td><span class="label label-success">Completed</span></td>
+									<td><a href="order.blade.php" class="btn btn-default">View</a></td>
+								</tr>
+								<tr>
+									<td>#451231</td>
+									<td>Mar 25, 2016</td>
+									<td>3</td>
+									<td>$150.00</td>
+									<td><span class="label label-danger">Canceled</span></td>
+									<td><a href="order.blade.php" class="btn btn-default">View</a></td>
+								</tr>
+								<tr>
+									<td>#451231</td>
+									<td>Mar 25, 2016</td>
+									<td>2</td>
+									<td>$99.00</td>
+									<td><span class="label label-info">On Hold</span></td>
+									<td><a href="order.blade.php" class="btn btn-default">View</a></td>
+								</tr>
+								<tr>
+									<td>#451231</td>
+									<td>Mar 25, 2016</td>
+									<td>3</td>
+									<td>$150.00</td>
+									<td><span class="label label-warning">Pending</span></td>
+									<td><a href="order.blade.php" class="btn btn-default">View</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+@include('user.layout.footer')
     <!--
     Essential Scripts
     =====================================-->
