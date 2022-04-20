@@ -26,7 +26,7 @@ class ProductController extends Controller
     {
         $product = $this->productService->getProductById($id);
         $comments = Comment::query()->where('product_id', $id)->get();
-        return view('product-single')->with([
+        return view('user.product-single')->with([
             'product' => $product,
             'comments' => $comments,
         ]);

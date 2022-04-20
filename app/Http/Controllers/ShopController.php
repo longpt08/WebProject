@@ -59,7 +59,7 @@ class ShopController extends Controller
             $category = Category::query()->find($request['category']);
             $products = $category->products;
         }
-        return view('shop-sidebar')->with([
+        return view('user.shop-sidebar')->with([
             'categories' => $categories,
             'products' => $products,
         ]);
@@ -87,12 +87,12 @@ class ShopController extends Controller
 
     public function getCart()
     {
-        return view('cart');
+        return view('user.cart');
     }
 
     public function checkout()
     {
-        return view('checkout');
+        return view('user.checkout');
     }
 
     public function confirm(Request $request)
@@ -146,6 +146,6 @@ class ShopController extends Controller
             DB::rollBack();
             return view('checkout')->with(['alert' => 'Something went wrong!']);
         }
-        return view('confirmation');
+        return view('user.confirmation');
     }
 }

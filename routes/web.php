@@ -20,11 +20,11 @@ Route::group([
     Route::get('/order-detail/{id}', [\App\Http\Controllers\OrderController::class, 'detail'])->middleware(\App\Http\Middleware\Authenticate::class);
 
     Route::get('/profile-details', function() {
-        return view('profile-details');
+        return view('user.profile-details');
     });
 
     Route::get('/order', function() {
-        return view('order');
+        return view('user.order');
     });
 
     Route::get('/checkout', [\App\Http\Controllers\ShopController::class, 'checkout']);
@@ -32,7 +32,7 @@ Route::group([
     Route::post('/confirm', [\App\Http\Controllers\ShopController::class, 'confirm']);
 
     Route::get('/purchase-confirmation', function () {
-        return view ('purchase-confirmation');
+        return view ('user.purchase-confirmation');
     });
 });
 
@@ -40,14 +40,14 @@ Route::get('/', [IndexController::class, 'index'])->name('home');
 
 //login
 Route::get('/login', function () {
-    return view('login');
+    return view('user.login');
 })->name('login');
 
 Route::post('/login/login', [\App\Http\Controllers\UserController::class, 'login']);
 
 //sign up
 Route::get('/sign-up', function () {
-    return view('signUp');
+    return view('user.signUp');
 });
 Route::post('/sign-up/create', [\App\Http\Controllers\UserController::class, 'create']);
 

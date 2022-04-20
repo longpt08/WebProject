@@ -11,6 +11,6 @@ class OrderController extends Controller
     public function detail($id)
     {
         $order = Order::query()->where('id', $id)->first();
-        return view('order-detail')->with(['order' => $order]);
+        return view('user.order-detail')->with(['order' => $order]);
     }
 }
