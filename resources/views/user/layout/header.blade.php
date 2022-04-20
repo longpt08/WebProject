@@ -109,7 +109,7 @@
                                             <li><a href="/sign-up">Sign Up</a></li>
                                         @else
                                             <li><a href="/order">Orders</a></li>
-                                            <li><a href="/profile-detail">Profile Details</a></li>
+                                            <li><a href="/profile-details">Profile Details</a></li>
                                             <li><a href="/log-out">Log Out</a></li>
                                         @endif
                                     </ul>

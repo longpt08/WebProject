@@ -1705,11 +1705,11 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
   padding-left: 30px;
 }
 
-.dashboard-user-profile .user-profile-list li {
+.dashboard-user-profile .user-profile-list td {
   margin-bottom: 8px;
 }
 
-.dashboard-user-profile .user-profile-list span {
+.dashboard-user-profile .user-profile-list td {
   font-weight: bold;
   margin-right: 5px;
   width: 100px;

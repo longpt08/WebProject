@@ -31,7 +31,7 @@ class UserController extends Controller
         } else {
            if ($user->save()) {
                session(['user' => $user]);
-               return redirect()->route('index');
+               return redirect()->route('home');
            }
         }
     }
@@ -42,7 +42,7 @@ class UserController extends Controller
         if ($user) {
             Auth::login($user);
             session()->put(['user' => $user]);
-            return redirect()->route('index');
+            return redirect()->route('home');
         } else {
             return $message = "Login Failed";
         }
@@ -52,6 +52,6 @@ class UserController extends Controller
     {
         session()->flush();
         Auth::logout();
-        return redirect()->route('index');
+        return redirect()->route('home');
     }
 }

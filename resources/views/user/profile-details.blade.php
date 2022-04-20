@@ -1,18 +1,3 @@
-<!--
-THEME: Aviato | E-commerce template
-VERSION: 1.0.0
-AUTHOR: Themefisher
-
-HOMEPAGE: https://themefisher.com/products/aviato-e-commerce-template/
-DEMO: https://demo.themefisher.com/aviato/
-GITHUB: https://github.com/themefisher/Aviato-E-Commerce-Template/
-
-WEBSITE: https://themefisher.com
-TWITTER: https://twitter.com/themefisher
-FACEBOOK: https://www.facebook.com/themefisher
--->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +33,9 @@ FACEBOOK: https://www.facebook.com/themefisher
   <link rel="stylesheet" href="css/style.css">
 
 </head>
-
+<?php
+    $user = \Illuminate\Support\Facades\Auth::user();
+?>
 <body id="body">
 @include('user.layout.header')
 @include('user.layout.navigator')
@@ -82,13 +69,41 @@ FACEBOOK: https://www.facebook.com/themefisher
               <a href="#x" class="btn btn-transparent mt-20">Change Image</a>
             </div>
             <div class="media-body">
-              <ul class="user-profile-list">
-                <li><span>Full Name:</span>Johanna Doe</li>
-                <li><span>Country:</span>USA</li>
-                <li><span>Email:</span>mail@gmail.com</li>
-                <li><span>Phone:</span>+880123123</li>
-                <li><span>Date of Birth:</span>Dec , 22 ,1991</li>
-              </ul>
+                <form method="POST" action="/edit-profile">
+                    <table class="user-profile-list">
+                        <tr>
+                            <td><label for="full-name">Full Name:</label></td>
+                            <td><input type="text" id="full-name" name="full_name"
+                                       placeholder="{{$user->getFullName()}}"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="address">Address:</label>
+                            <td><input type="text" id="address" name="address"
+                                       placeholder="{{$user->address ?? 'N/A'}}"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="email">Email:</label></td>
+                            <td><input type="email" id="email" name="email" placeholder="{{$user->email}}"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="phone-number">Phone:</label></td>
+                            <td><input type="text" id="phone-number" name="phone_number"
+                                       placeholder="{{$user->phone_number ?? 'N/A'}}"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="date-of-birth">Date Of Birth:</label></td>
+                            <td><input type="date" id="date-of-birth" name="date_of_birth"
+                                       placeholder="{{(optional($user->date_of_birth)->format('dd/MM/YY')) ?? 'N/A'}}">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <button type="submit">Update</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>
           </div>
         </div>
@@ -96,51 +111,7 @@ FACEBOOK: https://www.facebook.com/themefisher
     </div>
   </div>
 </section>
-<footer class="footer section text-center">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<ul class="social-media">
-					<li>
-						<a href="https://www.facebook.com/themefisher">
-							<i class="tf-ion-social-facebook"></i>
-						</a>
-					</li>
-					<li>
-						<a href="https://www.instagram.com/themefisher">
-							<i class="tf-ion-social-instagram"></i>
-						</a>
-					</li>
-					<li>
-						<a href="https://www.twitter.com/themefisher">
-							<i class="tf-ion-social-twitter"></i>
-						</a>
-					</li>
-					<li>
-						<a href="https://www.pinterest.com/themefisher/">
-							<i class="tf-ion-social-pinterest"></i>
-						</a>
-					</li>
-				</ul>
-				<ul class="footer-menu text-uppercase">
-					<li>
-						<a href="../contact.html">CONTACT</a>
-					</li>
-					<li>
-						<a href="shop.blade.php">SHOP</a>
-					</li>
-					<li>
-						<a href="pricing.blade.php">Pricing</a>
-					</li>
-					<li>
-						<a href="../contact.html">PRIVACY POLICY</a>
-					</li>
-				</ul>
-				<p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a></p>
-			</div>
-		</div>
-	</div>
-</footer>
+@include('user.layout.footer')
     <!--
     Essential Scripts
     =====================================-->
