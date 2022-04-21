@@ -6,6 +6,11 @@
         <ul class="metismenu" id="menu">
             <li class="nav-label">Dashboard</li>
             <li>
+                <a class="has-arrow" href="/admin/index" aria-expanded="false">
+                    <i class="icon-home menu-icon"></i><span class="nav-text">Home</span>
+                </a>
+            </li>
+            <li>
                 <a class="has-arrow" href="/admin/user" aria-expanded="false">
                     <i class="icon-user menu-icon"></i><span class="nav-text">Users</span>
                 </a>
