@@ -81,6 +81,8 @@ Route::group([
     Route::get('category', [\App\Http\Controllers\AdminController::class, 'listCategory']);
     Route::get('category/detail/{id}', [\App\Http\Controllers\CategoryController::class, 'getCategoryDetail'])->name('category-detail');
     Route::post('category/detail/edit/{id}', [\App\Http\Controllers\CategoryController::class, 'editCategory']);
+
+    Route::get('invoice', [\App\Http\Controllers\AdminController::class, 'listInvoice']);
 });
 
 

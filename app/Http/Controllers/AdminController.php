@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -27,5 +28,11 @@ class AdminController extends Controller
     {
         $categories = $this->categoryService->getCategories();
         return view('admin.category', ['categories' => $categories]);
+    }
+
+    public function listInvoice()
+    {
+        $invoices = Invoice::query()->get();
+        return view('admin.invoice', ['invoices' => $invoices]);
     }
 }

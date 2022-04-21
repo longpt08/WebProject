@@ -33,17 +33,6 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-
-            <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-                    </ol>
-                </div>
-            </div>
-            <!-- row -->
-
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -66,7 +55,7 @@
                                                 <td>{{$category->id}}</td>
                                                 <td>{{$category->name}}</td>
                                                 <td>{{$category->description}}</td>
-                                                <td>{{$category->status}}</td>
+                                                <td>{{\App\Http\Enums\CategoryStatus::convert($category->status)}}</td>
                                                 <td><span><a href="/admin/category/detail/{{$category->id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span></td>
                                             </tr>
                                         @endforeach

@@ -26,8 +26,8 @@
     <div id="main-wrapper">
 
 @include('admin.layout.nav-header')
-    @include('admin.layout.header')
-@include('admin.layout.sidebar')
+@include(('admin.layout.header'))
+    @include('admin.layout.sidebar')
 
         <!--**********************************
             Content body start
@@ -35,35 +35,33 @@
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                                <h4 class="card-title">Data Table</h4>
                                 <div class="table-responsive">
-                                    <table class="table table-bordered verticle-middle">
+                                    <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                <th scope="col">UID</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Detail</th>
-                                                <th scope="col">Quantity</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Action</th>
+                                                <th>Invoice ID</th>
+                                                <th>Owner</th>
+                                                <th>Order ID</th>
+                                                <th>Total</th>
+                                                <th>Status</th>
+                                                <th>Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($products as $product)
+                                        @foreach($invoices as $invoice)
                                             <tr>
-                                                <td>{{$product->id}}</td>
-                                                <td>{{$product->name}}</td>
-                                                <td>{{$product->price}}</td>
-                                                <td>{{$product->detail}}</td>
-                                                <td>{{$product->quantity}}</td>
-                                                <td>{{\App\Http\Enums\ProductStatus::convert($product->status)}}</td>
-                                                <td><span><a href="/admin/product/detail/{{$product->id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span></td>
+                                                <td>{{$invoice->id}}</td>
+                                                <td>{{$invoice->user->getFullName()}}</td>
+                                                <td>{{$invoice->order->id}}</td>
+                                                <td>{{$invoice->total}}$</td>
+                                                <td>{{\App\Http\Enums\InvoiceStatus::convert($invoice->status)}}</td>
+                                                <td>{{$invoice->created_at}}</td>
                                             </tr>
                                         @endforeach
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -77,13 +75,11 @@
             Content body end
         ***********************************-->
 
-
 @include('admin.layout.footer')
     </div>
     <!--**********************************
         Main wrapper end
     ***********************************-->
-
 @include('admin.layout.include-bottom')
 
 </body>

@@ -35,6 +35,11 @@ class User extends Authenticatable
         return $this->hasMany(UserRate::class);
     }
 
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
     public function getFullName(): string
     {
         return $this->first_name . ' ' . $this->last_name;
