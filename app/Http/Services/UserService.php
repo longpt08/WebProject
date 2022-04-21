@@ -5,6 +5,7 @@ namespace App\Http\Services;
 
 
 use App\Models\User;
+use Illuminate\Support\Collection;
 
 class UserService
 {
@@ -15,5 +16,10 @@ class UserService
             $query->where('password', $password);
         }
         return $query->first();
+    }
+
+    public function getAll(): Collection
+    {
+        return User::query()->get();
     }
 }

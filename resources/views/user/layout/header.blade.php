@@ -95,7 +95,7 @@
 
                     <li class="dropdown full-width dropdown-slide">
                         <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350"
-                           role="button" aria-haspopup="true" aria-expanded="false">Hi, @if (isset($user)) {{$user->first_name}} @else Guest @endif <span
+                           role="button" aria-haspopup="true" aria-expanded="false">Hi, @if (isset($product)) {{$product->first_name}} @else Guest @endif <span
                                 class="tf-ion-ios-arrow-down"></span></a>
                         <div class="dropdown-menu">
                             <div class="row">

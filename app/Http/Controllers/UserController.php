@@ -9,16 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    /**
-     * @var UserService
-     */
-    private $userService;
-
-    public function __construct()
-    {
-        $this->userService = new UserService();
-    }
-
     public function create(Request $request)
     {
         $user = new User();
@@ -53,5 +43,20 @@ class UserController extends Controller
         session()->flush();
         Auth::logout();
         return redirect()->route('home');
+    }
+
+    public function getUserDetail($id)
+    {
+        $user = User::query()->find($id);
+        return view('admin.user-detail', ['user' => $user]);
+    }
+
+    public function editUser($id, Request $request)
+    {
+        $user = User::query()->find($id);
+        $user->status = $request->status;
+        $user->save();
+
+        return redirect()->route('user-detail', ['id' => $id]);
     }
 }

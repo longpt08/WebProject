@@ -74,26 +74,26 @@
                         <tr>
                             <td><label for="full-name">Full Name:</label></td>
                             <td><input type="text" id="full-name" name="full_name"
-                                       placeholder="{{$user->getFullName()}}"></td>
+                                       placeholder="{{$product->getFullName()}}"></td>
                         </tr>
                         <tr>
                             <td><label for="address">Address:</label>
                             <td><input type="text" id="address" name="address"
-                                       placeholder="{{$user->address ?? 'N/A'}}"></td>
+                                       placeholder="{{$product->address ?? 'N/A'}}"></td>
                         </tr>
                         <tr>
                             <td><label for="email">Email:</label></td>
-                            <td><input type="email" id="email" name="email" placeholder="{{$user->email}}"></td>
+                            <td><input type="email" id="email" name="email" placeholder="{{$product->email}}"></td>
                         </tr>
                         <tr>
                             <td><label for="phone-number">Phone:</label></td>
                             <td><input type="text" id="phone-number" name="phone_number"
-                                       placeholder="{{$user->phone_number ?? 'N/A'}}"></td>
+                                       placeholder="{{$product->phone_number ?? 'N/A'}}"></td>
                         </tr>
                         <tr>
                             <td><label for="date-of-birth">Date Of Birth:</label></td>
                             <td><input type="date" id="date-of-birth" name="date_of_birth"
-                                       placeholder="{{(optional($user->date_of_birth)->format('dd/MM/YY')) ?? 'N/A'}}">
+                                       placeholder="{{(optional($product->date_of_birth)->format('dd/MM/YY')) ?? 'N/A'}}">
                             </td>
                         </tr>
 

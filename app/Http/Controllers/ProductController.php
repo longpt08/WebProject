@@ -2,26 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\ProductService;
-use App\Models\Category;
-use App\Models\CategoryProduct;
 use App\Models\Comment;
 use App\Models\Product;
-use App\Models\ProductSize;
-use App\Models\User;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * @var ProductService
-     */
-    private $productService;
-
-    public function __construct()
-    {
-        $this->productService = new ProductService();
-    }
-
     public function index($id)
     {
         $product = $this->productService->getProductById($id);
@@ -30,5 +16,24 @@ class ProductController extends Controller
             'product' => $product,
             'comments' => $comments,
         ]);
+    }
+
+    public function getProductDetail($id)
+    {
+        $product = $this->productService->getProductById($id);
+        return view('admin.product-detail', ['product' => $product]);
+    }
+
+    public function editProduct($id, Request $request)
+    {
+        $product = $this->productService->getProductById($id);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->detail = $request->detail;
+        $product->status = $request->status;
+        $product->quantity = $request->quantity;
+        $product->save();
+
+        return redirect()->route('product-detail', ['id' => $id]);
     }
 }

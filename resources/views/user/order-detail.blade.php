@@ -71,7 +71,7 @@ $user = session()->get('user');
 				<div class="dashboard-wrapper user-dashboard">
 					<div class="media">
 						<div class="media-body">
-							<h2 class="media-heading">Welcome {{$user->first_name}}!</h2>
+							<h2 class="media-heading">Welcome {{$product->first_name}}!</h2>
 							<p>Let's check it out! Order ID: #{{$order->id}}</p>
 						</div>
 					</div>
