@@ -47,4 +47,10 @@ class AdminController extends Controller
         $invoices = Invoice::query()->get();
         return view('admin.invoice', ['invoices' => $invoices]);
     }
+
+    public function listOrder()
+    {
+        $orders = Order::query()->get();
+        return view('admin.order', ['orders' => $orders]);
+    }
 }

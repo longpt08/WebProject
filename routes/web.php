@@ -83,6 +83,8 @@ Route::group([
     Route::post('category/detail/edit/{id}', [\App\Http\Controllers\CategoryController::class, 'editCategory']);
 
     Route::get('invoice', [\App\Http\Controllers\AdminController::class, 'listInvoice']);
+
+    Route::get('order', [\App\Http\Controllers\AdminController::class, 'listOrder']);
 });
 
 
