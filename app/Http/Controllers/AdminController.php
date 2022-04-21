@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Product;
@@ -52,5 +53,11 @@ class AdminController extends Controller
     {
         $orders = Order::query()->get();
         return view('admin.order', ['orders' => $orders]);
+    }
+
+    public function listComment()
+    {
+        $comments = Comment::query()->get();
+        return view('admin.comment', ['comments' => $comments]);
     }
 }

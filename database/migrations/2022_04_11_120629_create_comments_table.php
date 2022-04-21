@@ -20,6 +20,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->text('content');
+            $table->integer('rating')->default(5);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

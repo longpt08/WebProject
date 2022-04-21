@@ -39,26 +39,28 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered verticle-middle">
+                                    <table class="table table-bcommented verticle-middle">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Order ID</th>
+                                                <th scope="col">Comment ID</th>
                                                 <th scope="col">Owner</th>
-                                                <th scope="col">Invoice ID</th>
-                                                <th scope="col">Description</th>
+                                                <th scope="col">Product ID</th>
+                                                <th scope="col">Content</th>
+                                                <th scope="col">Rating</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($orders as $order)
+                                        @foreach($comments as $comment)
                                             <tr>
-                                                <td>{{$order->id}}</td>
-                                                <td>{{$order->user->getFullName()}}</td>
-                                                <td>#{{$order->invoice->id}}</td>
-                                                <td>{{$order->description}}</td>
-                                                <td>{{\App\Http\Enums\OrderStatus::convert($order->status)}}</td>
-                                                <td><span><a href="/admin/order/detail/{{$order->id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span></td>
+                                                <td>{{$comment->id}}</td>
+                                                <td>{{$comment->user->getFullName()}}</td>
+                                                <td>#{{$comment->product->id}}</td>
+                                                <td>{{$comment->content}}</td>
+                                                <td>{{$comment->rating}}</td>
+                                                <td>{{\App\Http\Enums\CommentStatus::convert($comment->status)}}</td>
+                                                <td><span><a href="/admin/product/detail/{{$comment->id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span></td>
                                             </tr>
                                         @endforeach
                                         </tbody>

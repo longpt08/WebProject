@@ -85,6 +85,10 @@ Route::group([
     Route::get('invoice', [\App\Http\Controllers\AdminController::class, 'listInvoice']);
 
     Route::get('order', [\App\Http\Controllers\AdminController::class, 'listOrder']);
+    Route::get('order/detail/{id}', [\App\Http\Controllers\OrderController::class, 'getOrderDetail'])->name('order-detail');
+    Route::post('order/detail/edit/{id}', [\App\Http\Controllers\OrderController::class, 'editOrder']);
+
+    Route::get('comment', [\App\Http\Controllers\AdminController::class, 'listComment']);
 });
 
 
