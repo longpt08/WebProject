@@ -18,21 +18,6 @@ use Illuminate\Support\Facades\Log;
 
 class ShopController extends Controller
 {
-    /**
-     * @var CategoryService
-     */
-    private $categoryService;
-
-    /**
-     * @var ProductService
-     */
-    private $productService;
-
-    public function __construct()
-    {
-        $this->categoryService = new CategoryService();
-        $this->productService = new ProductService();
-    }
     public function index(Request $request)
     {
         $categoriesOriginal = $this->categoryService->getCategories();
