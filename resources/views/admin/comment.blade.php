@@ -60,7 +60,7 @@
                                                 <td>{{$comment->content}}</td>
                                                 <td>{{$comment->rating}}</td>
                                                 <td>{{\App\Http\Enums\CommentStatus::convert($comment->status)}}</td>
-                                                <td><span><a href="/admin/product/detail/{{$comment->id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span></td>
+                                                <td><span><a href="/admin/comment/detail/{{$comment->id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span></td>
                                             </tr>
                                         @endforeach
                                         </tbody>

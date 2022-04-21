@@ -89,6 +89,8 @@ Route::group([
     Route::post('order/detail/edit/{id}', [\App\Http\Controllers\OrderController::class, 'editOrder']);
 
     Route::get('comment', [\App\Http\Controllers\AdminController::class, 'listComment']);
+    Route::get('comment/detail/{id}', [\App\Http\Controllers\CommentController::class, 'getCommentDetail'])->name('comment-detail');
+    Route::post('comment/detail/edit/{id}', [\App\Http\Controllers\CommentController::class, 'editComment']);
 });
 
 
