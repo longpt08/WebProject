@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\UserService;
+use App\Http\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +32,10 @@ class UserController extends Controller
         if ($user) {
             Auth::login($user);
             session()->put(['user' => $user]);
-            return redirect()->route('home');
+            if ($user->role = UserRole::USER) {
+                return redirect()->route('home');
+            }
+            return redirect()->route('admin-index');
         } else {
             return $message = "Login Failed";
         }

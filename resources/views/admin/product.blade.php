@@ -38,9 +38,9 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <button type="button" class="btn mb-1 btn-info">Add new <span class="btn-icon-right"><i
+                            <a href="/admin/product/create-form"><button type="button" class="btn mb-1 btn-info">Add new <span class="btn-icon-right"><i
                                         class="fa fa-plus"></i></span>
-                            </button>
+                                </button></a>
                             <div class="table-responsive">
                                 <table class="table table-bordered verticle-middle">
                                     <thead>

@@ -68,19 +68,25 @@ Route::group([
     'prefix' => 'admin',
     'middleware' => 'auth',
 ], function(){
-   Route::get('index', [\App\Http\Controllers\AdminController::class, 'index']);
+   Route::get('index', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin-index');
 
    Route::get('user', [\App\Http\Controllers\AdminController::class, 'listUser']);
    Route::get('user/detail/{id}', [\App\Http\Controllers\UserController::class, 'getUserDetail'])->name('user-detail');
    Route::post('user/detail/edit/{id}', [\App\Http\Controllers\UserController::class, 'editUser']);
 
-   Route::get('product', [\App\Http\Controllers\AdminController::class, 'listProduct']);
+   Route::get('product', [\App\Http\Controllers\AdminController::class, 'listProduct'])->name('product-list');
    Route::get('product/detail/{id}', [\App\Http\Controllers\ProductController::class, 'getProductDetail'])->name('product-detail');
    Route::post('product/detail/edit/{id}', [\App\Http\Controllers\ProductController::class, 'editProduct']);
+   Route::get('product/create-form', [\App\Http\Controllers\ProductController::class, 'getProductForm']);
+   Route::post('product/create', [\App\Http\Controllers\ProductController::class, 'createProduct']);
 
-    Route::get('category', [\App\Http\Controllers\AdminController::class, 'listCategory']);
+    Route::get('category', [\App\Http\Controllers\AdminController::class, 'listCategory'])->name('category-list');
     Route::get('category/detail/{id}', [\App\Http\Controllers\CategoryController::class, 'getCategoryDetail'])->name('category-detail');
     Route::post('category/detail/edit/{id}', [\App\Http\Controllers\CategoryController::class, 'editCategory']);
+    Route::get('category/create-form', function () {
+        return view('admin.create-category');
+    });
+    Route::post('category/create', [\App\Http\Controllers\CategoryController::class, 'createCategory']);
 
     Route::get('invoice', [\App\Http\Controllers\AdminController::class, 'listInvoice']);
 

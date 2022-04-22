@@ -23,4 +23,14 @@ class CategoryController extends Controller
 
         return redirect()->route('category-detail', ['id' => $id]);
     }
+
+    public function createCategory(Request $request)
+    {
+        $category = new Category();
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->status = $request->status;
+        $category->save();
+        return redirect()->route('category-list');
+    }
 }
