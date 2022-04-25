@@ -21,7 +21,8 @@ Route::group([
 
     Route::get('/profile-details', function() {
         return view('user.profile-details');
-    });
+    })->name('profile');
+    Route::post('edit-profile', [\App\Http\Controllers\UserController::class, 'editProfile']);
 
     Route::get('/order', function() {
         return view('user.order');

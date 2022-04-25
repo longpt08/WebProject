@@ -70,30 +70,36 @@
             </div>
             <div class="media-body">
                 <form method="POST" action="/edit-profile">
+                    @csrf
                     <table class="user-profile-list">
                         <tr>
-                            <td><label for="full-name">Full Name:</label></td>
-                            <td><input type="text" id="full-name" name="full_name"
-                                       placeholder="{{$product->getFullName()}}"></td>
+                            <td><label for="full-name">First Name:</label></td>
+                            <td><input type="text" id="full-name" name="first_name"
+                                       value="{{$user->first_name}}"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="full-name">Last Name:</label></td>
+                            <td><input type="text" id="full-name" name="last_name"
+                                       value="{{$user->last_name}}"></td>
                         </tr>
                         <tr>
                             <td><label for="address">Address:</label>
                             <td><input type="text" id="address" name="address"
-                                       placeholder="{{$product->address ?? 'N/A'}}"></td>
+                                       value="{{$user->address ?? 'N/A'}}"></td>
                         </tr>
                         <tr>
                             <td><label for="email">Email:</label></td>
-                            <td><input type="email" id="email" name="email" placeholder="{{$product->email}}"></td>
+                            <td><input type="email" id="email" name="email" value="{{$user->email}}"></td>
                         </tr>
                         <tr>
                             <td><label for="phone-number">Phone:</label></td>
                             <td><input type="text" id="phone-number" name="phone_number"
-                                       placeholder="{{$product->phone_number ?? 'N/A'}}"></td>
+                                       value="{{$user->phone_number}}"></td>
                         </tr>
                         <tr>
                             <td><label for="date-of-birth">Date Of Birth:</label></td>
                             <td><input type="date" id="date-of-birth" name="date_of_birth"
-                                       placeholder="{{(optional($product->date_of_birth)->format('dd/MM/YY')) ?? 'N/A'}}">
+                                       value="{{(optional($user->date_of_birth)->format('Y-m-d'))}}">
                             </td>
                         </tr>
 

@@ -38,7 +38,7 @@
                                         <label class="col-lg-4 col-form-label" for="name">Full Name
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="name" name="full-name"
+                                            <input type="text" class="form-control" id="name" name="full-name" disabled
                                                    value="{{$user->getFullName()}}">
                                         </div>
                                     </div>

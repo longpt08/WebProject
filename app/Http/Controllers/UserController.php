@@ -21,6 +21,7 @@ class UserController extends Controller
         } else {
            if ($user->save()) {
                session(['user' => $user]);
+               Auth::login($user);
                return redirect()->route('home');
            }
         }
@@ -61,5 +62,19 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('user-detail', ['id' => $id]);
+    }
+
+    public function editProfile(Request $request)
+    {
+        $user = User::query()->find(Auth::id());
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->address = $request->address;
+        $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
+        $user->date_of_birth = $request->date_of_birth;
+
+        $user->save();
+        return redirect()->route('profile');
     }
 }

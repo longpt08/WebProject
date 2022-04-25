@@ -91,23 +91,23 @@ $user = session()->get('user');
                             <div class="form-group">
                                 <label for="full_name">Full Name</label>
                                 <input type="text" class="form-control" name="full_name"
-                                       placeholder="{{$product->first_name . " " . $product->last_name}}">
+                                       placeholder="{{$user->first_name . " " . $user->last_name}}">
                             </div>
                             <div class="form-group">
                                 <label for="user_address">Address</label>
                                 <input type="text" class="form-control" name="user_address"
-                                       placeholder="{{$product->address}}">
+                                       placeholder="{{$user->address}}">
                             </div>
                             <div class="form-group">
                                 <label for="user_country">Phone Number</label>
                                 <input type="text" class="form-control" name="phone_number"
-                                       placeholder="{{$product->phone_number}}">
+                                       placeholder="{{$user->phone_number}}">
                             </div>
                         </div>
                         <div class="block">
                             <h4 class="widget-title">Payment Method</h4>
                             <p>Credit Cart Details (Secure payment)</p>
-                            <div class="checkout-product-details">
+                            <div class="checkout-user-details">
                                 <div class="payment">
                                     <div class="card-details">
                                         <div class="form-group">

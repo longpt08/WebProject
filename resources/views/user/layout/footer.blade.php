@@ -24,20 +24,6 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="footer-menu text-uppercase">
-                    <li>
-                        <a href="/contact">CONTACT</a>
-                    </li>
-                    <li>
-                        <a href="/shop-sidebar">SHOP</a>
-                    </li>
-                    <li>
-                        <a href="/pricing">Pricing</a>
-                    </li>
-                    <li>
-                        <a href="/">PRIVACY POLICY</a>
-                    </li>
-                </ul>
                 <p class="copyright-text">Copyright &copy;2022</p>
             </div>
         </div>

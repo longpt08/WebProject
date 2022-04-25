@@ -20,19 +20,7 @@ class ShopController extends Controller
 {
     public function index(Request $request)
     {
-        $categoriesOriginal = $this->categoryService->getCategories();
-        $categories = [];
-        foreach($categoriesOriginal as $category) {
-            if ($category->gender == Gender::MALE){
-                $categories['male'][] = $category;
-            }
-            if ($category->gender == Gender::FEMALE){
-                $categories['female'][] = $category;
-            }
-            if ($category->gender == Gender::UNISEX){
-                $categories['unisex'][] = $category;
-            }
-        }
+        $categories = $this->categoryService->getCategories();
         $products = $this->productService->getProducts();
         if ($request['search']) {
             $products = $this->productService->search($request['search']);

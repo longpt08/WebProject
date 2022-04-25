@@ -55,8 +55,8 @@
                                         @foreach($invoices as $invoice)
                                             <tr>
                                                 <td>{{$invoice->id}}</td>
-                                                <td>{{$invoice->user->getFullName()}}</td>
-                                                <td>{{$invoice->order->id}}</td>
+                                                <td><a href="/admin/user/detail/{{$invoice->user->id}}">{{$invoice->user->getFullName()}}</a></td>
+                                                <td><a href="/admin/order/detail/{{$invoice->order->id}}">{{$invoice->order->id}}</a></td>
                                                 <td>{{$invoice->total}}$</td>
                                                 <td>{{\App\Http\Enums\InvoiceStatus::convert($invoice->status)}}</td>
                                                 <td>{{$invoice->created_at}}</td>

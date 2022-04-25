@@ -76,6 +76,34 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered verticle-middle">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Quantity</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($orderItems as $key => $orderItem)
+                                            <tr>
+                                                <td>{{$key+1}}</td>
+                                                <td>{{$orderItem->product->name}}</td>
+                                                <td>{{$orderItem->product->price}}</td>
+                                                <td>{{$orderItem->amount}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- #/ container -->

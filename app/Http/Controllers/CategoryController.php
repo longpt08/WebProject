@@ -10,7 +10,8 @@ class CategoryController extends Controller
     public function getCategoryDetail($id)
     {
         $category = Category::query()->find($id);
-        return view('admin.category-detail', ['category' => $category]);
+        $products = $category->products;
+        return view('admin.category-detail', ['category' => $category, 'products' => $products]);
     }
 
     public function editCategory($id, Request $request)
