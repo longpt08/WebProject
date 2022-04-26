@@ -56,7 +56,7 @@
                                         @foreach($categories as $category)
                                             <tr>
                                                 <td>{{$category->id}}</td>
-                                                <td>{{$category->name}}</td>
+                                                <td><a href="/admin/category/detail/{{$category->id}}">{{$category->name}}</a></td>
                                                 <td>{{$category->description}}</td>
                                                 <td>{{\App\Http\Enums\CategoryStatus::convert($category->status)}}</td>
                                                 <td><span><a href="/admin/category/detail/{{$category->id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span></td>

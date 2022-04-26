@@ -38,12 +38,12 @@ class ShopController extends Controller
         ]);
     }
 
-    public function addCart($id)
+    public function addCart(Request $request)
     {
-        $product = $this->productService->getProductById($id);
+        $product = $this->productService->getProductById($request->id);
         session()->push('product_cart', $product);
         $route = session()->get('current');
-        return redirect()->route($route, ['id' => $id]);
+        return redirect()->route($route, ['id' => $request->id]);
     }
 
     public function removeCart($id)

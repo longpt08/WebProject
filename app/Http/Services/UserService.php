@@ -17,9 +17,4 @@ class UserService
         }
         return $query->first();
     }
-
-    public function getAll(): Collection
-    {
-        return User::query()->get();
-    }
 }

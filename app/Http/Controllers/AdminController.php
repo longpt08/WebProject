@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Enums\UserRole;
 use App\Models\Comment;
 use App\Models\Invoice;
 use App\Models\Order;
@@ -14,7 +15,7 @@ class AdminController extends Controller
     {
         $productCount = Product::query()->get()->count();
         $profit = array_sum(Invoice::query()->get()->pluck('total')->toArray());
-        $userCount = User::query()->get()->count();
+        $userCount = User::query()->where('roles', UserRole::USER)->get()->count();
         $orderCount = Order::query()->get()->count();
         return view('admin.index', [
             'productCount' => $productCount,
@@ -26,7 +27,7 @@ class AdminController extends Controller
 
     public function listUser()
     {
-        $users = $this->userService->getAll();
+        $users = User::query()->where('roles', UserRole::USER)->get();
         return view('admin.user', ['users' => $users]);
     }
 

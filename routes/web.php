@@ -59,7 +59,7 @@ Route::get('/shop-sidebar', [\App\Http\Controllers\ShopController::class, 'index
 
 Route::get('/product-single/{id}', [\App\Http\Controllers\ProductController::class, 'index'])->name('product-single');
 
-Route::get('/add-cart/{id}', [\App\Http\Controllers\ShopController::class, 'addCart']);
+Route::post('/product/add-cart', [\App\Http\Controllers\ShopController::class, 'addCart']);
 
 Route::get('/remove-cart/{id}', [\App\Http\Controllers\ShopController::class, 'removeCart']);
 

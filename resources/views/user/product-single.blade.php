@@ -45,7 +45,7 @@ session()->put('current','product-single')
 		<div class="row">
 			<div class="col-md-6">
 				<ol class="breadcrumb">
-					<li><a href="/">Home</a></li>
+					<li><a href="/">Trang chủ</a></li>
 					<li><a href="/shop-sidebar">Shop</a></li>
 					<li class="active">{{$product->name}}</li>
 				</ol>
@@ -125,20 +125,20 @@ session()->put('current','product-single')
                         {{$product->detail}}
 					</p>
                     <div class="product-quantity">
-                        <span>Quantity:</span>
+                        <span>Số lượng:</span>
                         <div class="product-quantity-slider">
-                            <input id="product-quantity" type="text" value="0" name="product-quantity">
+                            <input id="product-quantity" type="text" value="1" name="product-quantity">
                         </div>
                     </div>
 					<div class="product-category">
-						<span>Categories:</span>
+						<span>Danh mục:</span>
 						<ul>
                             @foreach($product->categoryProducts as $category)
 							<li><a href="product-single.blade.php">{{$category->name}}</a></li>
                             @endforeach
 						</ul>
 					</div>
-					<a href="/add-cart/{{$product->id}}" class="btn btn-main mt-20">Add To Cart</a>
+					<a id="add-cart" class="btn btn-main mt-20">Thêm vào giỏ hàng</a>
 				</div>
 			</div>
 		</div>
@@ -146,7 +146,7 @@ session()->put('current','product-single')
 			<div class="col-xs-12">
 				<div class="tabCommon mt-20">
 					<ul class="nav nav-tabs">
-						<li class=""><a data-toggle="tab" href="#reviews" aria-expanded="true">Reviews ({{$comments->count()}})</a></li>
+						<li class=""><a data-toggle="tab" href="#reviews" aria-expanded="true">Đánh giá ({{$comments->count()}})</a></li>
 					</ul>
 					<div class="tab-content patternbg">
 						<div id="reviews" class="tab-pane fade">
@@ -219,10 +219,10 @@ session()->put('current','product-single')
     <!-- Main Js File -->
     <script src="../js/script.js"></script>
     <script>
-        $('select').on('change', function () {
-            var productSizes = <?php $product->productSizes ?>
-            $('#quantity').val();
-        });
+        var val = $("#product-quantity").slider("value");
+        $("#add-cart").click(function () {
+            $.post("/addcart")
+        })
     </script>
   </body>
   </html>

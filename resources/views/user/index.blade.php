@@ -1,5 +1,5 @@
 <?php
-    $user = session()->get('user');
+    $user = \Illuminate\Support\Facades\Auth::user();
     session()->put(['current' => 'index']);
 ?>
 <!DOCTYPE html>
@@ -48,8 +48,8 @@
       <div class="row">
         <div class="col-lg-8 text-center">
           <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
-          <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
-          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="/shop-sidebar">Shop Now</a>
+          <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">Sản phẩm nhập khẩu <br> chất lượng quốc tế.</h1>
+          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="/shop-sidebar">Mua Ngay</a>
         </div>
       </div>
     </div>
@@ -59,8 +59,8 @@
       <div class="row">
         <div class="col-lg-8 text-left">
           <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
-          <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
-          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="/shop-sidebar">Shop Now</a>
+          <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">Nguyên liệu cao cấp <br> tạo nên chiếc bánh ngon.</h1>
+          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="/shop-sidebar">Mua Ngay</a>
         </div>
       </div>
     </div>
@@ -70,8 +70,8 @@
       <div class="row">
         <div class="col-lg-8 text-right">
           <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
-          <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
-          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="/shop-sidebar">Shop Now</a>
+          <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">Nghệ thuật của ẩm thực <br> tinh túy trong trang trí.</h1>
+          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="/shop-sidebar">Mua Ngay</a>
         </div>
       </div>
     </div>
@@ -88,7 +88,7 @@
 			</div>
 			<div class="col-md-6">
 				<div class="category-box">
-					<a href="#!">
+					<a href="/shop-sidebar?category={{$categories[0]->id}}">
 						<img src="images/shop/category/category-1.jpg" alt="" />
 						<div class="content">
 							<h3>{{$categories[0]->name}}</h3>
@@ -97,7 +97,7 @@
 					</a>
 				</div>
 				<div class="category-box">
-					<a href="#!">
+					<a href="/shop-sidebar?category={{$categories[1]->id}}">
 						<img src="images/shop/category/category-2.jpg" alt="" />
 						<div class="content">
                             <h3>{{$categories[1]->name}}</h3>
@@ -108,7 +108,7 @@
 			</div>
 			<div class="col-md-6">
 				<div class="category-box category-box-2">
-					<a href="#!">
+					<a href="/shop-sidebar?category={{$categories[2]->id}}">
 						<img src="images/shop/category/category-3.jpg" alt="" />
 						<div class="content">
                             <h3>{{$categories[2]->name}}</h3>
@@ -148,7 +148,7 @@
 					</div>
 					<div class="product-content">
 						<h4><a href="product-single.blade.php">{{$trendyProduct->name}}</a></h4>
-						<p class="price">${{$trendyProduct->price}}</p>
+						<p class="price">{{$trendyProduct->price}}VND</p>
 					</div>
 				</div>
 			</div>

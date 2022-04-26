@@ -4,10 +4,16 @@
 <div class="nav-header">
     <div class="brand-logo">
         <a href="/admin/index">
-            <b class="logo-abbr"><img src="{{asset('images/logo.png')}}" alt=""> </b>
-            <span class="logo-compact"><img src="{{asset('images/logo-compact.png')}}" alt=""></span>
+            <b class="logo-abbr"><text id="AVIATO">
+                    <tspan x="108.94" y="325">MOONSHOP</tspan>
+                </text> </b>
+            <span class="logo-compact"><text id="AVIATO">
+                                        <tspan x="108.94" y="325">MOONSHOP</tspan>
+                                    </text></span>
             <span class="brand-title">
-                        <img src="{{asset('images/logo-text.png')}}" alt="">
+                        <text id="AVIATO">
+                                        <tspan x="108.94" y="325">MOONSHOP</tspan>
+                                    </text>
                     </span>
         </a>
     </div>

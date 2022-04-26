@@ -20,7 +20,7 @@
 
                     <!-- Home -->
                     <li class="dropdown ">
-                        <a href="/">Home</a>
+                        <a href="/">Trang chủ</a>
                     </li><!-- / Home -->
 
 

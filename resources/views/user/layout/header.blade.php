@@ -33,7 +33,7 @@ $productCarts = session()->get('product_cart');
                                font-family="AustinBold, Austin" font-weight="bold">
                                 <g id="Group" transform="translate(-108.000000, -297.000000)" fill="#000000">
                                     <text id="AVIATO">
-                                        <tspan x="108.94" y="325">AVIATO</tspan>
+                                        <tspan x="108.94" y="325">MOONSHOP</tspan>
                                     </text>
                                 </g>
                             </g>
@@ -46,7 +46,7 @@ $productCarts = session()->get('product_cart');
                 <ul class="top-menu text-right list-inline">
                     <li class="dropdown cart-nav dropdown-slide">
                         <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
-                                class="tf-ion-android-cart"></i>Cart</a>
+                                class="tf-ion-android-cart"></i>GIỎ HÀNG</a>
                         <div class="dropdown-menu cart-dropdown">
                         @if($productCarts)
                             @foreach($productCounts as $key => $value)
@@ -78,8 +78,8 @@ $productCarts = session()->get('product_cart');
                                 <span class="total-price">${{$total}}</span>
                             </div>
                             <ul class="text-center cart-buttons">
-                                <li><a href="/cart" class="btn btn-small">View Cart</a></li>
-                                    <li><a href="/checkout" class="btn btn-small btn-solid-border">Checkout</a></li>
+                                <li><a href="/cart" class="btn btn-small">XEM GIỎ HÀNG</a></li>
+                                    <li><a href="/checkout" class="btn btn-small btn-solid-border">THANH TOÁN</a></li>
                             </ul>
                         </div>
 
@@ -88,7 +88,7 @@ $productCarts = session()->get('product_cart');
                     <!-- Search -->
                     <li class="dropdown search dropdown-slide">
                         <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
-                                class="tf-ion-ios-search-strong"></i> Search</a>
+                                class="tf-ion-ios-search-strong"></i> TÌM KIẾM</a>
                         <ul class="dropdown-menu search-dropdown">
                             <li>
                                 <form action="/shop-sidebar" method="GET"><input type="search" name="search" class="form-control" placeholder="Search..."></form>
@@ -105,15 +105,15 @@ $productCarts = session()->get('product_cart');
                                 <!-- Contact -->
                                 <div class="col-sm-3 col-xs-12">
                                     <ul>
-                                        <li class="dropdown-header">Personal</li>
+                                        <li class="dropdown-header">CÁ NHÂN</li>
                                         <li role="separator" class="divider"></li>
                                         @if (!\Illuminate\Support\Facades\Auth::check())
-                                            <li><a href="/login">Log In</a></li>
-                                            <li><a href="/sign-up">Sign Up</a></li>
+                                            <li><a href="/login">ĐĂNG NHẬP</a></li>
+                                            <li><a href="/sign-up">ĐĂNG KÍ</a></li>
                                         @else
-                                            <li><a href="/order">Orders</a></li>
-                                            <li><a href="/profile-details">Profile Details</a></li>
-                                            <li><a href="/log-out">Log Out</a></li>
+                                            <li><a href="/order">ĐƠN HÀNG</a></li>
+                                            <li><a href="/profile-details">HỒ SƠ</a></li>
+                                            <li><a href="/log-out">ĐĂNG XUẤT</a></li>
                                         @endif
                                     </ul>
                                 </div>

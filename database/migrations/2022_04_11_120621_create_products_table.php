@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->bigInteger('price');
-            $table->string('detail');
+            $table->text('detail');
             $table->tinyInteger('status')->default(1);
             $table->float('average_rating')->default(5);
             $table->integer('quantity');
