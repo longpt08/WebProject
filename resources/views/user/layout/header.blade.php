@@ -1,14 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-
+$total = 0;
 $productCarts = session()->get('product_cart');
-    if ($productCarts) {
-        $productCounts = array_count_values(array_column(session()->get('product_cart'), 'id'));
-        $total = array_sum(array_column(session()->get('product_cart'), 'price'));
-    } else {
-        $total = 0;
+if ($productCarts) {
+    foreach ($productCarts as $productCart) {
+        $total += optional($productCart['product'])->getPrice() * $productCart['quantity'];
     }
+}
     $user = Auth::user();
 ?>
 <!-- Start Top Header Bar -->
@@ -49,29 +48,24 @@ $productCarts = session()->get('product_cart');
                                 class="tf-ion-android-cart"></i>GIỎ HÀNG</a>
                         <div class="dropdown-menu cart-dropdown">
                         @if($productCarts)
-                            @foreach($productCounts as $key => $value)
                                 @foreach($productCarts as $productCart)
-                                    @if($key == $productCart['id'])
                                         <!-- Cart Item -->
                                             <div class="media">
-                                                <a class="pull-left" href="/product-single/{{$productCart->id}}">
+                                                <a class="pull-left" href="/product-single/{{$productCart['product']->getId()}}">
                                                     <img class="media-object" src="images/shop/cart/cart-1.jpg"
                                                          alt="image"/>
                                                 </a>
                                                 <div class="media-body">
-                                                    <h4 class="media-heading"><a href="/product-single/{{$productCart['id']}}">{{$productCart['name']}}</a></h4>
+                                                    <h4 class="media-heading"><a href="/product-single/{{$productCart['product']->getId()}}">{{$productCart['product']->name}}</a></h4>
                                                     <div class="cart-price">
-                                                        <span>{{$value}} x </span>
-                                                        <span>{{$productCart['price']}}</span>
+                                                        <span>{{$productCart['quantity']}} x </span>
+                                                        <span>{{$productCart['product']->getPrice()}}</span>
                                                     </div>
-                                                    <h5><strong>{{$value * $productCart['price']}}</strong></h5>
+                                                    <h5><strong>{{$productCart['quantity'] * $productCart['product']->getPrice()}}</strong></h5>
                                                 </div>
-                                                <a href="remove-cart/{{$productCart['id']}}" class="remove"><i class="tf-ion-close"></i></a>
+                                                <a href="remove-cart/{{$productCart['product']->getId()}}" class="remove"><i class="tf-ion-close"></i></a>
                                             </div><!-- / Cart Item -->
-                                            @break
-                                        @endif
                                     @endforeach
-                                @endforeach
                             @endif
                             <div class="cart-summary">
                                 <span>Total</span>

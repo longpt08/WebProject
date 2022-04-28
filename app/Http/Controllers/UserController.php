@@ -33,7 +33,7 @@ class UserController extends Controller
         if ($user) {
             Auth::login($user);
             session()->put(['user' => $user]);
-            if ($user->role = UserRole::USER) {
+            if ($user->roles == UserRole::USER) {
                 return redirect()->route('home');
             }
             return redirect()->route('admin-index');

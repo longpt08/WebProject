@@ -34,4 +34,18 @@ class Product extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function getPrice()
+    {
+        return $this->price;
+    }
 }

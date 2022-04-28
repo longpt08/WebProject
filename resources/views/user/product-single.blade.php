@@ -123,22 +123,27 @@ session()->put('current','product-single')
 					<p class="product-price">${{$product->price}}</p>
 					<p class="product-description mt-20">
                         {{$product->detail}}
-					</p>
-                    <div class="product-quantity">
-                        <span>Số lượng:</span>
-                        <div class="product-quantity-slider">
-                            <input id="product-quantity" type="text" value="1" name="product-quantity">
+                    </p>
+                    <form action="/product/add-cart" method="post">
+                        @csrf
+                        <div class="product-quantity">
+                            <span>Số lượng:</span>
+                            <div class="product-quantity-slider">
+                                <input id="product-quantity" type="text" value="1" name="product-quantity"
+                                       oninput="this.value = this.value > {{$product->quantity}} ? {{$product->quantity}} : Math.abs(this.value)">
+                                <input name="id" value="{{$product->id}}" hidden="true">
+                            </div>
                         </div>
-                    </div>
-					<div class="product-category">
-						<span>Danh mục:</span>
-						<ul>
-                            @foreach($product->categoryProducts as $category)
-							<li><a href="product-single.blade.php">{{$category->name}}</a></li>
-                            @endforeach
-						</ul>
-					</div>
-					<a id="add-cart" class="btn btn-main mt-20">Thêm vào giỏ hàng</a>
+                        <div class="product-category">
+                            <span>Danh mục:</span>
+                            <ul>
+                                @foreach($product->categoryProducts as $category)
+                                    <li><a href="product-single.blade.php">{{$category->name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <input type="submit" id="add-cart" class="btn btn-main mt-20" value="Thêm vào giỏ hàng">
+                    </form>
 				</div>
 			</div>
 		</div>
@@ -218,11 +223,7 @@ session()->put('current','product-single')
 
     <!-- Main Js File -->
     <script src="../js/script.js"></script>
-    <script>
-        var val = $("#product-quantity").slider("value");
-        $("#add-cart").click(function () {
-            $.post("/addcart")
-        })
-    </script>
+
+
   </body>
   </html>

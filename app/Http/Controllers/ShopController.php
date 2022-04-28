@@ -41,7 +41,31 @@ class ShopController extends Controller
     public function addCart(Request $request)
     {
         $product = $this->productService->getProductById($request->id);
-        session()->push('product_cart', $product);
+        $quantity = $request->get('product-quantity');
+        $existed = false;
+        if (session()->has('product_cart')) {
+            $productCarts = session()->pull('product_cart');
+            foreach ($productCarts as &$productCart) {
+                $productInCart = $productCart['product'];
+                if ($productInCart->id == $product->id) {
+                    $productCart['quantity'] += $quantity;
+                    $existed = true;
+                }
+            }
+            if ($existed == false) {
+                $newProductCart = [];
+                $newProductCart['product'] = $product;
+                $newProductCart['quantity'] = $quantity;
+                array_push($productCarts, $newProductCart);
+            }
+            session()->put('product_cart', $productCarts);
+        } else {
+            $productCart = [];
+            $productCart['product'] = $product;
+            $productCart['quantity'] = $quantity;
+            session()->push('product_cart', $productCart);
+        }
+
         $route = session()->get('current');
         return redirect()->route($route, ['id' => $request->id]);
     }
@@ -72,8 +96,13 @@ class ShopController extends Controller
     {
         $description = $request['full_name'] . " (" . $request['phone_number'] . ") " . $request['user_address'];
         $productCarts = session()->get('product_cart');
-        $productCounts = array_count_values(array_column(session()->get('product_cart'), 'id'));
-        $total = array_sum(array_column(session()->get('product_cart'), 'price'));
+        $total = 0;
+        if ($productCarts) {
+            foreach ($productCarts as $productCart) {
+                $total += optional($productCart['product'])->getPrice() * $productCart['quantity'];
+            }
+        }
+
         $userId = session()->get('user')->id;
         DB::beginTransaction();
         try {
@@ -84,19 +113,14 @@ class ShopController extends Controller
             $order->status = OrderStatus::CONFIRMED;
             $order->updateTimestamps();
             if ($order->save()) {
-                foreach ($productCounts as $key => $count) {
-                    foreach ($productCarts as $product) {
-                        if ($key == $product['id']) {
+                foreach ($productCarts as $productCart) {
                             $orderItem = new OrderItem();
                             $orderItem->order_id = $order->id;
-                            $orderItem->product_id = $product['id'];
-                            $orderItem->amount = $count;
+                            $orderItem->product_id = $productCart['product']->getId();
+                            $orderItem->amount = $productCart['quantity'];
                             $orderItem->updateTimestamps();
                             $orderItem->save();
-                            break;
-                        }
-                        $this->productService->reduceQuantity($product, $count);
-                    }
+                        $this->productService->reduceQuantity($productCart['product'], $productCart['quantity']);
                 }
 
                 $invoice = new Invoice();
