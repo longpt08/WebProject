@@ -9,7 +9,7 @@
   <!-- Basic Page Needs
   ================================================== -->
   <meta charset="utf-8">
-  <title>Aviato</title>
+  <title>Moon</title>
 
   <!-- Mobile Specific Metas
   ================================================== -->

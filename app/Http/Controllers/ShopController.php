@@ -127,12 +127,13 @@ class ShopController extends Controller
                 $invoice->order_id = $order->id;
                 $invoice->user_id = $userId;
                 $invoice->total = $total;
-                if ($request['card_number'] && $request['cvc'] && $request['expiry']) {
+                if ($request->get('card_number') && $request->get('cvc') && $request->get('expiry')) {
                     $invoice->description = 'Card method';
                     $invoice->status = InvoiceStatus::PAID;
+                } else {
+                    $invoice->description = 'COD method';
+                    $invoice->status = InvoiceStatus::UNPAID;
                 }
-                $invoice->description = 'COD method';
-                $invoice->status = InvoiceStatus::UNPAID;
                 $invoice->updateTimestamps();
                 $invoice->save();
                 session()->forget('product_cart');
