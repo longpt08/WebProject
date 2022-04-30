@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\CategoryService;
+use App\Http\Services\OrderService;
 use App\Http\Services\ProductService;
 use App\Http\Services\UserService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -29,10 +30,16 @@ class Controller extends BaseController
      */
     public $categoryService;
 
+    /**
+     * @var OrderService
+     */
+    public $orderService;
+
     public function __construct()
     {
         $this->userService = new UserService();
         $this->productService = new ProductService();
         $this->categoryService = new CategoryService();
+        $this->orderService = new OrderService();
     }
 }

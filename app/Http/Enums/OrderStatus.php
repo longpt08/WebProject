@@ -15,13 +15,13 @@ class OrderStatus
     {
         switch ($status) {
             case self::CONFIRMED:
-                return 'Confirmed';
+                return 'Đã xác nhận';
             case self::SHIPPING:
-                return 'Shipping';
+                return 'Đang giao hàng';
             case self::COMPLETED:
-                return 'Completed';
+                return 'Hoàn tất';
             case self::CANCELED:
-                return 'Canceled';
+                return 'Đã hủy';
         }
         return '';
     }

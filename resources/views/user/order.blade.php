@@ -59,7 +59,7 @@ FACEBOOK: https://www.facebook.com/themefisher
 				<div class="content">
 					<h1 class="page-name">Dashboard</h1>
 					<ol class="breadcrumb">
-						<li><a href="../index.html">Home</a></li>
+						<li><a href="/">Home</a></li>
 						<li class="active">my account</li>
 					</ol>
 				</div>
@@ -82,53 +82,23 @@ FACEBOOK: https://www.facebook.com/themefisher
 								<tr>
 									<th>Order ID</th>
 									<th>Date</th>
-									<th>Items</th>
+									<th>Description</th>
 									<th>Total Price</th>
 									<th>Status</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
+                            @foreach($orders as $order)
 								<tr>
-									<td>#451231</td>
-									<td>Mar 25, 2016</td>
-									<td>2</td>
-									<td>$99.00</td>
-									<td><span class="label label-primary">Processing</span></td>
-									<td><a href="order.blade.php" class="btn btn-default">View</a></td>
+									<td>#{{$order->id}}</td>
+									<td>{{$order->created_at}}</td>
+									<td>{{$order->description}}</td>
+									<td>{{$order->total}}</td>
+									<td>{{\App\Http\Enums\OrderStatus::convert($order->status)}}</td>
+									<td><a href="order-detail/{{$order->id}}" class="btn btn-default">View</a></td>
 								</tr>
-								<tr>
-									<td>#451231</td>
-									<td>Mar 25, 2016</td>
-									<td>3</td>
-									<td>$150.00</td>
-									<td><span class="label label-success">Completed</span></td>
-									<td><a href="order.blade.php" class="btn btn-default">View</a></td>
-								</tr>
-								<tr>
-									<td>#451231</td>
-									<td>Mar 25, 2016</td>
-									<td>3</td>
-									<td>$150.00</td>
-									<td><span class="label label-danger">Canceled</span></td>
-									<td><a href="order.blade.php" class="btn btn-default">View</a></td>
-								</tr>
-								<tr>
-									<td>#451231</td>
-									<td>Mar 25, 2016</td>
-									<td>2</td>
-									<td>$99.00</td>
-									<td><span class="label label-info">On Hold</span></td>
-									<td><a href="order.blade.php" class="btn btn-default">View</a></td>
-								</tr>
-								<tr>
-									<td>#451231</td>
-									<td>Mar 25, 2016</td>
-									<td>3</td>
-									<td>$150.00</td>
-									<td><span class="label label-warning">Pending</span></td>
-									<td><a href="order.blade.php" class="btn btn-default">View</a></td>
-								</tr>
+                            @endforeach
 							</tbody>
 						</table>
 					</div>

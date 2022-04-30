@@ -24,9 +24,10 @@ Route::group([
     })->name('profile');
     Route::post('edit-profile', [\App\Http\Controllers\UserController::class, 'editProfile']);
 
-    Route::get('/order', function() {
-        return view('user.order');
-    });
+    Route::get('/order',[\App\Http\Controllers\OrderController::class, 'getOrders']);
+    Route::get('/order-detail/{id}', [\App\Http\Controllers\OrderController::class, 'detail'])->name('user-order-detail');
+    Route::get('/order-detail/{id}/cancel', [\App\Http\Controllers\OrderController::class, 'cancel']);
+    Route::get('/order-detail/{id}/complete', [\App\Http\Controllers\OrderController::class, 'complete']);
 
     Route::get('/checkout', [\App\Http\Controllers\ShopController::class, 'checkout']);
 

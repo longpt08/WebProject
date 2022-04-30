@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -12,6 +13,33 @@ class OrderController extends Controller
     {
         $order = Order::query()->where('id', $id)->first();
         return view('user.order-detail')->with(['order' => $order]);
+    }
+
+    public function getOrders()
+    {
+        $user = Auth::user();
+        $orders = $user->orders;
+        return view('user.order', ['orders' => $orders]);
+    }
+
+    public function cancel(int $id)
+    {
+        if ($this->orderService->cancelOrderById($id))
+        {
+            return redirect()->route('user-order-detail', ['id' => $id]);
+        } else {
+            return redirect()->route('user-order-detail', ['id' => $id])->with(['message' => 'Khong the huy don hang']);
+        }
+    }
+
+    public function complete(int $id)
+    {
+        if ($this->orderService->completeOrderById($id))
+        {
+            return redirect()->route('user-order-detail', ['id' => $id]);
+        } else {
+            return redirect()->route('user-order-detail', ['id' => $id])->with(['message' => 'Khong the hoan tat don hang']);
+        }
     }
 
     public function getOrderDetail($id)
