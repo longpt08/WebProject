@@ -157,10 +157,11 @@ session()->put('current', 'product-single')
             <div class="col-xs-12">
                 <div class="tabCommon mt-20">
                     <ul class="nav nav-tabs">
-                        <li class=""><a data-toggle="tab" href="#reviews" aria-expanded="true">Đánh giá
+                        <li class=""><a href="#reviews" aria-expanded="true">Đánh giá
                                 ({{$comments->count()}})</a></li>
                     </ul>
-                    <div>
+                    <div style="display:flex; justify-content: space-between" >
+                    <div style="width: 48%">
                         <form action="/comment/post" method="post">
                             @csrf
                             <div class="rate">
@@ -175,13 +176,21 @@ session()->put('current', 'product-single')
                                 <input type="radio" id="star1" name="rate" value="1"/>
                                 <label for="star1" title="text">1 star</label>
                             </div>
-                            <input type="text" name="content" placeholder="Viết nhận xét...">
+                            <div class="product-single-comments">
+
+                                <input type="text" name="content" placeholder="Viết nhận xét...">
+                            </div>
+                            <div class="product-single-submit">
+                                <input  type="submit">
+                                
+                            </div>
                             <input name="product-id" value="{{$product->id}}" hidden="true">
-                            <input type="submit">
+                            
                         </form>
                     </div>
-                    <div class="tab-content patternbg">
-                        <div id="reviews" class="tab-pane fade">
+
+                    <div class="tab-content patternbg" style="width: 48%">
+                        <div id="reviews">
                             <div class="post-comments">
                                 <ul class="media-list comments-list m-bot-50 clearlist">
                                 @foreach($comments as $comment)
@@ -215,7 +224,7 @@ session()->put('current', 'product-single')
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div></div>
                 </div>
             </div>
         </div>

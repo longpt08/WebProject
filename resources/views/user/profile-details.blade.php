@@ -64,50 +64,54 @@
         </ul>
         <div class="dashboard-wrapper dashboard-user-profile">
           <div class="media">
-            <div class="pull-left text-center" href="#!">
+            <div class="" href="#!">
               <img class="media-object user-img" src="images/avater.jpg" alt="Image">
-              <a href="#x" class="btn btn-transparent mt-20">Change Image</a>
+              <a href="#x" class="btn btn-transparent mt-20" style="width: 180px">Change Image</a>
             </div>
             <div class="media-body">
                 <form method="POST" action="/edit-profile">
                     @csrf
-                    <table class="user-profile-list">
-                        <tr>
-                            <td><label for="full-name">First Name:</label></td>
-                            <td><input type="text" id="full-name" name="first_name"
-                                       value="{{$user->first_name}}"></td>
-                        </tr>
-                        <tr>
-                            <td><label for="full-name">Last Name:</label></td>
-                            <td><input type="text" id="full-name" name="last_name"
-                                       value="{{$user->last_name}}"></td>
-                        </tr>
-                        <tr>
-                            <td><label for="address">Address:</label>
-                            <td><input type="text" id="address" name="address"
-                                       value="{{$user->address ?? 'N/A'}}"></td>
-                        </tr>
-                        <tr>
-                            <td><label for="email">Email:</label></td>
-                            <td><input type="email" id="email" name="email" value="{{$user->email}}"></td>
-                        </tr>
-                        <tr>
-                            <td><label for="phone-number">Phone:</label></td>
-                            <td><input type="text" id="phone-number" name="phone_number"
-                                       value="{{$user->phone_number}}"></td>
-                        </tr>
-                        <tr>
-                            <td><label for="date-of-birth">Date Of Birth:</label></td>
-                            <td><input type="date" id="date-of-birth" name="date_of_birth"
-                                       value="{{(optional($user->date_of_birth)->format('Y-m-d'))}}">
-                            </td>
-                        </tr>
+                    <div class="profile-rows">
+                    <div><label for="full-name">First Name:</label></div>
+                            <div><input type="text" id="full-name" name="first_name"
+                                       value="{{$user->first_name}}"></div>
+                    </div>
 
-                        <tr>
-                            <td>
+                        <div class="profile-rows">
+                        <div><label for="full-name">Last Name:</label></div>
+                            <div><input type="text" id="full-name" name="last_name"
+                                       value="{{$user->last_name}}"></div>
+                        </div>
+
+                        <div class="profile-rows">
+                            <div><label for="address">Address:</label></div>
+                            <div><input type="text" id="address" name="address"
+                                       value="{{$user->address ?? 'N/A'}}"></div>
+</div>
+
+                        <div class="profile-rows">
+                            <div><label for="email">Email:</label></div>
+                            <div><input type="email" id="email" name="email" value="{{$user->email}}"></div>
+                        </div>
+
+                        <div class="profile-rows">
+                            <div><label for="phone-number">Phone:</label></div>
+                            <div><input type="text" id="phone-number" name="phone_number"
+                                       value="{{$user->phone_number}}"></div>
+                        </div>
+                        
+                        <div class="profile-rows">
+                            <div><label for="date-of-birth">Date Of Birth:</label></div>
+                            <div><input type="date" id="date-of-birth" name="date_of_birth"
+                                       value="{{(optional($user->date_of_birth)->format('Y-m-d'))}}">
+                            </div>
+                        </div>
+
+                        <div class="profile-rows">
+                            <div>
                                 <button type="submit">Update</button>
-                            </td>
-                        </tr>
+                            </div>
+                        </div>
                     </table>
                 </form>
             </div>

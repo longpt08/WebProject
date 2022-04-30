@@ -13,7 +13,7 @@ $user = Auth::user();
 ?>
     <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>  
 
     <!-- Basic Page Needs
     ================================================== -->
@@ -89,19 +89,23 @@ $user = Auth::user();
                                     <tbody>
                                     @if($productCarts)
                                         @foreach($productCarts as $productCart)
-                                            <tr class="">
+                                            <tr class="product-rows">
                                                 <td class="">
                                                     <div class="product-info">
                                                         <img width="80" src="images/shop/cart/cart-1.jpg" alt=""/>
                                                         <a href="#!">{{$productCart['product']->getName()}}</a>
                                                     </div>
                                                 </td>
-                                                <td class="">${{$productCart['product']->getPrice()}}</td>
-                                                <td class="">{{$productCart['quantity']}}</td>
+                                                <td class="">{{App\Http\Services\Utility::convertPrice($productCart['product']->getPrice())}}</td>
+                                                <td class="">
+                                                    <div class="product-price">
+                                                        <span><i class="tf tf-ion-plus"></i></span>
+                                                        <span>{{$productCart['quantity']}}</span>
+                                                        <span><i class="tf tf-ion-minus"></i></span>
+                                                    </div>    
+                                                </td>
                                                 <td class="">
                                                     <ul class="action">
-                                                        <li><i class="tf-ion-plus"></i></li>
-                                                        <li><i class="tf-ion-minus"></i></li>
                                                         <li><i class="tf-ion-close"></i></li>
                                                     </ul>
                                                 </td>

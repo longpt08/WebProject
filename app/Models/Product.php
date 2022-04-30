@@ -48,4 +48,8 @@ class Product extends Model
     {
         return $this->price;
     }
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
 }
