@@ -12,12 +12,12 @@ TWITTER: https://twitter.com/themefisher
 FACEBOOK: https://www.facebook.com/themefisher
 -->
 <?php
+$total = 0;
 $productCarts = session()->get('product_cart');
 if ($productCarts) {
-    $productCounts = array_count_values(array_column(session()->get('product_cart'), 'id'));
-    $total = array_sum(array_column(session()->get('product_cart'), 'price'));
-} else {
-    $total = 0;
+    foreach ($productCarts as $productCart) {
+        $total += optional($productCart['product'])->getPrice() * $productCart['quantity'];
+    }
 }
 $user = session()->get('user');
 ?>
@@ -139,22 +139,17 @@ $user = session()->get('user');
                   <div class="block">
                      <h4 class="widget-title">Order Summary</h4>
                       @if($productCarts)
-                          @foreach($productCounts as $key => $value)
                               @foreach($productCarts as $productCart)
-                                  @if($key == $productCart['id'])
                                       <div class="media product-card">
-                                          <a class="pull-left" href="product-single.blade.php">
-                                              <img class="media-object" src="images/shop/cart/cart-1.jpg" alt="Image" />
+                                          <a class="pull-left" href="/product-single/{{$productCart['product']->getId()}}">
+                                              <img class="media-object" src="images/shop/products/product-1.jpg" alt="Image" />
                                           </a>
                                           <div class="media-body">
-                                              <h4 class="media-heading"><a href="product-single.blade.php">{{$productCart['name']}}</a></h4>
-                                              <p class="price">{{$value}} x ${{$productCart['price']}}</p>
+                                              <h4 class="media-heading"><a href="product-single.blade.php">{{$productCart['product']->getname()}}</a></h4>
+                                              <p class="price">{{$productCart['quantity']}} x ${{$productCart['product']->getPrice()}}</p>
                                           </div>
                                       </div>
-                                      @break
-                                  @endif
                               @endforeach
-                          @endforeach
                       @endif
                      <ul class="summary-prices">
                         <li>

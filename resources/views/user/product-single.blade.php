@@ -161,7 +161,7 @@ session()->put('current', 'product-single')
                                 ({{$comments->count()}})</a></li>
                     </ul>
                     <div>
-                        <form action="/product" method="post">
+                        <form action="/comment/post" method="post">
                             @csrf
                             <div class="rate">
                                 <input type="radio" id="star5" name="rate" value="5"/>
@@ -175,7 +175,8 @@ session()->put('current', 'product-single')
                                 <input type="radio" id="star1" name="rate" value="1"/>
                                 <label for="star1" title="text">1 star</label>
                             </div>
-                            <input type="text" placeholder="Viết nhận xét...">
+                            <input type="text" name="content" placeholder="Viết nhận xét...">
+                            <input name="product-id" value="{{$product->id}}" hidden="true">
                             <input type="submit">
                         </form>
                     </div>
@@ -200,7 +201,7 @@ session()->put('current', 'product-single')
                                                     </h4>
                                                     <time datetime="">{{$comment->updated_at}}</time>
                                                     <span class="comment-button"><i
-                                                            class="tf-ion-star"></i>{{$comment->user->userRates->where('product_id', $product->id)->first()->value('rating')}}</span>
+                                                            class="tf-ion-star"></i>{{$comment->rating}}</span>
                                                 </div>
 
                                                 <p>

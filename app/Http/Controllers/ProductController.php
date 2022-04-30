@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Enums\CommentStatus;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\Comment;
@@ -13,7 +14,11 @@ class ProductController extends Controller
     public function index($id)
     {
         $product = $this->productService->getProductById($id);
-        $comments = Comment::query()->where('product_id', $id)->get();
+        $comments = Comment::query()
+            ->where('product_id', $id)
+            ->where('status', CommentStatus::ACTIVE)
+            ->orderBy('rating', 'desc')
+            ->get();
         return view('user.product-single')->with([
             'product' => $product,
             'comments' => $comments,
@@ -44,6 +49,7 @@ class ProductController extends Controller
         $categories = Category::query()->get();
         return view('admin.create-product', ['categories' => $categories]);
     }
+
     public function createProduct(Request $request)
     {
         $product = new Product();
