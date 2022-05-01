@@ -51,7 +51,7 @@ if ($productCarts) {
                                 @foreach($productCarts as $productCart)
                                         <!-- Cart Item -->
                                             <div class="media">
-                                                <a class="pull-left" href="/product-single/{{$productCart['product']->getId()}}">
+                                                <a href="/product-single/{{$productCart['product']->getId()}}">
                                                     <img class="media-object" src="images/shop/cart/cart-1.jpg"
                                                          alt="image"/>
                                                 </a>
