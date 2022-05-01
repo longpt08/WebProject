@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Enums\Gender;
 use App\Http\Enums\InvoiceStatus;
 use App\Http\Enums\OrderStatus;
-use App\Http\Services\CategoryService;
-use App\Http\Services\ProductService;
+use App\Http\Enums\PaymentMethod;
 use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\OrderItem;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -74,7 +71,7 @@ class ShopController extends Controller
     {
         foreach (session()->get('product_cart') as $key => $product) {
             if ($product['id'] == $id) {
-                session()->forget('product_cart.'.$key);
+                session()->forget('product_cart.' . $key);
                 break;
             }
         }
@@ -114,26 +111,35 @@ class ShopController extends Controller
             $order->updateTimestamps();
             if ($order->save()) {
                 foreach ($productCarts as $productCart) {
-                            $orderItem = new OrderItem();
-                            $orderItem->order_id = $order->id;
-                            $orderItem->product_id = $productCart['product']->getId();
-                            $orderItem->amount = $productCart['quantity'];
-                            $orderItem->updateTimestamps();
-                            $orderItem->save();
-                        $this->productService->reduceQuantity($productCart['product'], $productCart['quantity']);
+                    $orderItem = new OrderItem();
+                    $orderItem->order_id = $order->id;
+                    $orderItem->product_id = $productCart['product']->getId();
+                    $orderItem->amount = $productCart['quantity'];
+                    $orderItem->updateTimestamps();
+                    $orderItem->save();
+                    $this->productService->reduceQuantity($productCart['product'], $productCart['quantity']);
                 }
 
                 $invoice = new Invoice();
                 $invoice->order_id = $order->id;
                 $invoice->user_id = $userId;
                 $invoice->total = $total;
-                if ($request->get('card_number') && $request->get('cvc') && $request->get('expiry')) {
-                    $invoice->description = 'Card method';
+                $method = $request->get('payment-method');
+                if (
+                    ($method == PaymentMethod::CARD
+                        && (
+                            $request->get('card_number')
+                            && $request->get('cvc')
+                            && $request->get('expiry')
+                        ))
+                    ||
+                    $method == PaymentMethod::MOMO
+                ) {
                     $invoice->status = InvoiceStatus::PAID;
                 } else {
-                    $invoice->description = 'COD method';
                     $invoice->status = InvoiceStatus::UNPAID;
                 }
+                $invoice->description = PaymentMethod::convert($method);
                 $invoice->updateTimestamps();
                 $invoice->save();
                 session()->forget('product_cart');
@@ -144,6 +150,6 @@ class ShopController extends Controller
             DB::rollBack();
             return view('checkout')->with(['alert' => 'Something went wrong!']);
         }
-        return view('user.confirmation');
+        return view('user.confirmation', ['orderId' => $order->id]);
     }
 }

@@ -59,9 +59,9 @@ FACEBOOK: https://www.facebook.com/themefisher
       <div class="col-md-6 col-md-offset-3">
         <div class="block text-center">
         	<i class="tf-ion-android-checkmark-circle"></i>
-          <h2 class="text-center">Thank you! For your payment</h2>
-          <p>Please follow order's status for more information</p>
-          <a href="/purchase-confirmation" class="btn btn-main mt-20">Purchase History</a>
+          <h2 class="text-center">Cảm ơn bạn vì đã sử dụng dịch vụ của chúng tôi</h2>
+          <p>Vui lòng theo dõi trạng thái đơn hàng để nắm thêm thông tin</p>
+          <a href="/order-detail/{{$orderId}}" class="btn btn-main mt-20">Xem trạng thái đơn hàng</a>
         </div>
       </div>
     </div>

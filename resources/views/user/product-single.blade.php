@@ -126,7 +126,7 @@ session()->put('current', 'product-single')
                 <div class="single-product-details">
                     <h2>{{$product->name}}</h2>
                     <p class="product-rating">{{$product->average_rating}}<i class="tf-ion-android-star"></i></p>
-                    <p class="product-price">${{$product->price}}</p>
+                    <p class="product-price">{{\App\Http\Services\Utility::convertPrice($product->price)}}</p>
                     <p class="product-description mt-20">
                         {{$product->detail}}
                     </p>
@@ -182,10 +182,10 @@ session()->put('current', 'product-single')
                             </div>
                             <div class="product-single-submit">
                                 <input  type="submit">
-                                
+
                             </div>
                             <input name="product-id" value="{{$product->id}}" hidden="true">
-                            
+
                         </form>
                     </div>
 

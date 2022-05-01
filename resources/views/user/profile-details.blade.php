@@ -44,10 +44,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="content">
-					<h1 class="page-name">Dashboard</h1>
+					<h1 class="page-name">THÔNG TIN CÁ NHÂN</h1>
 					<ol class="breadcrumb">
 						<li><a href="/">Home</a></li>
-						<li class="active">my account</li>
+						<li class="active">Thông tin</li>
 					</ol>
 				</div>
 			</div>
@@ -59,32 +59,32 @@
     <div class="row">
       <div class="col-md-12">
         <ul class="list-inline dashboard-menu text-center">
-          <li><a href="/order">Orders</a></li>
-          <li><a class="active"  href="/profile-details">Profile Details</a></li>
+          <li><a href="/order">ĐƠN HÀNG</a></li>
+          <li><a class="active"  href="/profile-details">THÔNG TIN CÁ NHÂN</a></li>
         </ul>
         <div class="dashboard-wrapper dashboard-user-profile">
           <div class="media">
             <div class="" href="#!">
               <img class="media-object user-img" src="images/avater.jpg" alt="Image">
-              <a href="#x" class="btn btn-transparent mt-20" style="width: 180px">Change Image</a>
+              <a href="#x" class="btn btn-transparent mt-20" style="width: 180px">ĐỔI ẢNH</a>
             </div>
             <div class="media-body">
                 <form method="POST" action="/edit-profile">
                     @csrf
                     <div class="profile-rows">
-                    <div><label for="full-name">First Name:</label></div>
+                    <div><label for="full-name">Họ:</label></div>
                             <div><input type="text" id="full-name" name="first_name"
                                        value="{{$user->first_name}}"></div>
                     </div>
 
                         <div class="profile-rows">
-                        <div><label for="full-name">Last Name:</label></div>
+                        <div><label for="full-name">Tên:</label></div>
                             <div><input type="text" id="full-name" name="last_name"
                                        value="{{$user->last_name}}"></div>
                         </div>
 
                         <div class="profile-rows">
-                            <div><label for="address">Address:</label></div>
+                            <div><label for="address">Địa chỉ:</label></div>
                             <div><input type="text" id="address" name="address"
                                        value="{{$user->address ?? 'N/A'}}"></div>
 </div>
@@ -95,13 +95,13 @@
                         </div>
 
                         <div class="profile-rows">
-                            <div><label for="phone-number">Phone:</label></div>
+                            <div><label for="phone-number">Số điện thoại:</label></div>
                             <div><input type="text" id="phone-number" name="phone_number"
                                        value="{{$user->phone_number}}"></div>
                         </div>
-                        
+
                         <div class="profile-rows">
-                            <div><label for="date-of-birth">Date Of Birth:</label></div>
+                            <div><label for="date-of-birth">Ngày sinh:</label></div>
                             <div><input type="date" id="date-of-birth" name="date_of_birth"
                                        value="{{(optional($user->date_of_birth)->format('Y-m-d'))}}">
                             </div>
@@ -109,7 +109,7 @@
 
                         <div class="profile-rows">
                             <div>
-                                <button type="submit">Update</button>
+                                <button type="submit">Cập nhật</button>
                             </div>
                         </div>
                     </table>

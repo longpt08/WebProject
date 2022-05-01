@@ -47,6 +47,7 @@
                                                 <th>Owner</th>
                                                 <th>Order ID</th>
                                                 <th>Total</th>
+                                                <th>Description</th>
                                                 <th>Status</th>
                                                 <th>Date</th>
                                             </tr>
@@ -58,6 +59,7 @@
                                                 <td><a href="/admin/user/detail/{{$invoice->user->id}}">{{$invoice->user->getFullName()}}</a></td>
                                                 <td><a href="/admin/order/detail/{{$invoice->order->id}}">{{$invoice->order->id}}</a></td>
                                                 <td>{{$invoice->total}}$</td>
+                                                <td>{{$invoice->description}}</td>
                                                 <td>{{\App\Http\Enums\InvoiceStatus::convert($invoice->status)}}</td>
                                                 <td>{{$invoice->created_at}}</td>
                                             </tr>

@@ -32,7 +32,7 @@ if ($productCarts) {
                                font-family="AustinBold, Austin" font-weight="bold">
                                 <g id="Group" transform="translate(-136.000000, -297.000000)" fill="#000000">
                                     <text id="AVIATO">
-                                        <tspan x="108.94" y="325">MOON</tspan>
+                                        <tspan x="108.94" y="325">MOONSHOP</tspan>
                                     </text>
                                 </g>
                             </g>
@@ -59,9 +59,9 @@ if ($productCarts) {
                                                     <h4 class="media-heading"><a href="/product-single/{{$productCart['product']->getId()}}">{{$productCart['product']->name}}</a></h4>
                                                     <div class="cart-price">
                                                         <span>{{$productCart['quantity']}} x </span>
-                                                        <span>{{$productCart['product']->getPrice()}}</span>
+                                                        <span>{{\App\Http\Services\Utility::convertPrice($productCart['product']->getPrice())}}</span>
                                                     </div>
-                                                    <h5><strong>{{$productCart['quantity'] * $productCart['product']->getPrice()}}</strong></h5>
+                                                    <h5><strong>{{\App\Http\Services\Utility::convertPrice($productCart['quantity'] * $productCart['product']->getPrice())}}</strong></h5>
                                                 </div>
                                                 <a href="remove-cart/{{$productCart['product']->getId()}}" class="remove"><i class="tf-ion-close"></i></a>
                                             </div><!-- / Cart Item -->
@@ -69,7 +69,7 @@ if ($productCarts) {
                             @endif
                             <div class="cart-summary">
                                 <span>Total</span>
-                                <span class="total-price">${{$total}}</span>
+                                <span class="total-price">{{\App\Http\Services\Utility::convertPrice($total)}}</span>
                             </div>
                             <ul class="text-center cart-buttons">
                                 <li><a href="/cart" class="btn btn-small">XEM GIỎ HÀNG</a></li>

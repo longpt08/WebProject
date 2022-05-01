@@ -34,7 +34,11 @@ class CommentController extends Controller
         $comment->rating = $request->get('rate');
         $comment->status = CommentStatus::PENDING;
         if ($comment->save()) {
-
+            $product = $comment->product;
+            $ratings = $product->comments->pluck('rating')->toArray();
+            $avarage = array_sum($ratings) / count($ratings);
+            $product->average_rating = round($avarage, 2);
+            $product->save();
             return redirect()->route('product-single', ['id' => $request->get('product-id')]);
         } else {
             return redirect()->route('product-single', ['id' => $request->get('product-id')])->with(['message' => 'Khong the dang binh luan']);

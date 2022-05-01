@@ -157,7 +157,7 @@ session()->put(['current' => 'index']);
                         </div>
                         <div class="product-content">
                             <h4><a href="/product-single/{{$trendyProduct->id}}">{{$trendyProduct->name}}</a></h4>
-                            <p class="price">{{$trendyProduct->price}}VND</p>
+                            <p class="price">{{\App\Http\Services\Utility::convertPrice($trendyProduct->price)}}</p>
                         </div>
                     </div>
                 </div>

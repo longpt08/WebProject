@@ -57,10 +57,10 @@ FACEBOOK: https://www.facebook.com/themefisher
 		<div class="row">
 			<div class="col-md-12">
 				<div class="content">
-					<h1 class="page-name">Dashboard</h1>
+					<h1 class="page-name">ĐƠN HÀNG</h1>
 					<ol class="breadcrumb">
 						<li><a href="/">Home</a></li>
-						<li class="active">my account</li>
+						<li class="active">Đơn hàng</li>
 					</ol>
 				</div>
 			</div>
@@ -72,19 +72,19 @@ FACEBOOK: https://www.facebook.com/themefisher
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="list-inline dashboard-menu text-center">
-					<li><a class="active" href="/order">Orders</a></li>
-					<li><a href="/profile-details">Profile Details</a></li>
+					<li><a class="active" href="/order">ĐƠN HÀNG</a></li>
+					<li><a href="/profile-details">THÔNG TIN CÁ NHÂN</a></li>
 				</ul>
 				<div class="dashboard-wrapper user-dashboard">
 					<div class="table-responsive">
 						<table class="table">
 							<thead>
 								<tr>
-									<th>Order ID</th>
-									<th>Date</th>
-									<th>Description</th>
-									<th>Total Price</th>
-									<th>Status</th>
+									<th>MÃ ĐƠN HÀNG</th>
+									<th>NGÀY ĐẶT</th>
+									<th>MÔ TẢ</th>
+									<th>TỔNG</th>
+									<th>TRẠNG THÁI</th>
 									<th></th>
 								</tr>
 							</thead>

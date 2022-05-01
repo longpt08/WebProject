@@ -119,8 +119,8 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h4><a href="product-single.blade.php">{{$product->name}}</a></h4>
-                                    <p class="price">${{$product->price}}</p>
+                                    <h4><a href="/product-single/{{$product->id}}">{{$product->name}}</a></h4>
+                                    <p class="price">{{\App\Http\Services\Utility::convertPrice($product->price)}}</p>
                                 </div>
                             </div>
                         </div>
