@@ -13,12 +13,12 @@ $user = Auth::user();
 ?>
     <!DOCTYPE html>
 <html lang="en">
-<head>  
+<head>
 
     <!-- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Aviato | E-commerce template</title>
+    <title>Moonshop</title>
 
     <!-- Mobile Specific Metas
     ================================================== -->
@@ -80,10 +80,10 @@ $user = Auth::user();
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th class="">Item Name</th>
-                                        <th class="">Item Price</th>
-                                        <th class="">Amount</th>
-                                        <th class="">Actions</th>
+                                        <th class="">SẢN PHẨM</th>
+                                        <th class="">ĐƠN GIÁ</th>
+                                        <th class="">SỐ LƯỢNG</th>
+                                        <th class=""></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -92,21 +92,25 @@ $user = Auth::user();
                                             <tr class="product-rows">
                                                 <td class="">
                                                     <div class="product-info">
-                                                        <img width="80" src="images/shop/cart/cart-1.jpg" alt=""/>
+                                                        <img class="img-responsive"
+                                                             src="{{asset('images/shop/products/' . $productCart['product']->getImageUrl())}}"
+                                                             alt="product-img"
+                                                             style="object-fit: contain; width: 100%; height: 100px;"
+                                                        />
                                                         <a href="#!">{{$productCart['product']->getName()}}</a>
                                                     </div>
                                                 </td>
                                                 <td class="">{{App\Http\Services\Utility::convertPrice($productCart['product']->getPrice())}}</td>
                                                 <td class="">
                                                     <div class="product-price">
-                                                        <span><i class="tf tf-ion-plus"></i></span>
-                                                        <span>{{$productCart['quantity']}}</span>
-                                                        <span><i class="tf tf-ion-minus"></i></span>
-                                                    </div>    
+                                                        <span id="plus" ><i class="tf tf-ion-plus"></i></span>
+                                                        <span id="quantity">{{$productCart['quantity']}}</span>
+                                                        <span id="minus"><i class="tf tf-ion-minus"></i></span>
+                                                    </div>
                                                 </td>
                                                 <td class="">
                                                     <ul class="action">
-                                                        <li><i class="tf-ion-close"></i></li>
+                                                        <li><i id="remove" class="tf-ion-close"></i></li>
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -159,6 +163,17 @@ $user = Auth::user();
 <!-- Main Js File -->
 <script src="js/script.js"></script>
 
+<script>
+    $("#plus{{$productCart['product']->getId()}}").click(function() {
 
+    });
+    $("#minus{{$productCart['product']->getId()}}").click(function() {
+
+    });
+
+    $("#remove{{$productCart['product']->getId()}}").click(function() {
+
+    });
+</script>
 </body>
 </html>

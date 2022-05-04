@@ -18,6 +18,8 @@ class Product extends Model
         'status',
         'average_rating',
         'gender',
+        'quantity',
+        'image_url',
     ];
 
     public function categoryProducts()
@@ -51,5 +53,10 @@ class Product extends Model
     public function getQuantity()
     {
         return $this->quantity;
+    }
+
+    public function getImageUrl()
+    {
+        return $this->image_url;
     }
 }

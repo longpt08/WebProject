@@ -140,8 +140,10 @@ session()->put(['current' => 'index']);
                     <div class="product-item">
                         <div class="product-thumb">
                             <img class="img-responsive"
-                                 src="images/shop/products/product-1.jpg"
-                                 alt="product-img"/>
+                                 src="{{asset('images/shop/products/' . $trendyProduct->image_url)}}"
+                                 alt="product-img"
+                                 style="object-fit: contain; height: 500px"
+                            />
                             <div class="preview-meta">
                                 <ul>
                                     <li>

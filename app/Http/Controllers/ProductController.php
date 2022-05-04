@@ -8,6 +8,7 @@ use App\Models\CategoryProduct;
 use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -39,6 +40,10 @@ class ProductController extends Controller
         $product->detail = $request->detail;
         $product->status = $request->status;
         $product->quantity = $request->quantity;
+
+        $imageName = 'product-' . $product->id . '.' . $request->file('image')->extension();
+        $request->file('image')->move('images/shop/products', $imageName);
+        $product->image_url = $imageName;
         $product->save();
 
         return redirect()->route('product-detail', ['id' => $id]);
@@ -58,6 +63,12 @@ class ProductController extends Controller
         $product->detail = $request->detail;
         $product->status = $request->status;
         $product->quantity = $request->quantity;
+
+        $product->save();
+
+        $imageName = 'product-' . $product->id . '.' . $request->file('image')->extension();
+        $request->file('image')->move('images/shop/products', $imageName);
+        $product->image_url = $imageName;
         $product->save();
 
         $categoryIds = $request->categories;

@@ -162,8 +162,9 @@ $user = session()->get('user');
                                     <div class="media product-card">
                                         <a class="pull-left"
                                            href="/product-single/{{$productCart['product']->getId()}}">
-                                            <img class="media-object" src="images/shop/products/product-1.jpg"
-                                                 alt="Image"/>
+                                            <img class="media-object" src="{{asset('images/shop/products/' . $productCart['product']->getImageUrl())}}"
+                                                 alt="Image"
+                                            style="height: 100px; object-fit: contain"/>
                                         </a>
                                         <div class="media-body">
                                             <h4 class="media-heading"><a

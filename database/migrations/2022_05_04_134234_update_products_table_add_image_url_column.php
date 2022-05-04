@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateUsersTableAddImageUrlColumn extends Migration
+class UpdateProductsTableAddImageUrlColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,9 @@ class UpdateUsersTableAddImageUrlColumn extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('products', function (Blueprint $table) {
+           $table->string('image_url')->after('quantity')->default('product-1.jpg');
+        });
     }
 
     /**

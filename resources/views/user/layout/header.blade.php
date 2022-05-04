@@ -52,8 +52,8 @@ if ($productCarts) {
                                         <!-- Cart Item -->
                                             <div class="media">
                                                 <a href="/product-single/{{$productCart['product']->getId()}}">
-                                                    <img class="media-object" src="images/shop/cart/cart-1.jpg"
-                                                         alt="image"/>
+                                                    <img class="media-object" src="{{asset('images/shop/products/'.$productCart['product']->getImageUrl())}}"
+                                                         alt="image" style="height: 80px; object-fit: contain"/>
                                                 </a>
                                                 <div class="media-body">
                                                     <h4 class="media-heading"><a href="/product-single/{{$productCart['product']->getId()}}">{{$productCart['product']->name}}</a></h4>

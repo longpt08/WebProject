@@ -2404,7 +2404,8 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 
 .shopping.cart .product-list .product-info{
   width: 220px;
-  margin: 0 auto;
+  margin: auto;
+    text-align: center;
 }
 .shopping.cart .product-list .product-info a {
   margin-left: 10px;

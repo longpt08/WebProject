@@ -63,7 +63,9 @@ Route::get('/product-single/{id}', [\App\Http\Controllers\ProductController::cla
 
 Route::post('/product/add-cart', [\App\Http\Controllers\ShopController::class, 'addCart'])->name('add-cart');
 
-Route::get('/remove-cart/{id}', [\App\Http\Controllers\ShopController::class, 'removeCart']);
+Route::get('/remove-cart/{id}', [\App\Http\Controllers\ShopController::class, 'remove'])->name('remove');
+Route::get('/plus/{id}', [\App\Http\Controllers\ShopController::class, 'plus']);
+Route::get('/minus/{id}', [\App\Http\Controllers\ShopController::class, 'minus']);
 
 Route::get('/cart', [\App\Http\Controllers\ShopController::class, 'getCart']);
 

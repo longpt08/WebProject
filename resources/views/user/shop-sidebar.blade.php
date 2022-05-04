@@ -105,8 +105,11 @@
                         <div class="col-md-4">
                             <div class="product-item">
                                 <div class="product-thumb">
-                                    <img class="img-responsive" src="images/shop/products/product-1.jpg"
-                                         alt="product-img"/>
+                                    <img class="img-responsive"
+                                         src="{{asset('images/shop/products/' . $product->image_url)}}"
+                                         alt="product-img"
+                                         style="object-fit: contain; height: 500px"
+                                    />
                                     <div class="preview-meta">
                                         <ul>
                                             <li>

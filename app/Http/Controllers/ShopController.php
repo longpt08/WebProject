@@ -67,16 +67,42 @@ class ShopController extends Controller
         return redirect()->route($route, ['id' => $request->id]);
     }
 
-    public function removeCart($id)
+    public function remove($id)
     {
-        foreach (session()->get('product_cart') as $key => $product) {
-            if ($product['id'] == $id) {
-                session()->forget('product_cart.' . $key);
+        $productCarts = session()->get('product_cart');
+        foreach ($productCarts as $key => $productCart) {
+            if ($productCart['product']->getId() == $id) {
+                session()->forget('product_cart'.$key);
                 break;
             }
         }
-        $route = session()->get('current');
-        return redirect()->route($route, ['id' => $id]);
+        return true;
+    }
+
+    public function plus($id)
+    {
+        $productCarts = session()->pull('product_cart');
+        foreach ($productCarts as $key => $productCart) {
+            if ($productCart['product']->getId() == $id) {
+                $productCart['quantity']++;
+                break;
+            }
+        }
+        session()->put('product_cart', $productCarts);
+        return true;
+    }
+
+    public function minus($id)
+    {
+        $productCarts = session()->pull('product_cart');
+        foreach ($productCarts as $key => $productCart) {
+            if ($productCart['product']->getId() == $id) {
+                $productCart['quantity']--;
+                break;
+            }
+        }
+        session()->put('product_cart', $productCarts);
+        return true;
     }
 
     public function getCart()
