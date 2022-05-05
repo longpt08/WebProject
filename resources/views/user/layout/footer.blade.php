@@ -24,8 +24,48 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright-text">Copyright &copy;2022</p>
             </div>
         </div>
     </div>
 </footer>
+<script src="plugins/jquery/dist/jquery.min.js"></script>
+<script>
+    $(".button").click(function () {
+        const id = $(this).attr('id').split('-');
+        const action = id[0];
+        const productId = id[1];
+        switch (action) {
+            case 'plus':
+                $.get(
+                    '/plus/' + productId,
+                    function (response) {
+                        $(".quantity-" + productId).text(response[0]);
+                        $(".total-" + productId).text(response[1])
+                        $(".total-price").text(response[2])
+                    }
+                );
+                break;
+            case 'minus':
+                $.get(
+                    '/minus/' + productId,
+                    function (response) {
+                        $(".quantity-" + productId).text(response[0]);
+                        $(".total-" + productId).text(response[1])
+                        $(".total-price").text(response[2])
+                    }
+                );
+                break;
+            case 'remove':
+                $('#yes').click(function () {
+                        $.get(
+                            '/remove-cart/' + productId,
+                            function (response) {
+                                $('.product-' + productId).remove();
+                                $(".total-price").text(response)
+                            }
+                        );
+                    }
+                );
+        }
+    })
+</script>

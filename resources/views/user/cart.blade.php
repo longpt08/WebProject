@@ -89,7 +89,7 @@ $user = Auth::user();
                                     <tbody>
                                     @if($productCarts)
                                         @foreach($productCarts as $productCart)
-                                            <tr class="product-rows">
+                                            <tr class="product-rows product-{{$productCart['product']->getId()}}">
                                                 <td class="">
                                                     <div class="product-info">
                                                         <img class="img-responsive"
@@ -103,14 +103,21 @@ $user = Auth::user();
                                                 <td class="">{{App\Http\Services\Utility::convertPrice($productCart['product']->getPrice())}}</td>
                                                 <td class="">
                                                     <div class="product-price">
-                                                        <span id="plus" ><i class="tf tf-ion-plus"></i></span>
-                                                        <span id="quantity">{{$productCart['quantity']}}</span>
-                                                        <span id="minus"><i class="tf tf-ion-minus"></i></span>
+                                                        <span class="button"
+                                                              id="plus-{{$productCart['product']->getId()}}"><i
+                                                                class="tf tf-ion-plus"></i></span>
+                                                        <span
+                                                            class="quantity-{{$productCart['product']->getId()}}">{{$productCart['quantity']}}</span>
+                                                        <span class="button"
+                                                              id="minus-{{$productCart['product']->getId()}}"><i
+                                                                class="tf tf-ion-minus"></i></span>
                                                     </div>
                                                 </td>
-                                                <td class="">
+                                                <td>
                                                     <ul class="action">
-                                                        <li><i id="remove" class="tf-ion-close"></i></li>
+                                                        <li><i id="remove-{{$productCart['product']->getId()}}"
+                                                               class="tf-ion-close button" data-toggle="modal"
+                                                               data-target="#basicModal"></i></li>
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -123,6 +130,7 @@ $user = Auth::user();
                                 @else
                                     <a href="/login" class="btn btn-main pull-right">Checkout</a>
                                 @endif
+
                             </form>
                         </div>
                     </div>
@@ -140,17 +148,9 @@ $user = Auth::user();
     =====================================-->
 
 <!-- Main jQuery -->
-<script src="plugins/jquery/dist/jquery.min.js"></script>
+
 <!-- Bootstrap 3.1 -->
-<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-<!-- Bootstrap Touchpin -->
-<script src="plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
-<!-- Instagram Feed Js -->
-<script src="plugins/instafeed/instafeed.min.js"></script>
-<!-- Video Lightbox Plugin -->
-<script src="plugins/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
-<!-- Count Down Js -->
-<script src="plugins/syo-timer/build/jquery.syotimer.min.js"></script>
+<script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- slick Carousel -->
 <script src="plugins/slick/slick.min.js"></script>
@@ -162,18 +162,5 @@ $user = Auth::user();
 
 <!-- Main Js File -->
 <script src="js/script.js"></script>
-
-<script>
-    $("#plus{{$productCart['product']->getId()}}").click(function() {
-
-    });
-    $("#minus{{$productCart['product']->getId()}}").click(function() {
-
-    });
-
-    $("#remove{{$productCart['product']->getId()}}").click(function() {
-
-    });
-</script>
 </body>
 </html>

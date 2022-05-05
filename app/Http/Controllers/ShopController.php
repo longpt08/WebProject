@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Enums\InvoiceStatus;
 use App\Http\Enums\OrderStatus;
 use App\Http\Enums\PaymentMethod;
+use App\Http\Services\Utility;
 use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Order;
@@ -69,40 +70,53 @@ class ShopController extends Controller
 
     public function remove($id)
     {
-        $productCarts = session()->get('product_cart');
-        foreach ($productCarts as $key => $productCart) {
+        $productCarts = session()->pull('product_cart');
+        foreach ($productCarts as &$productCart) {
             if ($productCart['product']->getId() == $id) {
-                session()->forget('product_cart'.$key);
+                $productCart = null;
                 break;
             }
         }
-        return true;
+        $total = 0;
+        foreach ($productCarts as $product) {
+            $total += optional($product['product'])->getPrice() * $product['quantity'];
+        }
+        session()->put('product_cart', array_filter($productCarts));
+        return $total;
     }
 
     public function plus($id)
     {
         $productCarts = session()->pull('product_cart');
-        foreach ($productCarts as $key => $productCart) {
+        foreach ($productCarts as $key => &$productCart) {
             if ($productCart['product']->getId() == $id) {
                 $productCart['quantity']++;
                 break;
             }
         }
         session()->put('product_cart', $productCarts);
-        return true;
+        $total = 0;
+        foreach ($productCarts as $product) {
+            $total += optional($product['product'])->getPrice() * $product['quantity'];
+        }
+        return [$productCart['quantity'], Utility::convertPrice($productCart['quantity'] * $productCart['product']->getPrice()), Utility::convertPrice($total)];
     }
 
     public function minus($id)
     {
         $productCarts = session()->pull('product_cart');
-        foreach ($productCarts as $key => $productCart) {
+        foreach ($productCarts as $key => &$productCart) {
             if ($productCart['product']->getId() == $id) {
                 $productCart['quantity']--;
                 break;
             }
         }
         session()->put('product_cart', $productCarts);
-        return true;
+        $total = 0;
+        foreach ($productCarts as $product) {
+            $total += optional($product['product'])->getPrice() * $product['quantity'];
+        }
+        return [$productCart['quantity'], Utility::convertPrice($productCart['quantity'] * $productCart['product']->getPrice()), Utility::convertPrice($total)];
     }
 
     public function getCart()

@@ -1,16 +1,3 @@
-<!--
-THEME: Aviato | E-commerce template
-VERSION: 1.0.0
-AUTHOR: Themefisher
-
-HOMEPAGE: https://themefisher.com/products/aviato-e-commerce-template/
-DEMO: https://demo.themefisher.com/aviato/
-GITHUB: https://github.com/themefisher/Aviato-E-Commerce-Template/
-
-WEBSITE: https://themefisher.com
-TWITTER: https://twitter.com/themefisher
-FACEBOOK: https://www.facebook.com/themefisher
--->
 <?php
 $total = 0;
 $productCarts = session()->get('product_cart');
@@ -159,7 +146,7 @@ $user = session()->get('user');
                             <h4 class="widget-title">Order Summary</h4>
                             @if($productCarts)
                                 @foreach($productCarts as $productCart)
-                                    <div class="media product-card">
+                                    <div class="media product-card product-{{$productCart['product']->getId()}}">
                                         <a class="pull-left"
                                            href="/product-single/{{$productCart['product']->getId()}}">
                                             <img class="media-object" src="{{asset('images/shop/products/' . $productCart['product']->getImageUrl())}}"
@@ -179,7 +166,7 @@ $user = session()->get('user');
                             <ul class="summary-prices">
                                 <li>
                                     <span>Subtotal:</span>
-                                    <span class="price">${{\App\Http\Services\Utility::convertPrice($total)}}</span>
+                                    <span class="total-price">${{\App\Http\Services\Utility::convertPrice($total)}}</span>
                                 </li>
                                 <li>
                                     <span>Shipping:</span>
@@ -188,7 +175,7 @@ $user = session()->get('user');
                             </ul>
                             <div class="summary-total">
                                 <span>Total</span>
-                                <span>${{$total}}</span>
+                                <span class="total-price">${{$total}}</span>
                             </div>
                             <div class="verified-icon">
                                 <img src="images/shop/verified.png">

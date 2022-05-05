@@ -86,14 +86,13 @@
                                 <div class="panel-body">
                                     <ul>
                                         @foreach($categories as $category)
-                                            <li><a href="/shop-sidebar?category={{$category->id}}">{{strtoupper($category->name)}}</a></li>
+                                            <li><a href="/shop-sidebar?category={{$category->id}}">{{$category->name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="col-md-9">
@@ -166,8 +165,6 @@
 
     <!-- Main Js File -->
     <script src="{{asset('js/script.js')}}"></script>
-
-@include('user.layout.footer')
 
   </body>
   </html>
