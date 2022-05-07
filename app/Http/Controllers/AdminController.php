@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Enums\UserRole;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Invoice;
 use App\Models\Order;
@@ -27,37 +28,56 @@ class AdminController extends Controller
 
     public function listUser()
     {
-        $users = User::query()->where('roles', UserRole::USER)->get();
+        $users = User::query()
+            ->orderByDesc('roles')
+            ->orderByDesc('status')
+            ->orderBy('id')
+            ->get();
         return view('admin.user', ['users' => $users]);
     }
 
     public function listProduct()
     {
-        $products = $this->productService->getProducts();
+        $products = Product::query()
+            ->orderByDesc('status')
+            ->orderBy('id')
+            ->get();
         return view('admin.product', ['products' => $products]);
     }
 
     public function listCategory()
     {
-        $categories = $this->categoryService->getCategories();
+        $categories = Category::query()
+            ->orderByDesc('status')
+            ->orderBy('id')
+            ->get();
         return view('admin.category', ['categories' => $categories]);
     }
 
     public function listInvoice()
     {
-        $invoices = Invoice::query()->get();
+        $invoices = Invoice::query()
+            ->orderByDesc('status')
+            ->orderBy('id')
+            ->get();
         return view('admin.invoice', ['invoices' => $invoices]);
     }
 
     public function listOrder()
     {
-        $orders = Order::query()->get();
+        $orders = Order::query()
+            ->orderByDesc('status')
+            ->orderBy('id')
+            ->get();
         return view('admin.order', ['orders' => $orders]);
     }
 
     public function listComment()
     {
-        $comments = Comment::query()->get();
+        $comments = Comment::query()
+            ->orderByDesc('status')
+            ->orderBy('id')
+            ->get();
         return view('admin.comment', ['comments' => $comments]);
     }
 }

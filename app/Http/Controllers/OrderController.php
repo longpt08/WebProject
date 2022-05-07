@@ -56,7 +56,14 @@ class OrderController extends Controller
     {
         $order = Order::query()->find($id);
         $order->status = $request->status;
-        $order->save();
-        return redirect()->route('order-detail', ['id' => $id]);
+        if ($order->save()) {
+            $message = 'Cập nhật thành công!';
+            $status = true;
+        } else {
+            $message = 'Cập nhật không thành công!';
+            $status = false;
+        }
+        return redirect()->route('order-detail', ['id' => $id])
+            ->with(['message' => $message, 'status' => $status]);
     }
 }

@@ -16,14 +16,27 @@ class UserController extends Controller
         $user->last_name = $request['last-name'];
         $user->email = $request['email'];
         $user->password = $request['password'];
+        if ($request['role']) {
+            $user->roles = $request['role'];
+        }
+        if ($request['address']) {
+            $user->address = $request['address'];
+        }
+        if ($request['phone-number']) {
+            $user->phone_number = $request['phone-number'];
+        }
+
         if ($this->userService->checkIfExistedAccount($user->email)) {
             return $message = "Can't create account";
         } else {
-           if ($user->save()) {
-               session(['user' => $user]);
-               Auth::login($user);
-               return redirect()->route('home');
-           }
+            if ($user->save()) {
+                if (Auth::user()) {
+                    return redirect()->route('user-list');
+                }
+                session(['user' => $user]);
+                Auth::login($user);
+                return redirect()->route('home');
+            }
         }
     }
 
@@ -59,9 +72,16 @@ class UserController extends Controller
     {
         $user = User::query()->find($id);
         $user->status = $request->status;
-        $user->save();
+        if ($user->save()) {
+            $message = 'Cập nhật thành công!';
+            $status = true;
+        } else {
+            $message = 'Cập nhật thất bại!';
+            $status = false;
+        }
 
-        return redirect()->route('user-detail', ['id' => $id]);
+        return redirect()->route('user-detail', ['id' => $id])
+            ->with('status', $status)->with('message', $message);
     }
 
     public function editProfile(Request $request)

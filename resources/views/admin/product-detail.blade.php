@@ -86,6 +86,19 @@
                                                 <input type="file" class="form-control" id="image" name="image" value="">
                                             </div>
                                         </div>
+                                        @if (session()->has('status') && session()->has('message'))
+                                            @if (session()->get('status'))
+                                                <div class="form-group row">
+                                                    <div class="col-lg-4"></div>
+                                                    <div class="alert alert-success col-lg-6">{{session()->get('message')}}</div>
+                                                </div>
+                                            @else
+                                                <div class="form-group row">
+                                                    <div class="col-lg-4"></div>
+                                                    <div class="alert alert-danger col-lg-6">{{session()->get('message')}}</div>
+                                                </div>
+                                            @endif
+                                        @endif
                                         <div class="form-group row">
                                             <div class="col-lg-8 ml-auto">
                                                 <button type="submit" class="btn btn-primary">Submit</button>

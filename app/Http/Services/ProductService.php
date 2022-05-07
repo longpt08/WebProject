@@ -11,7 +11,8 @@ class ProductService
 {
     public function getProducts(?int $limit = null): Collection
     {
-        $query = Product::query()->orderByDesc('average_rating');
+        $query = Product::query()
+            ->orderByDesc('average_rating');
         if ($limit) {
             $query->limit($limit);
         }

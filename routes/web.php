@@ -75,9 +75,13 @@ Route::group([
 ], function(){
    Route::get('index', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin-index');
 
-   Route::get('user', [\App\Http\Controllers\AdminController::class, 'listUser']);
+   Route::get('user', [\App\Http\Controllers\AdminController::class, 'listUser'])->name('user-list');
    Route::get('user/detail/{id}', [\App\Http\Controllers\UserController::class, 'getUserDetail'])->name('user-detail');
    Route::post('user/detail/edit/{id}', [\App\Http\Controllers\UserController::class, 'editUser']);
+    Route::get('user/create-form', function() {
+        return view('admin.create-user');
+    });
+    Route::post('user/create', [\App\Http\Controllers\UserController::class, 'create']);
 
    Route::get('product', [\App\Http\Controllers\AdminController::class, 'listProduct'])->name('product-list');
    Route::get('product/detail/{id}', [\App\Http\Controllers\ProductController::class, 'getProductDetail'])->name('product-detail');

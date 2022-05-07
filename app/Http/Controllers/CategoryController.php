@@ -20,9 +20,16 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->description = $request->description;
         $category->status = $request->status;
-        $category->save();
+        if ($category->save()) {
+            $message = 'Cập nhật thành công!';
+            $status = true;
+        } else {
+            $message = 'Cập nhật không thành công!';
+            $status = false;
+        }
 
-        return redirect()->route('category-detail', ['id' => $id]);
+        return redirect()->route('category-detail', ['id' => $id])
+            ->with(['message' => $message, 'status' => $status]);
     }
 
     public function createCategory(Request $request)

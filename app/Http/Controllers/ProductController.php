@@ -41,12 +41,21 @@ class ProductController extends Controller
         $product->status = $request->status;
         $product->quantity = $request->quantity;
 
-        $imageName = 'product-' . $product->id . '.' . $request->file('image')->extension();
-        $request->file('image')->move('images/shop/products', $imageName);
-        $product->image_url = $imageName;
-        $product->save();
+        if ($request->file('image')) {
+            $imageName = 'product-' . $product->id . '.' . $request->file('image')->extension();
+            $request->file('image')->move('images/shop/products', $imageName);
+            $product->image_url = $imageName;
+        }
+        if ($product->save()) {
+            $message = 'Cập nhật thành công!';
+            $status = true;
+        } else {
+            $message = 'Cập nhật không thành công!';
+            $status = false;
+        }
 
-        return redirect()->route('product-detail', ['id' => $id]);
+        return redirect()->route('product-detail', ['id' => $id])
+            ->with(['message' => $message, 'status' => $status]);
     }
 
     public function getProductForm()

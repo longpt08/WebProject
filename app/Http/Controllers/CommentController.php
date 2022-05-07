@@ -21,8 +21,15 @@ class CommentController extends Controller
     {
         $comment = Comment::query()->find($id);
         $comment->status = $request->status;
-        $comment->save();
-        return redirect()->route('comment-detail', ['id' => $id]);
+        if ($comment->save()) {
+            $message = 'Cập nhật thành công!';
+            $status = true;
+        } else {
+            $message = 'Cập nhật không thành công!';
+            $status = false;
+        }
+        return redirect()->route('comment-detail', ['id' => $id])
+            ->with(['message' => $message, 'status' => $status]);
     }
 
     public function postComment(Request $request)

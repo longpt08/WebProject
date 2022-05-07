@@ -22,27 +22,35 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+                            <a href="/admin/user/create-form">
+                                <button type="button" class="btn mb-1 btn-info">Add new <span class="btn-icon-right"><i
+                                            class="fa fa-plus"></i></span>
+                                </button>
+                            </a>
                             <div class="table-responsive">
                                 <table class="table table-bordered verticle-middle">
                                     <thead>
                                     <tr>
                                         <th scope="col">UID</th>
-                                        <th scope="col">Full Name</th>
+                                        <th scope="col">Họ Và Tên</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Phone Number</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col">Số điện thoại</th>
+                                        <th scope="col">Địa chỉ</th>
+                                        <th scope="col">Chức vụ</th>
+                                        <th scope="col">Trạng Thái</th>
+                                        <th scope="col"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($users as $user)
                                         <tr>
                                             <td>{{$user->id}}</td>
-                                            <td>{{$user->getFullName()}}</td>
+                                            <td><a href="/admin/user/detail/{{$user->id}}">{{$user->getFullName()}}</a>
+                                                /td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->phone_number}}</td>
                                             <td>{{$user->address}}</td>
+                                            <td>{{\App\Http\Enums\UserRole::convert($user->roles)}}</td>
                                             <td>{{\App\Http\Enums\UserStatus::convert($user->status)}}</td>
                                             <td><span><a href="/admin/user/detail/{{$user->id}}" data-toggle="tooltip" data-placement="top"
                                                          title="Edit"><i
