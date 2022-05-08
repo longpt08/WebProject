@@ -86,12 +86,6 @@ session()->put(['current' => 'index']);
         </div>
     </div>
 </div>
-Số đầu: 1884
-Số cuối: 2035
-Tiền điện = (2035-1884) + 10 (tháng trước) = 161 x 3500 = 563500
-Tiền nước = 100000 x 2 = 200000
-Tiền phòng = 3500000
-Tổng = 4263500
 <section class="product-category section">
     <div class="container">
         <div class="row">
@@ -196,11 +190,11 @@ Start Call To Action
         <div class="row">
             <div class="col-md-12 text-center">
                 <div class="title">
-                    <h2>SUBSCRIBE TO NEWSLETTER</h2>
+                    <h2>THEO DÕI ĐỂ NHẬN THÔNG BÁO MỚI NHẤT</h2>
                 </div>
                 <div class="col-lg-6 col-md-offset-3">
                     <div class="input-group subscription-form">
-                        <input type="text" class="form-control" placeholder="Enter Your Email Address">
+                        <input type="text" class="form-control" placeholder="NHẬP ĐỊA CHỈ EMAIL">
                         <span class="input-group-btn">
 				        <button class="btn btn-main" type="button">Subscribe Now!</button>
 				      </span>
@@ -216,7 +210,7 @@ Start Call To Action
     <div class="container">
         <div class="row">
             <div class="title">
-                <h2>View us on instagram</h2>
+                <h2>INSTAGRAM</h2>
             </div>
         </div>
         <div class="row">
