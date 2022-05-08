@@ -54,10 +54,10 @@ $user = session()->get('user');
         <div class="row">
             <div class="col-md-12">
                 <div class="content">
-                    <h1 class="page-name">Checkout</h1>
+                    <h1 class="page-name">THANH TOÁN</h1>
                     <ol class="breadcrumb">
-                        <li><a href="../index.html">Home</a></li>
-                        <li class="active">checkout</li>
+                        <li><a href="../index.html">TRANG CHỦ</a></li>
+                        <li class="active">THANH TOÁN</li>
                     </ol>
                 </div>
             </div>
@@ -72,27 +72,27 @@ $user = session()->get('user');
                     @csrf
                     <div class="col-md-8">
                         <div class="block billing-details">
-                            <h4 class="widget-title">Billing Details</h4>
+                            <h4 class="widget-title">THÔNG TIN ĐƠN HÀNG</h4>
                             <div id="default-address">
                             </div>
                             <div class="form-group">
-                                <label for="full_name">Full Name</label>
+                                <label for="full_name">HỌ VÀ TÊN</label>
                                 <input type="text" class="form-control" name="full_name"
                                        placeholder="{{$user->first_name . " " . $user->last_name}}">
                             </div>
                             <div class="form-group">
-                                <label for="user_address">Address</label>
+                                <label for="user_address">ĐỊA CHỈ</label>
                                 <input type="text" class="form-control" name="user_address"
                                        placeholder="{{$user->address}}">
                             </div>
                             <div class="form-group">
-                                <label for="user_country">Phone Number</label>
+                                <label for="user_country">SỐ ĐIỆN THOẠI</label>
                                 <input type="text" class="form-control" name="phone_number"
                                        placeholder="{{$user->phone_number}}">
                             </div>
                         </div>
                         <div class="block">
-                            <h4 class="widget-title">Payment Method</h4>
+                            <h4 class="widget-title">PHƯƠNG THỨC THANH TOÁN</h4>
                             <div>
                                 <input id="cod" type="radio" name="payment-method" checked value="{{\App\Http\Enums\PaymentMethod::COD}}">
                                 <label for="cod">Thanh toán khi nhận hàng (COD)</label>
@@ -133,7 +133,7 @@ $user = session()->get('user');
                                     </div>
                                 </div>
                                 <div>
-                                    <button type="submit" class="btn btn-main mt-20">Place Order</button>
+                                    <button type="submit" class="btn btn-main mt-20">Đặt hàng</button>
                                 </div>
 
                             </div>
@@ -143,7 +143,7 @@ $user = session()->get('user');
                 <div class="col-md-4">
                     <div class="product-checkout-details">
                         <div class="block">
-                            <h4 class="widget-title">Order Summary</h4>
+                            <h4 class="widget-title">CHI TIẾT ĐƠN HÀNG</h4>
                             @if($productCarts)
                                 @foreach($productCarts as $productCart)
                                     <div class="media product-card product-{{$productCart['product']->getId()}}">
@@ -165,16 +165,16 @@ $user = session()->get('user');
                             @endif
                             <ul class="summary-prices">
                                 <li>
-                                    <span>Subtotal:</span>
+                                    <span>TẠM TÍNH:</span>
                                     <span class="total-price">${{\App\Http\Services\Utility::convertPrice($total)}}</span>
                                 </li>
                                 <li>
-                                    <span>Shipping:</span>
-                                    <span>Free</span>
+                                    <span>PHÍ VẬN CHUYỂN:</span>
+                                    <span>MIỄN PHÍ</span>
                                 </li>
                             </ul>
                             <div class="summary-total">
-                                <span>Total</span>
+                                <span>TỔNG</span>
                                 <span class="total-price">${{$total}}</span>
                             </div>
                             <div class="verified-icon">
@@ -187,33 +187,51 @@ $user = session()->get('user');
         </div>
     </div>
 </div>
-
+<div style="text-align: center">
+    <div class="bootstrap-modal">
+        <div class="modal fade" id="basicModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">
+                            HỦY
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">ĐỒNG Ý
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @include('user.layout.footer')
 <!--
     Essential Scripts
     =====================================-->
 
 <!-- Main jQuery -->
-<script src="plugins/jquery/dist/jquery.min.js"></script>
+<script src="public/plugins/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.1 -->
-<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="public/plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- Bootstrap Touchpin -->
-<script src="plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+<script src="public/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
 <!-- Instagram Feed Js -->
-<script src="plugins/instafeed/instafeed.min.js"></script>
+<script src="public/plugins/instafeed/instafeed.min.js"></script>
 <!-- Video Lightbox Plugin -->
-<script src="plugins/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
+<script src="public/plugins/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
 <!-- Count Down Js -->
-<script src="plugins/syo-timer/build/jquery.syotimer.min.js"></script>
 
-<!-- slick Carousel -->
-<script src="plugins/slick/slick.min.js"></script>
-<script src="plugins/slick/slick-animation.min.js"></script>
 
 
 <!-- Main Js File -->
 <script src="js/script.js"></script>
-
 <script>
     $("#card").click(function () {
             $(".checkout-user-details").attr("hidden", false);

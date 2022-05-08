@@ -46,26 +46,42 @@
                 );
                 break;
             case 'minus':
-                $.get(
-                    '/minus/' + productId,
-                    function (response) {
-                        $(".quantity-" + productId).text(response[0]);
-                        $(".total-" + productId).text(response[1])
-                        $(".total-price").text(response[2])
-                    }
-                );
-                break;
-            case 'remove':
+                let quantity = $(".quantity-" + productId).text()
+                if (quantity[0] == 1) {
+                    $("#basicModal").modal('show');
+                    $('#yes').click(function () {
+                            $.get(
+                                '/remove-cart/' + productId,
+                                function (response) {
+                                    $('.product-' + productId).remove();
+                                    $(".total-price").text(response)
+                                }
+                            );
+                        }
+                    );
+                    break;
+                } else {
+                    $.get(
+                        '/minus/' + productId,
+                        function (response) {
+                            $(".quantity-" + productId).text(response[0]);
+                            $(".total-" + productId).text(response[1])
+                            $(".total-price").text(response[2])
+                        }
+                    );
+                    break;
+                }
+
+            case 'remove': {
                 $('#yes').click(function () {
-                        $.get(
-                            '/remove-cart/' + productId,
-                            function (response) {
-                                $('.product-' + productId).remove();
-                                $(".total-price").text(response)
-                            }
-                        );
-                    }
-                );
+                    $.get(
+                        '/remove-cart/' + productId,
+                        function (response) {
+                            $('.product-' + productId).remove();
+                            $(".total-price").text(response)
+                        });
+                });
+            }
         }
     })
 </script>

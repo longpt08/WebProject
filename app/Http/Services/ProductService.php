@@ -41,4 +41,13 @@ class ProductService
         $product->quantity -= $quantity;
         return $product->save();
     }
+
+    public function checkQuantity(int $id, int $quantity)
+    {
+        $product = Product::query()->find($id);
+        if ($quantity > $product) {
+            return false;
+        }
+        return true;
+    }
 }

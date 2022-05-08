@@ -48,7 +48,8 @@ session()->put(['current' => 'index']);
             <div class="row">
                 <div class="col-lg-8 text-center">
                     <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
-                    <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">Sản phẩm nhập khẩu <br>
+                    <h1 style="font-size: 60px" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">
+                        Sản phẩm nhập khẩu <br>
                         chất lượng quốc tế.</h1>
                     <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn"
                        href="/shop-sidebar">Mua Ngay</a>
@@ -61,7 +62,8 @@ session()->put(['current' => 'index']);
             <div class="row">
                 <div class="col-lg-8 text-left">
                     <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
-                    <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">Nguyên liệu cao cấp <br>
+                    <h1 style="font-size: 60px" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">
+                        Nguyên liệu cao cấp <br>
                         tạo nên chiếc bánh ngon.</h1>
                     <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn"
                        href="/shop-sidebar">Mua Ngay</a>
@@ -74,7 +76,8 @@ session()->put(['current' => 'index']);
             <div class="row">
                 <div class="col-lg-8 text-right">
                     <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
-                    <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">Nghệ thuật của ẩm thực
+                    <h1 style="font-size: 60px" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">
+                        Nghệ thuật của ẩm thực
                         <br> tinh túy trong trang trí.</h1>
                     <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn"
                        href="/shop-sidebar">Mua Ngay</a>
@@ -83,7 +86,12 @@ session()->put(['current' => 'index']);
         </div>
     </div>
 </div>
-
+Số đầu: 1884
+Số cuối: 2035
+Tiền điện = (2035-1884) + 10 (tháng trước) = 161 x 3500 = 563500
+Tiền nước = 100000 x 2 = 200000
+Tiền phòng = 3500000
+Tổng = 4263500
 <section class="product-category section">
     <div class="container">
         <div class="row">
@@ -139,6 +147,9 @@ session()->put(['current' => 'index']);
                 <div class="col-md-4">
                     <div class="product-item">
                         <div class="product-thumb">
+                            @if($trendyProduct->quantity == 0)
+                                <span class="bage">Hết hàng</span>
+                            @endif
                             <img class="img-responsive"
                                  src="{{asset('images/shop/products/' . $trendyProduct->image_url)}}"
                                  alt="product-img"
@@ -158,8 +169,16 @@ session()->put(['current' => 'index']);
                             </div>
                         </div>
                         <div class="product-content">
-                            <h4><a href="/product-single/{{$trendyProduct->id}}">{{$trendyProduct->name}}</a></h4>
-                            <p class="price">{{\App\Http\Services\Utility::convertPrice($trendyProduct->price)}}</p>
+                            @if($trendyProduct->quantity == 0)
+                                <s><h4><a href="/product-single/{{$trendyProduct->id}}">{{$trendyProduct->name}}</a>
+                                    </h4></s>
+                                <s>
+                                    <p class="price">{{\App\Http\Services\Utility::convertPrice($trendyProduct->price)}}</p>
+                                </s>
+                            @else
+                                <h4><a href="/product-single/{{$trendyProduct->id}}">{{$trendyProduct->name}}</a></h4>
+                                <p class="price">{{\App\Http\Services\Utility::convertPrice($trendyProduct->price)}}</p>
+                            @endif
                         </div>
                     </div>
                 </div>

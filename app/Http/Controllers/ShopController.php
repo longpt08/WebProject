@@ -131,18 +131,25 @@ class ShopController extends Controller
 
     public function confirm(Request $request)
     {
-        $description = $request['full_name'] . " (" . $request['phone_number'] . ") " . $request['user_address'];
-        $productCarts = session()->get('product_cart');
-        $total = 0;
-        if ($productCarts) {
-            foreach ($productCarts as $productCart) {
-                $total += optional($productCart['product'])->getPrice() * $productCart['quantity'];
-            }
-        }
-
         $userId = session()->get('user')->id;
-        DB::beginTransaction();
+        $description = $request['full_name'] . " (" . $request['phone_number'] . ") " . $request['user_address'];
+        $productCarts = session()->pull('product_cart');
+        $total = 0;
         try {
+            if ($productCarts) {
+                foreach ($productCarts as &$productCart) {
+                    if ($this->productService->checkQuantity($productCart['product']->getId(), $productCart['quantity'])) {
+                        $productCart = null;
+                        session()->put('product_cart', array_filter($productCarts));
+                        throw new \Exception('Số lượng sản phẩm' . $productCart['product']->getName() . 'trong kho không đủ');
+                    }
+                    $total += optional($productCart['product'])->getPrice() * $productCart['quantity'];
+                }
+            }
+
+
+            DB::beginTransaction();
+
             $order = new Order();
             $order->description = $description;
             $order->total = $total;
@@ -182,13 +189,12 @@ class ShopController extends Controller
                 $invoice->description = PaymentMethod::convert($method);
                 $invoice->updateTimestamps();
                 $invoice->save();
-                session()->forget('product_cart');
                 DB::commit();
             }
         } catch (\Exception $exception) {
             Log::error($exception . ' UID: ' . $userId);
             DB::rollBack();
-            return view('checkout')->with(['alert' => 'Something went wrong!']);
+            return view('user.checkout')->with('alert', $exception);
         }
         return view('user.confirmation', ['orderId' => $order->id]);
     }

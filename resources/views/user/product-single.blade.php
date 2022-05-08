@@ -57,7 +57,11 @@ session()->put('current', 'product-single')
             </div>
             <div class="col-md-7">
                 <div class="single-product-details">
-                    <h2>{{$product->name}}</h2>
+                    <h2>{{$product->name}}
+                        @if($product->quantity == 0)
+                            <span class="bage">(Hết hàng)</span>
+                        @endif
+                    </h2>
                     <p class="product-rating">{{$product->average_rating}}<i class="tf-ion-android-star"></i></p>
                     <p class="product-price">{{\App\Http\Services\Utility::convertPrice($product->price)}}</p>
                     <p class="product-description mt-20">
@@ -70,7 +74,8 @@ session()->put('current', 'product-single')
                             <div class="product-quantity-slider">
                                 <input id="product-quantity" type="text" value="1" name="product-quantity"
                                        oninput="this.value = this.value > {{$product->quantity}} ? {{$product->quantity}} : Math.abs(this.value)">
-                                <input name="id" value="{{$product->id}}" hidden="true">
+                                <input name="id" value="{{$product->id}}" hidden>
+                                <input id="limit-quantity" value="{{$product->quantity}}" hidden>
                             </div>
                         </div>
                         <div class="product-category">
@@ -81,7 +86,7 @@ session()->put('current', 'product-single')
                                 @endforeach
                             </ul>
                         </div>
-                        <input type="submit" id="add-cart" class="btn btn-main mt-20" value="Thêm vào giỏ hàng">
+                        <input {{$product->quantity != 0 ? '': 'disabled'}} type="submit" id="add-cart" class="btn btn-main mt-20" value="Thêm vào giỏ hàng">
                     </form>
                 </div>
             </div>
@@ -192,7 +197,22 @@ session()->put('current', 'product-single')
 
 <!-- Main Js File -->
 <script src="../js/script.js"></script>
-
+<script>
+    $("#product-quantity").change(function() {
+                let quantity = $(this).val();
+        if (quantity == $("#limit-quantity").val()) {
+            $(".bootstrap-touchspin-up").prop('disabled', true);
+        }
+        else {
+            $(".bootstrap-touchspin-up").prop('disabled', false);
+        }
+        if (quantity == 0) {
+            $("#add-cart").prop('disabled', true);
+        } else {
+            $("#add-cart").prop('disabled', false);
+        }
+    })
+</script>
 
 </body>
 </html>
