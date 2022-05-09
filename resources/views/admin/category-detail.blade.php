@@ -61,6 +61,14 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <p class="col-lg-4 col-form-label" >Image
+                                        </p>
+                                        <div class="col-lg-6">
+                                            <img id="image-hint" style="max-height: 100px" src="{{asset('images/shop/categories/'.$category->image_url)}}">
+                                            <input type="file" class="form-control" id="image" name="image" value="">
+                                        </div>
+                                    </div>
                                     @if (session()->has('status') && session()->has('message'))
                                         @if (session()->get('status'))
                                             <div class="form-group row">
@@ -132,7 +140,22 @@
 ***********************************-->
 
 @include('admin.layout.include-bottom')
+<script>
+    $("#image").change(function(e) {
 
+        for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+
+            var file = e.originalEvent.srcElement.files[i];
+
+            var img = $("#image-hint");
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                img.attr('src', reader.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 </body>
 
 </html>

@@ -33,12 +33,12 @@
   <link rel="stylesheet" href="css/style.css">
 
 </head>
-<?php
-    $user = \Illuminate\Support\Facades\Auth::user();
-?>
 <body id="body">
 @include('user.layout.header')
 @include('user.layout.navigator')
+<?php
+$user = \Illuminate\Support\Facades\Auth::user();
+?>
 <section class="page-header">
 	<div class="container">
 		<div class="row">
@@ -103,7 +103,7 @@
                         <div class="profile-rows">
                             <div><label for="date-of-birth">Ngày sinh:</label></div>
                             <div><input type="date" id="date-of-birth" name="date_of_birth"
-                                       value="{{(optional($user->date_of_birth)->format('Y-m-d'))}}">
+                                       value="{{\Carbon\Carbon::parse(optional($user->date_of_birth)->toString())->format('Y-m-d')}}">
                             </div>
                         </div>
 
@@ -149,6 +149,7 @@
 
     <!-- Main Js File -->
     <script src="js/script.js"></script>
+
 
 
 

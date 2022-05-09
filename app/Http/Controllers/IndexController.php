@@ -11,7 +11,7 @@ class IndexController extends Controller
     public function index()
     {
         $trendyProducts = $this->productService->getProducts(9);
-        $categories = $this->categoryService->getCategories(3);
+        $categories = $this->categoryService->getCategories(4);
         return view('user.index')->with([
             'categories' => $categories,
             'trendyProducts' => $trendyProducts,

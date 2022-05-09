@@ -38,7 +38,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <a href="/admin/category/create-form"><button type="button" class="btn mb-1 btn-info">Add new <span class="btn-icon-right"><i
+                                <a href="/admin/category/create-form"><button type="button" class="btn mb-1 btn-info">THÊM MỚI <span class="btn-icon-right"><i
                                             class="fa fa-plus"></i></span>
                                     </button></a>
                                 <div class="table-responsive">
@@ -49,7 +49,8 @@
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Description</th>
                                                 <th scope="col">Status</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col">Image</th>
+                                                <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -59,6 +60,7 @@
                                                 <td><a href="/admin/category/detail/{{$category->id}}">{{$category->name}}</a></td>
                                                 <td>{{$category->description}}</td>
                                                 <td>{{\App\Http\Enums\CategoryStatus::convert($category->status)}}</td>
+                                                <td><img src="{{asset('images/shop/categories/'.$category->image_url)}}" style="max-height: 100px"></td>
                                                 <td><span><a href="/admin/category/detail/{{$category->id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span></td>
                                             </tr>
                                         @endforeach

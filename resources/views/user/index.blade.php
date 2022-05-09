@@ -91,13 +91,13 @@ session()->put(['current' => 'index']);
         <div class="row">
             <div class="col-md-12">
                 <div class="title text-center">
-                    <h2>Product Category</h2>
+                    <h2>DANH MỤC NỔI BẬT</h2>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="category-box">
                     <a href="/shop-sidebar?category={{$categories[0]->id}}">
-                        <img src="images/shop/category/category-1.jpg" alt=""/>
+                        <img src="images/shop/categories/{{$categories[0]->image_url}}" alt=""/>
                         <div class="content">
                             <h3>{{$categories[0]->name}}</h3>
                             <p>{{$categories[0]->description}}</p>
@@ -106,7 +106,7 @@ session()->put(['current' => 'index']);
                 </div>
                 <div class="category-box">
                     <a href="/shop-sidebar?category={{$categories[1]->id}}">
-                        <img src="images/shop/category/category-2.jpg" alt=""/>
+                        <img src="images/shop/categories/{{$categories[1]->image_url}}" alt=""/>
                         <div class="content">
                             <h3>{{$categories[1]->name}}</h3>
                             <p>{{$categories[1]->description}}</p>
@@ -115,12 +115,21 @@ session()->put(['current' => 'index']);
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="category-box category-box-2">
+                <div class="category-box">
                     <a href="/shop-sidebar?category={{$categories[2]->id}}">
-                        <img src="images/shop/category/category-3.jpg" alt=""/>
+                        <img src="images/shop/categories/{{$categories[2]->image_url}}" alt=""/>
                         <div class="content">
                             <h3>{{$categories[2]->name}}</h3>
                             <p>{{$categories[2]->description}}</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="category-box">
+                    <a href="/shop-sidebar?category={{$categories[3]->id}}">
+                        <img src="images/shop/categories/{{$categories[3]->image_url}}" alt=""/>
+                        <div class="content">
+                            <h3>{{$categories[3]->name}}</h3>
+                            <p>{{$categories[3]->description}}</p>
                         </div>
                     </a>
                 </div>
@@ -133,7 +142,7 @@ session()->put(['current' => 'index']);
     <div class="container">
         <div class="row">
             <div class="title text-center">
-                <h2>Trendy Products</h2>
+                <h2>SẢN PHẨM NỔI BẬT</h2>
             </div>
         </div>
         <div class="row">

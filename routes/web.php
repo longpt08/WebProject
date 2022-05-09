@@ -51,9 +51,10 @@ Route::post('/login/login', [\App\Http\Controllers\UserController::class, 'login
 //sign up
 Route::get('/sign-up', function () {
     return view('user.signUp');
-});
+})->name('sign-up');;
 Route::post('/sign-up/create', [\App\Http\Controllers\UserController::class, 'create']);
 
+Route::post('/check-email', [\App\Http\Controllers\UserController::class, 'checkEmail']);
 //log out
 Route::get('/log-out', [\App\Http\Controllers\UserController::class, 'logOut']);
 

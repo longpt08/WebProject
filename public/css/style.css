@@ -2874,3 +2874,12 @@ opacity: 1;
   display: flex;
   justify-content: flex-end;
 }
+
+
+.popover-content {
+    width: max-content;
+    color: red;
+}
+.arrow {
+    top: 50%;
+}

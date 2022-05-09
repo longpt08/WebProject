@@ -39,7 +39,7 @@
                     <div class="card">
                         <div class="card-body">
                             <a href="/admin/product/create-form">
-                                <button type="button" class="btn mb-1 btn-info">Add new <span class="btn-icon-right"><i
+                                <button type="button" class="btn mb-1 btn-info">THÊM MỚI <span class="btn-icon-right"><i
                                             class="fa fa-plus"></i></span>
                                 </button>
                             </a>
@@ -54,7 +54,7 @@
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Image</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"></th>
                                     </tr>
                                     </thead>
                                     <tbody>

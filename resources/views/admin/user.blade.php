@@ -23,7 +23,7 @@
                     <div class="card">
                         <div class="card-body">
                             <a href="/admin/user/create-form">
-                                <button type="button" class="btn mb-1 btn-info">Add new <span class="btn-icon-right"><i
+                                <button type="button" class="btn mb-1 btn-info">THÊM MỚI <span class="btn-icon-right"><i
                                             class="fa fa-plus"></i></span>
                                 </button>
                             </a>
@@ -46,13 +46,14 @@
                                         <tr>
                                             <td>{{$user->id}}</td>
                                             <td><a href="/admin/user/detail/{{$user->id}}">{{$user->getFullName()}}</a>
-                                                /td>
+                                            </td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->phone_number}}</td>
                                             <td>{{$user->address}}</td>
                                             <td>{{\App\Http\Enums\UserRole::convert($user->roles)}}</td>
                                             <td>{{\App\Http\Enums\UserStatus::convert($user->status)}}</td>
-                                            <td><span><a href="/admin/user/detail/{{$user->id}}" data-toggle="tooltip" data-placement="top"
+                                            <td><span><a href="/admin/user/detail/{{$user->id}}" data-toggle="tooltip"
+                                                         data-placement="top"
                                                          title="Edit"><i
                                                             class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#"
                                                                                                                data-toggle="tooltip"

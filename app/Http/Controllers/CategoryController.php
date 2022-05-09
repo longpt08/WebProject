@@ -20,6 +20,11 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->description = $request->description;
         $category->status = $request->status;
+        if ($request->file('image')) {
+            $imageName = 'product-' . $category->id . '.' . $request->file('image')->extension();
+            $request->file('image')->move('images/shop/categories', $imageName);
+            $category->image_url = $imageName;
+        }
         if ($category->save()) {
             $message = 'Cập nhật thành công!';
             $status = true;
@@ -39,6 +44,12 @@ class CategoryController extends Controller
         $category->description = $request->description;
         $category->status = $request->status;
         $category->save();
+
+        $imageName = 'category-' . $category->id . '.' . $request->file('image')->extension();
+        $request->file('image')->move('images/shop/categories', $imageName);
+        $category->image_url = $imageName;
+        $category->save();
+
         return redirect()->route('category-list');
     }
 }

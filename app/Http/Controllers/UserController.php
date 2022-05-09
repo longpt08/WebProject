@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Enums\UserRole;
+use App\Http\Enums\UserStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,7 @@ class UserController extends Controller
         }
 
         if ($this->userService->checkIfExistedAccount($user->email)) {
-            return $message = "Can't create account";
+            return redirect()->route('sign-up')->with('message', 'Email đã tồn tại!');
         } else {
             if ($user->save()) {
                 if (Auth::user()) {
@@ -44,15 +45,27 @@ class UserController extends Controller
     {
         $user = $this->userService->checkIfExistedAccount($request['email'], $request['password']);
         if ($user) {
-            Auth::login($user);
-            session()->put(['user' => $user]);
-            if ($user->roles == UserRole::USER) {
-                return redirect()->route('home');
+            if ($user->status == UserStatus::ACTIVE) {
+                Auth::login($user);
+                session()->put(['user' => $user]);
+                if ($user->roles == UserRole::USER) {
+                    return redirect()->route('home');
+                }
+                return redirect()->route('admin-index');
+            } else {
+                return redirect()->route('login')->with('message', "Tài khoản đã bị vô hiệu hóa! Vui lòng liên hệ CSKH để biết thêm chi tiết!");
             }
-            return redirect()->route('admin-index');
         } else {
-            return $message = "Login Failed";
+            return redirect()->route('login')->with('message', "Đăng nhập thất bại, tài khoản không tồn tại!");
         }
+    }
+
+    public function checkEmail(Request $request)
+    {
+        if ($this->userService->checkIfExistedAccount($request->email)) {
+            return true;
+        }
+        return false;
     }
 
     public function logOut()
@@ -92,9 +105,10 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
-        $user->date_of_birth = $request->date_of_birth;
+        $user->date_of_birth = date('Y-m-d',strtotime($request->date_of_birth));
 
         $user->save();
+        Auth::setUser($user);
         return redirect()->route('profile');
     }
 }

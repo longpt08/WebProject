@@ -50,7 +50,7 @@ session()->put(['current' => 'shop']);
                 <div class="content">
                     <h1 class="page-name">Shop</h1>
                     <ol class="breadcrumb">
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/">TRANG CHỦ</a></li>
                         <li class="active">shop</li>
                     </ol>
                 </div>
@@ -65,7 +65,7 @@ session()->put(['current' => 'shop']);
         <div class="row">
             <div class="col-md-3">
                 <div class="widget">
-                    <h4 class="widget-title">Pricing</h4>
+                    <h4 class="widget-title">GIÁ</h4>
                     <div>
                         <form action="/shop-sidebar" method="GET">
                             <div class="filter">
@@ -73,12 +73,12 @@ session()->put(['current' => 'shop']);
                                 <span style="padding: 5px">-</span>
                                 <input id="to" name="to" type="text"/>
                             </div>
-                            <button type="submit">Apply</button>
+                            <button type="submit">ÁP DỤNG</button>
                         </form>
                     </div>
                 </div>
                 <div class="widget product-category">
-                    <h4 class="widget-title">Categories</h4>
+                    <h4 class="widget-title">DANH MỤC</h4>
                     <div class="panel-group commonAccordion" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
@@ -100,8 +100,8 @@ session()->put(['current' => 'shop']);
             <div class="col-md-9">
                 <div class="row">
                     @if ($products->count() == 0)
-                        <div class="alert alert-danger alert-common" role="alert"><i class="tf-ion-search"></i><span>Warning!</span>
-                            Can not find product relate to your word! See <a href="/shop-sidebar">other product</a>
+                        <div class="alert alert-danger alert-common" role="alert"><i class="tf-ion-search"></i><span>CẢNH BÁO!</span>
+                            KHÔNG THỂ TÌM THẤY SẢN PHẨM BẠN MUỐN! XEM <a href="/shop-sidebar">SẢN PHẨM KHÁC</a>
                         </div>
                     @endif
                     @foreach($products as $product)

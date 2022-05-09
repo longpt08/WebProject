@@ -1,18 +1,3 @@
-<!--
-THEME: Aviato | E-commerce template
-VERSION: 1.0.0
-AUTHOR: Themefisher
-
-HOMEPAGE: https://themefisher.com/products/aviato-e-commerce-template/
-DEMO: https://demo.themefisher.com/aviato/
-GITHUB: https://github.com/themefisher/Aviato-E-Commerce-Template/
-
-WEBSITE: https://themefisher.com
-TWITTER: https://twitter.com/themefisher
-FACEBOOK: https://www.facebook.com/themefisher
--->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +5,7 @@ FACEBOOK: https://www.facebook.com/themefisher
   <!-- Basic Page Needs
   ================================================== -->
   <meta charset="utf-8">
-  <title>Aviato | E-commerce template</title>
+  <title>Moonshop</title>
 
   <!-- Mobile Specific Metas
   ================================================== -->
@@ -59,24 +44,41 @@ FACEBOOK: https://www.facebook.com/themefisher
           <a class="logo" href="../index.html">
             <img src="images/logo.png" alt="">
           </a>
-          <h2 class="text-center">Welcome Back</h2>
+          <h2 class="text-center">CHÀO MỪNG TRỞ LẠI!</h2>
           <form class="text-left clearfix" action="/login/login" method="POST" >
               @csrf
             <div class="form-group">
-              <input type="email" class="form-control" name="email" placeholder="Email">
+              <input type="email" class="form-control" name="email" placeholder="EMAIL">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" name="password" placeholder="Password">
+              <input type="password" class="form-control" name="password" placeholder="PASSWORD">
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-main text-center" >Login</button>
+              <button type="submit" class="btn btn-main text-center" >ĐĂNG NHẬP</button>
             </div>
           </form>
-          <p class="mt-20">New in this site ?<a href="/sign-up"> Create New Account</a></p>
+          <p class="mt-20">Bạn chưa có tài khoản?<a href="/sign-up"> Tạo tài khoản mới</a></p>
         </div>
       </div>
     </div>
   </div>
+    <div id="alert-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="alert-message"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </section>
 
     <!--
@@ -107,7 +109,15 @@ FACEBOOK: https://www.facebook.com/themefisher
     <!-- Main Js File -->
     <script src="js/script.js"></script>
 
-
+<script>
+    $(document).ready(function() {
+        let message = "<?php echo session()->get('message') ?>";
+        if (message != "") {
+            $("#alert-message").text(message)
+            $("#alert-modal").modal('show')
+        }
+    })
+</script>
 
   </body>
   </html>
