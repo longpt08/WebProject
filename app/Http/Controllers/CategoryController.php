@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
@@ -20,8 +21,9 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->description = $request->description;
         $category->status = $request->status;
+
         if ($request->file('image')) {
-            $imageName = 'product-' . $category->id . '.' . $request->file('image')->extension();
+            $imageName = 'category-' . $category->id . '.' . $request->file('image')->extension();
             $request->file('image')->move('images/shop/categories', $imageName);
             $category->image_url = $imageName;
         }

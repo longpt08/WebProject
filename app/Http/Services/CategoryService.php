@@ -10,7 +10,8 @@ class CategoryService
 {
     public function getCategories(?int $limit = null): Collection
     {
-        $query = Category::query()->where('status', CategoryStatus::ACTIVE);
+        $query = Category::query()
+            ->where('status', CategoryStatus::ACTIVE);
         if($limit) {
             $query->limit($limit);
         }

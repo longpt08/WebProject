@@ -24,7 +24,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-validation">
-                                <form class="form-valide" action="edit/{{$category->id}}" method="post">
+                                <form class="form-valide" action="edit/{{$category->id}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="id">Category ID

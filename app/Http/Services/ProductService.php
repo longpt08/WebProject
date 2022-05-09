@@ -4,6 +4,7 @@
 namespace App\Http\Services;
 
 
+use App\Http\Enums\ProductStatus;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -12,6 +13,7 @@ class ProductService
     public function getProducts(?int $limit = null): Collection
     {
         $query = Product::query()
+            ->where('status', ProductStatus::ACTIVE)
             ->orderByDesc('average_rating');
         if ($limit) {
             $query->limit($limit);

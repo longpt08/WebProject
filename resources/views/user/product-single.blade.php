@@ -8,7 +8,7 @@ session()->put('current', 'product-single')
     <!-- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Aviato</title>
+    <title>Moonshop</title>
 
     <!-- Mobile Specific Metas
     ================================================== -->
