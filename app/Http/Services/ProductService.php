@@ -45,7 +45,7 @@ class ProductService
     public function checkQuantity(int $id, int $quantity)
     {
         $product = Product::query()->find($id);
-        if ($quantity > $product) {
+        if ($quantity > $product->quantity) {
             return false;
         }
         return true;

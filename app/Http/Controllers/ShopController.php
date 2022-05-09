@@ -138,10 +138,11 @@ class ShopController extends Controller
         try {
             if ($productCarts) {
                 foreach ($productCarts as &$productCart) {
-                    if ($this->productService->checkQuantity($productCart['product']->getId(), $productCart['quantity'])) {
+                    if (!$this->productService->checkQuantity($productCart['product']->getId(), $productCart['quantity'])) {
+                        $message = 'Số lượng sản phẩm ' . $productCart['product']->getName() . ' trong kho không đủ';
                         $productCart = null;
                         session()->put('product_cart', array_filter($productCarts));
-                        throw new \Exception('Số lượng sản phẩm' . $productCart['product']->getName() . 'trong kho không đủ');
+                        return redirect()->route('checkout')->with('alert-quantity', $message);
                     }
                     $total += optional($productCart['product'])->getPrice() * $productCart['quantity'];
                 }
@@ -194,7 +195,6 @@ class ShopController extends Controller
         } catch (\Exception $exception) {
             Log::error($exception . ' UID: ' . $userId);
             DB::rollBack();
-            return view('user.checkout')->with('alert', $exception);
         }
         return view('user.confirmation', ['orderId' => $order->id]);
     }

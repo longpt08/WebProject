@@ -30,7 +30,7 @@ Route::group([
     Route::get('/order-detail/{id}/complete', [\App\Http\Controllers\OrderController::class, 'complete']);
 
     Route::post('/comment/post', [\App\Http\Controllers\CommentController::class, 'postComment']);
-    Route::get('/checkout', [\App\Http\Controllers\ShopController::class, 'checkout']);
+    Route::get('/checkout', [\App\Http\Controllers\ShopController::class, 'checkout'])->name('checkout');
 
     Route::post('/confirm', [\App\Http\Controllers\ShopController::class, 'confirm']);
 

@@ -16,7 +16,7 @@ $user = session()->get('user');
     <!-- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Aviato | E-commerce template</title>
+    <title>Moonshop</title>
 
     <!-- Mobile Specific Metas
     ================================================== -->
@@ -94,18 +94,21 @@ $user = session()->get('user');
                         <div class="block">
                             <h4 class="widget-title">PHƯƠNG THỨC THANH TOÁN</h4>
                             <div>
-                                <input id="cod" type="radio" name="payment-method" checked value="{{\App\Http\Enums\PaymentMethod::COD}}">
+                                <input id="cod" type="radio" name="payment-method" checked
+                                       value="{{\App\Http\Enums\PaymentMethod::COD}}">
                                 <label for="cod">Thanh toán khi nhận hàng (COD)</label>
                             </div>
                             <div>
-                                <input id="air-pay" type="radio" name="payment-method" value="{{\App\Http\Enums\PaymentMethod::MOMO}}">
+                                <input id="air-pay" type="radio" name="payment-method"
+                                       value="{{\App\Http\Enums\PaymentMethod::MOMO}}">
                                 <label for="air-pay">Thanh toán qua MOMO</label>
                                 <div class="qr" hidden="true">
                                     <img src="images/QR.png" width="50%" height="50%">
                                 </div>
                             </div>
                             <div>
-                                <input id="card" type="radio" name="payment-method" value="{{\App\Http\Enums\PaymentMethod::CARD}}">
+                                <input id="card" type="radio" name="payment-method"
+                                       value="{{\App\Http\Enums\PaymentMethod::CARD}}">
                                 <label for="card">Thanh toàn bằng thẻ (ATM/Visa/MasterCard)</label>
                                 <div class="checkout-user-details" hidden="true">
                                     <div class="payment">
@@ -149,9 +152,10 @@ $user = session()->get('user');
                                     <div class="media product-card product-{{$productCart['product']->getId()}}">
                                         <a class="pull-left"
                                            href="/product-single/{{$productCart['product']->getId()}}">
-                                            <img class="media-object" src="{{asset('images/shop/products/' . $productCart['product']->getImageUrl())}}"
+                                            <img class="media-object"
+                                                 src="{{asset('images/shop/products/' . $productCart['product']->getImageUrl())}}"
                                                  alt="Image"
-                                            style="height: 100px; object-fit: contain"/>
+                                                 style="height: 100px; object-fit: contain"/>
                                         </a>
                                         <div class="media-body">
                                             <h4 class="media-heading"><a
@@ -166,7 +170,8 @@ $user = session()->get('user');
                             <ul class="summary-prices">
                                 <li>
                                     <span>TẠM TÍNH:</span>
-                                    <span class="total-price">${{\App\Http\Services\Utility::convertPrice($total)}}</span>
+                                    <span
+                                        class="total-price">${{\App\Http\Services\Utility::convertPrice($total)}}</span>
                                 </li>
                                 <li>
                                     <span>PHÍ VẬN CHUYỂN:</span>
@@ -187,28 +192,21 @@ $user = session()->get('user');
         </div>
     </div>
 </div>
-<div style="text-align: center">
-    <div class="bootstrap-modal">
-        <div class="modal fade" id="basicModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title"></h5>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                                data-dismiss="modal">
-                            HỦY
-                        </button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">ĐỒNG Ý
-                        </button>
-                    </div>
-                </div>
+<div id="alert-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="alert-message"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
+
     </div>
 </div>
 @include('user.layout.footer')
@@ -217,9 +215,10 @@ $user = session()->get('user');
     =====================================-->
 
 <!-- Main jQuery -->
-<script src="public/plugins/jquery/dist/jquery.min.js"></script>
+
+<script src="{{asset('plugins/jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.1 -->
-<script src="public/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- Bootstrap Touchpin -->
 <script src="public/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
 <!-- Instagram Feed Js -->
@@ -229,12 +228,18 @@ $user = session()->get('user');
 <!-- Count Down Js -->
 
 
-
 <!-- Main Js File -->
 <script src="js/script.js"></script>
 <script>
+    $(document).ready(function () {
+            let message = "<?php echo session()->get('alert-quantity') ?>"
+            if (message != "") {
+                $("#alert-message").text(message)
+                $("#alert-modal").modal()
+            }
+    })
     $("#card").click(function () {
-            $(".checkout-user-details").attr("hidden", false);
+        $(".checkout-user-details").attr("hidden", false);
     });
     $("#cod").click(function () {
         $(".checkout-user-details").attr("hidden", true);
@@ -253,6 +258,61 @@ $user = session()->get('user');
         $(".qr").attr("hidden", false);
     })
 </script>
+<script>
+    $(".button").click(function () {
+        const id = $(this).attr('id').split('-');
+        const action = id[0];
+        const productId = id[1];
+        switch (action) {
+            case 'plus':
+                $.get(
+                    '/plus/' + productId,
+                    function (response) {
+                        $(".quantity-" + productId).text(response[0]);
+                        $(".total-" + productId).text(response[1])
+                        $(".total-price").text(response[2])
+                    }
+                );
+                break;
+            case 'minus':
+                let quantity = $(".quantity-" + productId).text()
+                if (quantity[0] == 1) {
+                    $("#basicModal").modal('show');
+                    $('#yes').click(function () {
+                            $.get(
+                                '/remove-cart/' + productId,
+                                function (response) {
+                                    $('.product-' + productId).remove();
+                                    $(".total-price").text(response)
+                                }
+                            );
+                        }
+                    );
+                    break;
+                } else {
+                    $.get(
+                        '/minus/' + productId,
+                        function (response) {
+                            $(".quantity-" + productId).text(response[0]);
+                            $(".total-" + productId).text(response[1])
+                            $(".total-price").text(response[2])
+                        }
+                    );
+                    break;
+                }
 
+            case 'remove': {
+                $('#yes').click(function () {
+                    $.get(
+                        '/remove-cart/' + productId,
+                        function (response) {
+                            $('.product-' + productId).remove();
+                            $(".total-price").text(response)
+                        });
+                });
+            }
+        }
+    })
+</script>
 </body>
 </html>

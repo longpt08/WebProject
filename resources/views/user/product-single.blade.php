@@ -213,6 +213,61 @@ session()->put('current', 'product-single')
         }
     })
 </script>
+<script>
+    $(".button").click(function () {
+        const id = $(this).attr('id').split('-');
+        const action = id[0];
+        const productId = id[1];
+        switch (action) {
+            case 'plus':
+                $.get(
+                    '/plus/' + productId,
+                    function (response) {
+                        $(".quantity-" + productId).text(response[0]);
+                        $(".total-" + productId).text(response[1])
+                        $(".total-price").text(response[2])
+                    }
+                );
+                break;
+            case 'minus':
+                let quantity = $(".quantity-" + productId).text()
+                if (quantity[0] == 1) {
+                    $("#basicModal").modal('show');
+                    $('#yes').click(function () {
+                            $.get(
+                                '/remove-cart/' + productId,
+                                function (response) {
+                                    $('.product-' + productId).remove();
+                                    $(".total-price").text(response)
+                                }
+                            );
+                        }
+                    );
+                    break;
+                } else {
+                    $.get(
+                        '/minus/' + productId,
+                        function (response) {
+                            $(".quantity-" + productId).text(response[0]);
+                            $(".total-" + productId).text(response[1])
+                            $(".total-price").text(response[2])
+                        }
+                    );
+                    break;
+                }
 
+            case 'remove': {
+                $('#yes').click(function () {
+                    $.get(
+                        '/remove-cart/' + productId,
+                        function (response) {
+                            $('.product-' + productId).remove();
+                            $(".total-price").text(response)
+                        });
+                });
+            }
+        }
+    })
+</script>
 </body>
 </html>
