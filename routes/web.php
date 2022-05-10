@@ -37,6 +37,8 @@ Route::group([
     Route::get('/purchase-confirmation', function () {
         return view ('user.purchase-confirmation');
     });
+    //log out
+    Route::get('/log-out', [\App\Http\Controllers\UserController::class, 'logOut']);
 });
 
 Route::get('/', [IndexController::class, 'index'])->name('home');
@@ -55,8 +57,7 @@ Route::get('/sign-up', function () {
 Route::post('/sign-up/create', [\App\Http\Controllers\UserController::class, 'create']);
 
 Route::post('/check-email', [\App\Http\Controllers\UserController::class, 'checkEmail']);
-//log out
-Route::get('/log-out', [\App\Http\Controllers\UserController::class, 'logOut']);
+
 
 Route::get('/shop-sidebar', [\App\Http\Controllers\ShopController::class, 'index'])->name('shop');
 

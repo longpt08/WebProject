@@ -9,7 +9,7 @@ session()->put(['current' => 'shop']);
     <!-- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Aviato | E-commerce template</title>
+    <title>Moonshop</title>
 
     <!-- Mobile Specific Metas
     ================================================== -->

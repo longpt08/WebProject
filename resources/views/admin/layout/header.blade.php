@@ -32,10 +32,7 @@
                     <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                         <div class="dropdown-content-body">
                             <ul>
-                                <li>
-                                    <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
-                                </li>
-                                <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                <li><a href="/log-out"><i class="icon-key"></i> <span>Logout</span></a></li>
                             </ul>
                         </div>
                     </div>
