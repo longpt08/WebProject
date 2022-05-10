@@ -2,17 +2,27 @@
 
 namespace App\Http\Services;
 
+use App\Http\Enums\InvoiceStatus;
 use App\Http\Enums\OrderStatus;
 use App\Models\Order;
-use App\Models\Product;
 
 class OrderService
 {
-    public function cancelOrderById($id): bool
+    public function cancelOrder($order): bool
     {
-        $order = Order::query()->find($id);
         $order->status = OrderStatus::CANCELED;
-        return $order->save();
+        $order->save();
+
+        $orderItems = $order->orderItems;
+        foreach ($orderItems as $item) {
+            $product = $item->product;
+            $product->quantity += $item->amount;
+            $product->save();
+        }
+
+        $invoice = $order->invoice;
+        $invoice->status = InvoiceStatus::VOID;
+        return $invoice->save();
     }
 
     public function completeOrderById($id): bool
@@ -20,16 +30,5 @@ class OrderService
         $order = Order::query()->find($id);
         $order->status = OrderStatus::COMPLETED;
         return $order->save();
-    }
-
-    public function returnProductQuantity(int $orderId)
-    {
-        $order = Order::query()->find($orderId);
-        $orderItems = $order->orderItems;
-        foreach ($orderItems as $item) {
-            $product = $item->product;
-            $product->quantity += $item->amount;
-            $product->save();
-        }
     }
 }

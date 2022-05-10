@@ -55,11 +55,7 @@
                                             <td><span><a href="/admin/user/detail/{{$user->id}}" data-toggle="tooltip"
                                                          data-placement="top"
                                                          title="Edit"><i
-                                                            class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#"
-                                                                                                               data-toggle="tooltip"
-                                                                                                               data-placement="top"
-                                                                                                               title="Close"><i
-                                                            class="fa fa-close color-danger"></i></a></span></td>
+                                                            class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
                                         </tr>
                                     @endforeach
                                     </tbody>

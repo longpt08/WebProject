@@ -51,6 +51,17 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="role">Chức vụ <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <select class="form-control" id="role" name="role">
+                                                <option value="{{\App\Http\Enums\UserRole::ADMIN}}">Admin</option>
+                                                <option value="{{\App\Http\Enums\UserRole::USER}}">User</option>
+                                                <option value="{{\App\Http\Enums\UserRole::STAFF}}">Staff</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="val-skill">Status
                                         </label>
                                         <div class="col-lg-6">

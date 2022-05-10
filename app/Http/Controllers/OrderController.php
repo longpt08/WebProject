@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Enums\InvoiceStatus;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -24,9 +25,9 @@ class OrderController extends Controller
 
     public function cancel(int $id)
     {
-        if ($this->orderService->cancelOrderById($id))
+        $order = Order::query()->find($id);
+        if ($this->orderService->cancelOrder($order))
         {
-            $this->orderService->returnProductQuantity($id);
             return redirect()->route('user-order-detail', ['id' => $id]);
         } else {
             return redirect()->route('user-order-detail', ['id' => $id])->with(['message' => 'Khong the huy don hang']);

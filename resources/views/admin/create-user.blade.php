@@ -80,8 +80,9 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <select class="form-control" id="role" name="role">
-                                                <option value="1">Admin</option>
-                                                <option value="0">User</option>
+                                                <option value="{{\App\Http\Enums\UserRole::ADMIN}}">Admin</option>
+                                                <option value="{{\App\Http\Enums\UserRole::USER}}">User</option>
+                                                <option value="{{\App\Http\Enums\UserRole::STAFF}}">Staff</option>
                                             </select>
                                         </div>
                                     </div>

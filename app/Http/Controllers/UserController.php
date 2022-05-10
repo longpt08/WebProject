@@ -85,6 +85,7 @@ class UserController extends Controller
     {
         $user = User::query()->find($id);
         $user->status = $request->status;
+        $user->roles = $request->role;
         if ($user->save()) {
             $message = 'Cập nhật thành công!';
             $status = true;
@@ -106,6 +107,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->date_of_birth = date('Y-m-d',strtotime($request->date_of_birth));
+
 
         $user->save();
         Auth::setUser($user);

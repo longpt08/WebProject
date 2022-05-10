@@ -77,18 +77,18 @@ $user = session()->get('user');
                             </div>
                             <div class="form-group">
                                 <label for="full_name">HỌ VÀ TÊN</label>
-                                <input type="text" class="form-control" name="full_name"
-                                       placeholder="{{$user->first_name . " " . $user->last_name}}">
+                                <input type="text" class="form-control" name="full_name" required
+                                       value="{{$user->first_name . " " . $user->last_name}}">
                             </div>
                             <div class="form-group">
                                 <label for="user_address">ĐỊA CHỈ</label>
-                                <input type="text" class="form-control" name="user_address"
-                                       placeholder="{{$user->address}}">
+                                <input type="text" class="form-control" name="user_address" required
+                                       value="{{$user->address}}">
                             </div>
                             <div class="form-group">
                                 <label for="user_country">SỐ ĐIỆN THOẠI</label>
-                                <input type="text" class="form-control" name="phone_number"
-                                       placeholder="{{$user->phone_number}}">
+                                <input type="text" class="form-control" name="phone_number" required
+                                       value="{{$user->phone_number}}">
                             </div>
                         </div>
                         <div class="block">
@@ -110,7 +110,7 @@ $user = session()->get('user');
                                 <input id="card" type="radio" name="payment-method"
                                        value="{{\App\Http\Enums\PaymentMethod::CARD}}">
                                 <label for="card">Thanh toàn bằng thẻ (ATM/Visa/MasterCard)</label>
-                                <div class="checkout-user-details" hidden="true">
+                                <div class="checkout-user-details" disabled hidden>
                                     <div class="payment">
                                         <div class="card-details">
                                             <div class="form-group">
@@ -239,13 +239,25 @@ $user = session()->get('user');
             }
     })
     $("#card").click(function () {
-        $(".checkout-user-details").attr("hidden", false);
+        $(".checkout-user-details").removeAttr("hidden");
+        $(".checkout-user-details").removeAttr("disabled");
+        $("#card-number").attr('required', true);
+        $("#card-expiry").attr('required', true);
+        $("#card-cvc").attr('required', true);
     });
     $("#cod").click(function () {
         $(".checkout-user-details").attr("hidden", true);
+        $(".checkout-user-details").attr("disabled", true);
+        $("#card-number").removeAttr('required');
+        $("#card-expiry").removeAttr('required');
+        $("#card-cvc").removeAttr('required');
     })
     $("#air-pay").click(function () {
         $(".checkout-user-details").attr("hidden", true);
+        $(".checkout-user-details").attr("disabled", true);
+        $("#card-number").removeAttr('required');
+        $("#card-expiry").removeAttr('required');
+        $("#card-cvc").removeAttr('required');
     })
 
     $("#card").click(function () {

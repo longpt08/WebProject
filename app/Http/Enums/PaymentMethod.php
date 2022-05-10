@@ -15,10 +15,13 @@ class PaymentMethod
         switch ($method) {
             case self::COD:
                 $paymentMethod = 'COD';
+                break;
             case self::MOMO:
                 $paymentMethod = 'MOMO';
+                break;
             case self::CARD:
                 $paymentMethod = 'CARD';
+                break;
         }
         return $paymentMethod . ' method';
     }

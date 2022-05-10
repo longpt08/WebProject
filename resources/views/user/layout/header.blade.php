@@ -45,7 +45,7 @@ $user = Auth::user();
                 <!-- Cart -->
                 <ul class="top-menu text-right list-inline">
                     <li class="dropdown cart-nav dropdown-slide">
-                        <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
+                        <a href="/cart" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
                                 class="tf-ion-android-cart"></i>GIỎ HÀNG</a>
                         <div class="dropdown-menu cart-dropdown">
                         @if($productCarts)
@@ -90,7 +90,7 @@ $user = Auth::user();
 
                     <!-- Search -->
                     <li class="dropdown search dropdown-slide">
-                        <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
                                 class="tf-ion-ios-search-strong"></i> TÌM KIẾM</a>
                         <ul class="dropdown-menu search-dropdown">
                             <li>
@@ -102,7 +102,7 @@ $user = Auth::user();
                     </li><!-- / Search -->
 
                     <li class="dropdown full-width dropdown-slide">
-                        <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                        <a href="/profile-details" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                            data-delay="350"
                            role="button" aria-haspopup="true"
                            aria-expanded="false">Hi, @if (isset($user)) {{$user->first_name}} @else Guest @endif <span

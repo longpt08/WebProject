@@ -22,7 +22,7 @@ class User extends Authenticatable
         'status',
         'username',
         'password',
-        'role',
+        'roles',
     ];
 
     public function comments()

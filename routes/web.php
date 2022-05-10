@@ -16,16 +16,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
     'middleware' => 'auth',
-],function(){
-    Route::get('/order-detail/{id}', [\App\Http\Controllers\OrderController::class, 'detail'])->middleware(\App\Http\Middleware\Authenticate::class);
+], function () {
+    Route::get('/order-detail/{id}',
+        [\App\Http\Controllers\OrderController::class, 'detail'])->middleware(\App\Http\Middleware\Authenticate::class);
 
-    Route::get('/profile-details', function() {
+    Route::get('/profile-details', function () {
         return view('user.profile-details');
     })->name('profile');
     Route::post('edit-profile', [\App\Http\Controllers\UserController::class, 'editProfile']);
 
-    Route::get('/order',[\App\Http\Controllers\OrderController::class, 'getOrders']);
-    Route::get('/order-detail/{id}', [\App\Http\Controllers\OrderController::class, 'detail'])->name('user-order-detail');
+    Route::get('/order', [\App\Http\Controllers\OrderController::class, 'getOrders']);
+    Route::get('/order-detail/{id}',
+        [\App\Http\Controllers\OrderController::class, 'detail'])->name('user-order-detail');
     Route::get('/order-detail/{id}/cancel', [\App\Http\Controllers\OrderController::class, 'cancel']);
     Route::get('/order-detail/{id}/complete', [\App\Http\Controllers\OrderController::class, 'complete']);
 
@@ -35,7 +37,7 @@ Route::group([
     Route::post('/confirm', [\App\Http\Controllers\ShopController::class, 'confirm']);
 
     Route::get('/purchase-confirmation', function () {
-        return view ('user.purchase-confirmation');
+        return view('user.purchase-confirmation');
     });
     //log out
     Route::get('/log-out', [\App\Http\Controllers\UserController::class, 'logOut']);
@@ -73,41 +75,51 @@ Route::get('/cart', [\App\Http\Controllers\ShopController::class, 'getCart']);
 
 Route::group([
     'prefix' => 'admin',
-    'middleware' => 'auth',
-], function(){
-   Route::get('index', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin-index');
+    'middleware' => 'officer',
+], function () {
+    Route::get('index', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin-index');
 
-   Route::get('user', [\App\Http\Controllers\AdminController::class, 'listUser'])->name('user-list');
-   Route::get('user/detail/{id}', [\App\Http\Controllers\UserController::class, 'getUserDetail'])->name('user-detail');
-   Route::post('user/detail/edit/{id}', [\App\Http\Controllers\UserController::class, 'editUser']);
-    Route::get('user/create-form', function() {
-        return view('admin.create-user');
-    });
-    Route::post('user/create', [\App\Http\Controllers\UserController::class, 'create']);
-
-   Route::get('product', [\App\Http\Controllers\AdminController::class, 'listProduct'])->name('product-list');
-   Route::get('product/detail/{id}', [\App\Http\Controllers\ProductController::class, 'getProductDetail'])->name('product-detail');
-   Route::post('product/detail/edit/{id}', [\App\Http\Controllers\ProductController::class, 'editProduct']);
-   Route::get('product/create-form', [\App\Http\Controllers\ProductController::class, 'getProductForm']);
-   Route::post('product/create', [\App\Http\Controllers\ProductController::class, 'createProduct']);
-
-    Route::get('category', [\App\Http\Controllers\AdminController::class, 'listCategory'])->name('category-list');
-    Route::get('category/detail/{id}', [\App\Http\Controllers\CategoryController::class, 'getCategoryDetail'])->name('category-detail');
-    Route::post('category/detail/edit/{id}', [\App\Http\Controllers\CategoryController::class, 'editCategory']);
-    Route::get('category/create-form', function () {
-        return view('admin.create-category');
-    });
-    Route::post('category/create', [\App\Http\Controllers\CategoryController::class, 'createCategory']);
+    Route::get('product', [\App\Http\Controllers\AdminController::class, 'listProduct'])->name('product-list');
+    Route::get('product/detail/{id}',
+        [\App\Http\Controllers\ProductController::class, 'getProductDetail'])->name('product-detail');
+    Route::post('product/detail/edit/{id}', [\App\Http\Controllers\ProductController::class, 'editProduct']);
+    Route::get('product/create-form', [\App\Http\Controllers\ProductController::class, 'getProductForm']);
+    Route::post('product/create', [\App\Http\Controllers\ProductController::class, 'createProduct']);
 
     Route::get('invoice', [\App\Http\Controllers\AdminController::class, 'listInvoice']);
 
     Route::get('order', [\App\Http\Controllers\AdminController::class, 'listOrder']);
-    Route::get('order/detail/{id}', [\App\Http\Controllers\OrderController::class, 'getOrderDetail'])->name('order-detail');
+    Route::get('order/detail/{id}',
+        [\App\Http\Controllers\OrderController::class, 'getOrderDetail'])->name('order-detail');
     Route::post('order/detail/edit/{id}', [\App\Http\Controllers\OrderController::class, 'editOrder']);
 
     Route::get('comment', [\App\Http\Controllers\AdminController::class, 'listComment']);
-    Route::get('comment/detail/{id}', [\App\Http\Controllers\CommentController::class, 'getCommentDetail'])->name('comment-detail');
+    Route::get('comment/detail/{id}',
+        [\App\Http\Controllers\CommentController::class, 'getCommentDetail'])->name('comment-detail');
     Route::post('comment/detail/edit/{id}', [\App\Http\Controllers\CommentController::class, 'editComment']);
+
+
+    Route::group([
+        'middleware' => 'admin',
+    ], function () {
+        Route::get('user', [\App\Http\Controllers\AdminController::class, 'listUser'])->name('user-list');
+        Route::get('user/detail/{id}',
+            [\App\Http\Controllers\UserController::class, 'getUserDetail'])->name('user-detail');
+        Route::post('user/detail/edit/{id}', [\App\Http\Controllers\UserController::class, 'editUser']);
+        Route::get('user/create-form', function () {
+            return view('admin.create-user');
+        });
+        Route::post('user/create', [\App\Http\Controllers\UserController::class, 'create']);
+
+        Route::get('category', [\App\Http\Controllers\AdminController::class, 'listCategory'])->name('category-list');
+        Route::get('category/detail/{id}',
+            [\App\Http\Controllers\CategoryController::class, 'getCategoryDetail'])->name('category-detail');
+        Route::post('category/detail/edit/{id}', [\App\Http\Controllers\CategoryController::class, 'editCategory']);
+        Route::get('category/create-form', function () {
+            return view('admin.create-category');
+        });
+        Route::post('category/create', [\App\Http\Controllers\CategoryController::class, 'createCategory']);
+    });
 });
 
 
