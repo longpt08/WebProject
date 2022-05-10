@@ -123,7 +123,8 @@ session()->put(['current' => 'shop']);
                                                         class="tf-ion-ios-search-strong"></i></a>
                                             </li>
                                             <li>
-                                                <a href="#!"><i class="tf-ion-ios-heart"></i></a>
+                                                <a id="cart-button"><i class="tf-ion-ios-cart"></i></a>
+                                                <input id="product-id" value="{{$product->id}}" hidden>
                                             </li>
                                         </ul>
                                     </div>
@@ -236,6 +237,17 @@ session()->put(['current' => 'shop']);
                 });
             }
         }
+    })
+    $('#cart-button').click(function() {
+        let productId = $('#product-id').val()
+        $.get(
+            '/plus/' + productId,
+            function (response) {
+                $(".quantity-" + productId).text(response[0]);
+                $(".total-" + productId).text(response[1])
+                $(".total-price").text(response[2])
+            }
+        );
     })
 </script>
 </body>

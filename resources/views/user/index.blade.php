@@ -281,8 +281,8 @@ session()->put(['current' => 'index']);
                                                     class="tf-ion-ios-search-strong"></i></a>
                                         </li>
                                         <li>
-                                            <a href="/product-single/{{$trendyProduct->id}}"><i
-                                                    class="tf-ion-ios-cart"></i></a>
+                                            <a id="cart-button"><i class="tf-ion-ios-cart"></i></a>
+                                            <input id="product-id" value="{{$trendyProduct->id}}" hidden>
                                         </li>
                                     </ul>
                                 </div>
@@ -432,6 +432,17 @@ Start Call To Action
                 });
             }
         }
+    })
+    $('#cart-button').click(function() {
+        let productId = $('#product-id').val()
+        $.get(
+            '/plus/' + productId,
+            function (response) {
+                $(".quantity-" + productId).text(response[0]);
+                $(".total-" + productId).text(response[1])
+                $(".total-price").text(response[2])
+            }
+        );
     })
 </script>
 </body>
