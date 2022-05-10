@@ -72,7 +72,7 @@ $user = Auth::user();
                                         </div>
                                         <i id="remove-{{$productCart['product']->getId()}}"
                                            class="tf-ion-close button remove" data-toggle="modal"
-                                           data-target="#basicModal"></i>
+                                           data-target="#removeModal"></i>
                                     </div><!-- / Cart Item -->
                                 @endforeach
                             @endif
@@ -134,7 +134,7 @@ $user = Auth::user();
     </div>
     <div style="text-align: center">
         <div class="bootstrap-modal">
-            <div class="modal fade" id="basicModal">
+            <div class="modal fade" id="removeModal">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">

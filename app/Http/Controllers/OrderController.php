@@ -26,6 +26,7 @@ class OrderController extends Controller
     {
         if ($this->orderService->cancelOrderById($id))
         {
+            $this->orderService->returnProductQuantity($id);
             return redirect()->route('user-order-detail', ['id' => $id]);
         } else {
             return redirect()->route('user-order-detail', ['id' => $id])->with(['message' => 'Khong the huy don hang']);

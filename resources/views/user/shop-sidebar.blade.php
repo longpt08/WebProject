@@ -201,7 +201,7 @@ session()->put(['current' => 'shop']);
             case 'minus':
                 let quantity = $(".quantity-" + productId).text()
                 if (quantity[0] == 1) {
-                    $("#basicModal").modal('show');
+                    $("#removeModal").modal('show');
                     $('#yes').click(function () {
                             $.get(
                                 '/remove-cart/' + productId,

@@ -117,7 +117,7 @@ $user = Auth::user();
                                                     <ul class="action">
                                                         <li><i id="remove-{{$productCart['product']->getId()}}"
                                                                class="tf-ion-close button" data-toggle="modal"
-                                                               data-target="#basicModal"></i></li>
+                                                               data-target="#removeModal"></i></li>
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -181,7 +181,7 @@ $user = Auth::user();
             case 'minus':
                 let quantity = $(".quantity-" + productId).text()
                 if (quantity[0] == 1) {
-                    $("#basicModal").modal('show');
+                    $("#removeModal").modal('show');
                     $('#yes').click(function () {
                             $.get(
                                 '/remove-cart/' + productId,

@@ -107,10 +107,10 @@ $user = session()->get('user');
                             <div class="bootstrap-modal">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#basicModal">ĐÃ NHẬN ĐƯỢC HÀNG
+                                        data-target="#complete">ĐÃ NHẬN ĐƯỢC HÀNG
                                 </button>
                                 <!-- Modal -->
-                                <div class="modal fade" id="basicModal">
+                                <div class="modal fade" id="complete">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -142,10 +142,10 @@ $user = session()->get('user');
                                 <div class="bootstrap-modal">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#basicModal">HỦY ĐƠN HÀNG
+                                            data-target="#cancel">HỦY ĐƠN HÀNG
                                     </button>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="basicModal">
+                                    <div class="modal fade" id="cancel">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
