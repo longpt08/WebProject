@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Enums\InvoiceStatus;
+use App\Http\Enums\OrderStatus;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -57,7 +58,12 @@ class OrderController extends Controller
     public function editOrder($id, Request $request)
     {
         $order = Order::query()->find($id);
-        $order->status = $request->status;
+        if ($request->status == OrderStatus::CANCELED) {
+            $this->orderService->cancelOrder($order);
+        } else {
+            $order->status = $request->status;
+        }
+
         if ($order->save()) {
             $message = 'Cập nhật thành công!';
             $status = true;
