@@ -436,7 +436,7 @@ Start Call To Action
     $('#cart-button').click(function() {
         let productId = $('#product-id').val()
         $.get(
-            '/plus/' + productId,
+            '/add-cart-by-button/' + productId,
             function (response) {
                 $(".quantity-" + productId).text(response[0]);
                 $(".total-" + productId).text(response[1])

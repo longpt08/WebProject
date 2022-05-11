@@ -68,6 +68,40 @@ class ShopController extends Controller
         return redirect()->route($route, ['id' => $request->id]);
     }
 
+    public function addCartByButton($id)
+    {
+        $product = $this->productService->getProductById($id);
+        $existed = false;
+        if (session()->has('product_cart')) {
+            $productCarts = session()->pull('product_cart');
+            foreach ($productCarts as &$productCart) {
+                $productInCart = $productCart['product'];
+                if ($productInCart->id == $product->id) {
+                    $productCart['quantity'] ++;
+                    $existed = true;
+                }
+            }
+            if ($existed == false) {
+                $newProductCart = [];
+                $newProductCart['product'] = $product;
+                $newProductCart['quantity'] = 1;
+                array_push($productCarts, $newProductCart);
+            }
+            session()->put('product_cart', $productCarts);
+        } else {
+            $productCart = [];
+            $productCart['product'] = $product;
+            $productCart['quantity'] = 1;
+            session()->push('product_cart', $productCart);
+        }
+
+        $total = 0;
+        $productCarts = session()->get('product_cart');
+        foreach ($productCarts as $product) {
+            $total += optional($product['product'])->getPrice() * $product['quantity'];
+        }
+        return [$productCart['quantity'], Utility::convertPrice($productCart['quantity'] * $productCart['product']->getPrice()), Utility::convertPrice($total)];
+    }
     public function remove($id)
     {
         $productCarts = session()->pull('product_cart');

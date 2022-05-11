@@ -66,7 +66,7 @@ Route::get('/shop-sidebar', [\App\Http\Controllers\ShopController::class, 'index
 Route::get('/product-single/{id}', [\App\Http\Controllers\ProductController::class, 'index'])->name('product-single');
 
 Route::post('/product/add-cart', [\App\Http\Controllers\ShopController::class, 'addCart'])->name('add-cart');
-
+Route::get('/add-cart-by-button/{id}', [\App\Http\Controllers\ShopController::class, 'addCartByButton']);
 Route::get('/remove-cart/{id}', [\App\Http\Controllers\ShopController::class, 'remove'])->name('remove');
 Route::get('/plus/{id}', [\App\Http\Controllers\ShopController::class, 'plus'])->name('plus');
 Route::get('/minus/{id}', [\App\Http\Controllers\ShopController::class, 'minus']);

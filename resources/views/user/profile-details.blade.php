@@ -110,10 +110,36 @@ $user = \Illuminate\Support\Facades\Auth::user();
                         <div class="profile-rows">
                             <div>
                                 <button type="submit">Cập nhật</button>
+                                <button data-target="#changePassword" class="btn-danger">Đổi mật khẩu</button>
                             </div>
                         </div>
                     </table>
                 </form>
+                <div style="text-align: center">
+                    <div class="bootstrap-modal">
+                        <div class="modal fade" id="changePassword">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">BẠN MUỐN XÓA SẢN PHẨM NÀY KHỎI GIỎ
+                                            HÀNG?</h5>
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            <span>&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">
+                                            HỦY
+                                        </button>
+                                        <button type="button" id="yes" class="btn btn-primary" data-dismiss="modal">ĐỒNG Ý
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
           </div>
         </div>
