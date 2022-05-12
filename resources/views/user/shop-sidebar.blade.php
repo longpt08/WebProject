@@ -243,6 +243,9 @@ session()->put(['current' => 'shop']);
         $.get(
             '/add-cart-by-button/' + productId,
             function (response) {
+                if (response[3] != null) {
+                    $(".cart-dropdown").prepend(response[3])
+                }
                 $(".quantity-" + productId).text(response[0]);
                 $(".total-" + productId).text(response[1])
                 $(".total-price").text(response[2])

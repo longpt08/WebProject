@@ -72,12 +72,13 @@ class ShopController extends Controller
     {
         $product = $this->productService->getProductById($id);
         $existed = false;
+        $new = false;
         if (session()->has('product_cart')) {
             $productCarts = session()->pull('product_cart');
             foreach ($productCarts as &$productCart) {
                 $productInCart = $productCart['product'];
                 if ($productInCart->id == $product->id) {
-                    $productCart['quantity'] ++;
+                    $productCart['quantity']++;
                     $existed = true;
                 }
             }
@@ -86,6 +87,7 @@ class ShopController extends Controller
                 $newProductCart['product'] = $product;
                 $newProductCart['quantity'] = 1;
                 array_push($productCarts, $newProductCart);
+                $new = true;
             }
             session()->put('product_cart', $productCarts);
         } else {
@@ -93,6 +95,32 @@ class ShopController extends Controller
             $productCart['product'] = $product;
             $productCart['quantity'] = 1;
             session()->push('product_cart', $productCart);
+            $new = true;
+        }
+        if ($new) {
+            $element = "<div id='productCartTemplate' class='media product-" . $product->getId() . "'>
+    <a href='/product-single/" . $product->getId() . "'>
+        <img class='media-object'
+             src='" . asset('images/shop/products/' . $product->getImageUrl()) . "'
+             alt='image' style='height: 80px; object-fit: contain'/>
+    </a>
+    <div class='media-body'>
+        <h4 class='media-heading'><a
+                href='/product-single/" . $product->getId() . "'>" . $product->name . "</a>
+        </h4>
+        <div class='cart-price'>
+                                                <span
+                                                    class='quantity-" . $product->getId() . "'>" . 1 . " </span>x
+            <span>" . Utility::convertPrice($product->getPrice()) . "</span>
+        </div>
+        <h5 class='total-" . $product->getId() . "'>
+            <strong>" . Utility::convertPrice($product->getPrice()) . "</strong>
+        </h5>
+    </div>
+    <i id='remove-" . $product->getId() . "'
+       class='button tf-ion-close remove' data-toggle='modal'
+       data-target='#removeModal'></i>
+    </div>";
         }
 
         $total = 0;
@@ -100,8 +128,14 @@ class ShopController extends Controller
         foreach ($productCarts as $product) {
             $total += optional($product['product'])->getPrice() * $product['quantity'];
         }
-        return [$productCart['quantity'], Utility::convertPrice($productCart['quantity'] * $productCart['product']->getPrice()), Utility::convertPrice($total)];
+        return [
+            $productCart['quantity'],
+            Utility::convertPrice($productCart['quantity'] * $productCart['product']->getPrice()),
+            Utility::convertPrice($total),
+            $new ? $element : null,
+        ];
     }
+
     public function remove($id)
     {
         $productCarts = session()->pull('product_cart');
@@ -112,11 +146,13 @@ class ShopController extends Controller
             }
         }
         $total = 0;
-        foreach ($productCarts as $product) {
-            $total += optional($product['product'])->getPrice() * $product['quantity'];
+        if (count(array_filter($productCarts)) > 0) {
+            foreach ($productCarts as $product) {
+                $total += optional($product['product'])->getPrice() * $product['quantity'];
+            }
         }
         session()->put('product_cart', array_filter($productCarts));
-        return $total;
+        return Utility::convertPrice($total);
     }
 
     public function plus($id)
@@ -133,7 +169,11 @@ class ShopController extends Controller
         foreach ($productCarts as $product) {
             $total += optional($product['product'])->getPrice() * $product['quantity'];
         }
-        return [$productCart['quantity'], Utility::convertPrice($productCart['quantity'] * $productCart['product']->getPrice()), Utility::convertPrice($total)];
+        return [
+            $productCart['quantity'],
+            Utility::convertPrice($productCart['quantity'] * $productCart['product']->getPrice()),
+            Utility::convertPrice($total)
+        ];
     }
 
     public function minus($id)
@@ -150,7 +190,11 @@ class ShopController extends Controller
         foreach ($productCarts as $product) {
             $total += optional($product['product'])->getPrice() * $product['quantity'];
         }
-        return [$productCart['quantity'], Utility::convertPrice($productCart['quantity'] * $productCart['product']->getPrice()), Utility::convertPrice($total)];
+        return [
+            $productCart['quantity'],
+            Utility::convertPrice($productCart['quantity'] * $productCart['product']->getPrice()),
+            Utility::convertPrice($total)
+        ];
     }
 
     public function getCart()
@@ -172,7 +216,8 @@ class ShopController extends Controller
         try {
             if ($productCarts) {
                 foreach ($productCarts as &$productCart) {
-                    if (!$this->productService->checkQuantity($productCart['product']->getId(), $productCart['quantity'])) {
+                    if (!$this->productService->checkQuantity($productCart['product']->getId(),
+                        $productCart['quantity'])) {
                         $message = 'Số lượng sản phẩm ' . $productCart['product']->getName() . ' trong kho không đủ';
                         $productCart = null;
                         session()->put('product_cart', array_filter($productCarts));

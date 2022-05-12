@@ -59,6 +59,8 @@ Route::get('/sign-up', function () {
 Route::post('/sign-up/create', [\App\Http\Controllers\UserController::class, 'create']);
 
 Route::post('/check-email', [\App\Http\Controllers\UserController::class, 'checkEmail']);
+Route::post('/check-password', [\App\Http\Controllers\UserController::class, 'checkPassword']);
+Route::post('/change-password', [\App\Http\Controllers\UserController::class, 'changePassword']);
 
 
 Route::get('/shop-sidebar', [\App\Http\Controllers\ShopController::class, 'index'])->name('shop');

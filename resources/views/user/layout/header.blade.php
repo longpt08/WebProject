@@ -71,7 +71,7 @@ $user = Auth::user();
                                             </h5>
                                         </div>
                                         <i id="remove-{{$productCart['product']->getId()}}"
-                                           class="tf-ion-close button remove" data-toggle="modal"
+                                           class="button tf-ion-close remove" data-toggle="modal"
                                            data-target="#removeModal"></i>
                                     </div><!-- / Cart Item -->
                                 @endforeach

@@ -68,6 +68,23 @@ class UserController extends Controller
         return false;
     }
 
+    public function checkPassword(Request $request)
+    {
+        if (Auth::user()->getAuthPassword() != $request->password) {
+            return false;
+        }
+        return true;
+    }
+
+    public function changePassword(Request $request)
+    {   $user = Auth::user();
+        if ($request['new-password'] != "" && $user->password) {
+            $user->password = $request['new-password'];
+            $user->save();
+        }
+        return redirect()->route('profile')->with('successChange', 'Đổi mật khẩu thành công!');
+    }
+
     public function logOut()
     {
         session()->flush();

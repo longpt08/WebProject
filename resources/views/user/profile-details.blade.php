@@ -72,14 +72,14 @@ $user = \Illuminate\Support\Facades\Auth::user();
                 <form method="POST" action="/edit-profile">
                     @csrf
                     <div class="profile-rows">
-                    <div><label for="full-name">Họ:</label></div>
-                            <div><input type="text" id="full-name" name="first_name"
+                    <div><label for="first-name">Họ:</label></div>
+                            <div><input type="text" id="first-name" name="first_name"
                                        value="{{$user->first_name}}"></div>
                     </div>
 
                         <div class="profile-rows">
-                        <div><label for="full-name">Tên:</label></div>
-                            <div><input type="text" id="full-name" name="last_name"
+                        <div><label for="last-name">Tên:</label></div>
+                            <div><input type="text" id="last-name" name="last_name"
                                        value="{{$user->last_name}}"></div>
                         </div>
 
@@ -110,36 +110,11 @@ $user = \Illuminate\Support\Facades\Auth::user();
                         <div class="profile-rows">
                             <div>
                                 <button type="submit">Cập nhật</button>
-                                <button data-target="#changePassword" class="btn-danger">Đổi mật khẩu</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#changePasswordModal" data-whatever="@getbootstrap">Đổi mật khẩu</button>
                             </div>
                         </div>
                     </table>
                 </form>
-                <div style="text-align: center">
-                    <div class="bootstrap-modal">
-                        <div class="modal fade" id="changePassword">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">BẠN MUỐN XÓA SẢN PHẨM NÀY KHỎI GIỎ
-                                            HÀNG?</h5>
-                                        <button type="button" class="close" data-dismiss="modal">
-                                            <span>&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">
-                                            HỦY
-                                        </button>
-                                        <button type="button" id="yes" class="btn btn-primary" data-dismiss="modal">ĐỒNG Ý
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
           </div>
         </div>
@@ -147,6 +122,36 @@ $user = \Illuminate\Support\Facades\Auth::user();
     </div>
   </div>
 </section>
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/change-password" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label for="old-password" class="col-form-label">Mật khẩu hiện tại:</label>
+                        <a  id="old-password-popover" data-toggle="popover" data-content="Mật khẩu không đúng!"><input required type="password" class="form-control" name="old-password"  id="old-password"></a>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password" class="col-form-label">Mật khẩu mới:</label>
+                        <a  id="new-password-popover" data-toggle="popover" data-content="Mật khẩu mới phải khác mật khẩu cũ!"><input minlength="6" required type="password" class="form-control" id="new-password" name="new-password"></a>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password" class="col-form-label">Nhập lại mật khẩu:</label>
+                        <a  id="confirm-password-popover" data-toggle="popover" data-content="Mật khẩu không khớp!"><input minlength="6" required type="password" class="form-control" id="confirm-password"></a>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-primary" id="submit" disabled value="Đổi">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @include('user.layout.footer')
     <!--
     Essential Scripts
@@ -228,6 +233,60 @@ $user = \Illuminate\Support\Facades\Auth::user();
                         });
                 });
             }
+        }
+    })
+    let password = false;
+    let match = false;
+    let different = false;
+    $("#old-password").focusout(function() {
+        $.post(
+            '/check-password',
+            {
+                _token: "{{csrf_token()}}",
+                password: $(this).val(),
+            },
+            function(response) {
+                if (!response) {
+                    $("#old-password-popover").popover('show')
+                    password = false;
+                } else {
+                    $("#old-password-popover").popover('destroy')
+                    password = true;
+                }
+            }
+        )
+    })
+    $("#confirm-password").focusout(function() {
+        if ($(this).val() != $("#new-password").val()) {
+            $("#confirm-password-popover").popover('show')
+            match = false
+        } else {
+            $("#confirm-password-popover").popover('destroy')
+            match = true
+        }
+    })
+    $("#new-password").focusout(function() {
+        if ($(this).val() == $("#old-password").val()) {
+            $("#new-password-popover").popover('show')
+            different = false
+        } else {
+            $("#new-password-popover").popover('destroy')
+            different = true;
+        }
+    })
+    $(document).click(function() {
+        console.log(password, different, match)
+        if (match && different && password) {
+            $("#submit").removeAttr('disabled')
+        } else {
+            $("#submit").attr('disabled', true)
+        }
+    })
+    $(document).ready(function() {
+        let message = '{{session()->get('successChange')}}'
+        if (message.length > 0)
+        {
+            alert(message);
         }
     })
 </script>
