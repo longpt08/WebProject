@@ -281,8 +281,8 @@ session()->put(['current' => 'index']);
                                                     class="tf-ion-ios-search-strong"></i></a>
                                         </li>
                                         <li>
-                                            <a id="cart-button"><i class="tf-ion-ios-cart"></i></a>
-                                            <input id="product-id" value="{{$trendyProduct->id}}" hidden>
+                                            <a class="cart-button"
+                                            id="{{$trendyProduct->id}}"><i class="tf-ion-ios-cart"></i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -381,6 +381,7 @@ Start Call To Action
 
 <script>
     $(".button").click(function () {
+        console.log('click button')
         const id = $(this).attr('id').split('-');
         const action = id[0];
         const productId = id[1];
@@ -423,7 +424,9 @@ Start Call To Action
                 }
 
             case 'remove': {
+                console.log('click remove')
                 $('#yes').click(function () {
+                    console.log('click yes')
                     $.get(
                         '/remove-cart/' + productId,
                         function (response) {
@@ -434,11 +437,12 @@ Start Call To Action
             }
         }
     })
-    $('#cart-button').click(function() {
-        let productId = $('#product-id').val()
+    $('.cart-button').click(function() {
+        let productId = $(this).attr('id')
         $.get(
             '/add-cart-by-button/' + productId,
             function (response) {
+                console.log(response)
                 if (response[3] != null) {
                     $(".cart-dropdown").prepend(response[3])
                 }

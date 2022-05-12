@@ -123,8 +123,7 @@ session()->put(['current' => 'shop']);
                                                         class="tf-ion-ios-search-strong"></i></a>
                                             </li>
                                             <li>
-                                                <a id="cart-button"><i class="tf-ion-ios-cart"></i></a>
-                                                <input id="product-id" value="{{$product->id}}" hidden>
+                                                <a class="cart-button" id={{$product->id}}><i class="tf-ion-ios-cart"></i></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -238,11 +237,13 @@ session()->put(['current' => 'shop']);
             }
         }
     })
-    $('#cart-button').click(function() {
-        let productId = $('#product-id').val()
+    $('.cart-button').click(function() {
+        let productId = $(this).attr('id')
+        console.log(productId)
         $.get(
             '/add-cart-by-button/' + productId,
             function (response) {
+                console.log(response)
                 if (response[3] != null) {
                     $(".cart-dropdown").prepend(response[3])
                 }

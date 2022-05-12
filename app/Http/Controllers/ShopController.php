@@ -82,7 +82,7 @@ class ShopController extends Controller
                     $existed = true;
                 }
             }
-            if ($existed == false) {
+            if (!$existed) {
                 $newProductCart = [];
                 $newProductCart['product'] = $product;
                 $newProductCart['quantity'] = 1;
@@ -128,12 +128,18 @@ class ShopController extends Controller
         foreach ($productCarts as $product) {
             $total += optional($product['product'])->getPrice() * $product['quantity'];
         }
-        return [
-            $productCart['quantity'],
-            Utility::convertPrice($productCart['quantity'] * $productCart['product']->getPrice()),
-            Utility::convertPrice($total),
-            $new ? $element : null,
-        ];
+
+        foreach ($productCarts as $p) {
+            if ($p['product']->getId() == $id) {
+                return [
+                    $p['quantity'],
+                    Utility::convertPrice($p['quantity'] * $p['product']->getPrice()),
+                    Utility::convertPrice($total),
+                    $new ? $element : null,
+                ];
+            }
+        }
+
     }
 
     public function remove($id)
@@ -146,12 +152,13 @@ class ShopController extends Controller
             }
         }
         $total = 0;
-        if (count(array_filter($productCarts)) > 0) {
+        $productCarts = array_filter($productCarts);
+        if (count($productCarts) > 0) {
             foreach ($productCarts as $product) {
                 $total += optional($product['product'])->getPrice() * $product['quantity'];
             }
         }
-        session()->put('product_cart', array_filter($productCarts));
+        session()->put('product_cart', $productCarts);
         return Utility::convertPrice($total);
     }
 
