@@ -27,11 +27,22 @@ class UserController extends Controller
             $user->phone_number = $request['phone-number'];
         }
 
+        if ($request->file('image')) {
+            $imageName = 'user-' . $user->id . '.' . $request->file('image')->extension();
+            $request->file('image')->move('images/users', $imageName);
+            $user->img_url = $imageName;
+        }
+
         if ($this->userService->checkIfExistedAccount($user->email)) {
             return redirect()->route('sign-up')->with('message', 'Email đã tồn tại!');
         } else {
             if ($user->save()) {
                 if (Auth::user()) {
+                    if ($request->file('image')) {
+                        $imageName = 'user-' . $user->id . '.' . $request->file('image')->extension();
+                        $request->file('image')->move('images/users', $imageName);
+                        $user->img_url = $imageName;
+                    }
                     return redirect()->route('user-list');
                 }
                 session(['user' => $user]);
@@ -103,6 +114,13 @@ class UserController extends Controller
         $user = User::query()->find($id);
         $user->status = $request->status;
         $user->roles = $request->role;
+
+        if ($request->file('image')) {
+            $imageName = 'user-' . $user->id . '.' . $request->file('image')->extension();
+            $request->file('image')->move('images/users', $imageName);
+            $user->img_url = $imageName;
+        }
+
         if ($user->save()) {
             $message = 'Cập nhật thành công!';
             $status = true;
@@ -125,6 +143,11 @@ class UserController extends Controller
         $user->phone_number = $request->phone_number;
         $user->date_of_birth = date('Y-m-d',strtotime($request->date_of_birth));
 
+        if ($request->file('image')) {
+            $imageName = 'user-' . $user->id . '.' . $request->file('image')->extension();
+            $request->file('image')->move('images/users', $imageName);
+            $user->img_url = $imageName;
+        }
 
         $user->save();
         Auth::setUser($user);

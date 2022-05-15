@@ -226,7 +226,9 @@ session()->put(['current' => 'shop']);
                 }
 
             case 'remove': {
+                console.log('button clicked')
                 $('#yes').click(function () {
+                    console.log('yes clicked')
                     $.get(
                         '/remove-cart/' + productId,
                         function (response) {

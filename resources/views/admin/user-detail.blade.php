@@ -24,7 +24,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-validation">
-                                <form class="form-valide" action="edit/{{$user->id}}" method="post">
+                                <form class="form-valide" action="edit/{{$user->id}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="id">User ID
@@ -48,6 +48,14 @@
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" id="price" name="email"
                                                    disabled="true" value="{{$user->email}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <p class="col-lg-4 col-form-label" >Image
+                                        </p>
+                                        <div class="col-lg-6">
+                                            <img id="image-hint" style="max-height: 100px" src="{{asset('images/users/'.$user->img_url)}}">
+                                            <input type="file" class="form-control" id="image" name="image" value="">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -111,7 +119,22 @@
 ***********************************-->
 
 @include('admin.layout.include-bottom')
+<script>
+    $("#image").change(function(e) {
 
+        for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+
+            var file = e.originalEvent.srcElement.files[i];
+
+            var img = $("#image-hint");
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                img.attr('src', reader.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 </body>
 
 </html>

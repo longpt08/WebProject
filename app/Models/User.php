@@ -23,6 +23,7 @@ class User extends Authenticatable
         'username',
         'password',
         'roles',
+        'img_url'
     ];
 
     public function comments()
@@ -50,4 +51,8 @@ class User extends Authenticatable
         return $this->first_name . ' ' . $this->last_name;
     }
 
+    public function getImageUrl(): string
+    {
+        return $this->img_url;
+    }
 }

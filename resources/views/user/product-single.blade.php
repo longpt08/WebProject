@@ -136,8 +136,8 @@ session()->put('current', 'product-single')
                                         <li class="media">
 
                                             <a class="pull-left" href="#!">
-                                                <img class="media-object comment-avatar" src="images/blog/avater-1.jpg"
-                                                     alt="" width="50" height="50"/>
+                                                <img class="media-object comment-avatar" src="{{asset('images/users/' . $comment->user->img_url)}}"
+                                                     alt="" width="50" height="50" style="object-fit: contain"/>
                                             </a>
 
                                             <div class="media-body">

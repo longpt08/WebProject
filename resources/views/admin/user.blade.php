@@ -37,6 +37,7 @@
                                         <th scope="col">Số điện thoại</th>
                                         <th scope="col">Địa chỉ</th>
                                         <th scope="col">Chức vụ</th>
+                                        <th scope="col">Hình ảnh</th>
                                         <th scope="col">Trạng Thái</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -51,6 +52,7 @@
                                             <td>{{$user->phone_number}}</td>
                                             <td>{{$user->address}}</td>
                                             <td>{{\App\Http\Enums\UserRole::convert($user->roles)}}</td>
+                                            <td><img src="{{asset('images/users/'.$user->img_url)}}" style="max-height: 100px"></td>
                                             <td>{{\App\Http\Enums\UserStatus::convert($user->status)}}</td>
                                             <td><span><a href="/admin/user/detail/{{$user->id}}" data-toggle="tooltip"
                                                          data-placement="top"
