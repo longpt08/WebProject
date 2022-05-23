@@ -13,9 +13,9 @@ class UserStatus
     {
         switch ($status) {
             case self::ACTIVE:
-                return 'Active';
+                return 'Hoạt động';
             case self::INACTIVE:
-                return 'Inactive';
+                return 'Ngưng hoạt động';
         }
         return '';
     }

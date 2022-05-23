@@ -45,11 +45,11 @@
                                     <table class="table table-bordered verticle-middle">
                                         <thead>
                                             <tr>
-                                                <th scope="col">UID</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Description</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Image</th>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Tên</th>
+                                                <th scope="col">Mô Tả</th>
+                                                <th scope="col">Trạng Thái</th>
+                                                <th scope="col">Hình Ảnh</th>
                                                 <th scope="col"></th>
                                             </tr>
                                         </thead>

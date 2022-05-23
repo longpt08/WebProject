@@ -42,13 +42,13 @@
                                     <table class="table table-bcommented verticle-middle">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Comment ID</th>
-                                                <th scope="col">Owner</th>
-                                                <th scope="col">Product ID</th>
-                                                <th scope="col">Content</th>
-                                                <th scope="col">Rating</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Người Dùng</th>
+                                                <th scope="col">Mã Sản Phẩm</th>
+                                                <th scope="col">Nội Dung</th>
+                                                <th scope="col">Đánh Giá</th>
+                                                <th scope="col">Trạng Thái</th>
+                                                <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
