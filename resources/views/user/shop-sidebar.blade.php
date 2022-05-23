@@ -127,6 +127,7 @@ session()->put(['current' => 'shop']);
                                             </li>
                                         </ul>
                                     </div>
+                                        <input type="hidden" id="productQuantity-{{$product->id}}" value="{{$product->quantity}}">
                                 </div>
                                 <div class="product-content">
                                     @if($product->quantity == 0)
@@ -241,19 +242,25 @@ session()->put(['current' => 'shop']);
     })
     $('.cart-button').click(function() {
         let productId = $(this).attr('id')
-        console.log(productId)
-        $.get(
-            '/add-cart-by-button/' + productId,
-            function (response) {
-                console.log(response)
-                if (response[3] != null) {
-                    $(".cart-dropdown").prepend(response[3])
+        let quantityInCart = $(".quantity-" + productId).text();
+        let productQuantity = $("#productQuantity-" + productId).val();
+        console.log(quantityInCart, productQuantity);
+        if (productQuantity == 0 || (quantityInCart >= productQuantity)) {
+            alert('Sản phẩm đã đạt số lượng tối đa!')
+        } else {
+            $.get(
+                '/add-cart-by-button/' + productId,
+                function (response) {
+                    console.log(response)
+                    if (response[3] != null) {
+                        $(".cart-dropdown").prepend(response[3])
+                    }
+                    $(".quantity-" + productId).text(response[0]);
+                    $(".total-" + productId).text(response[1])
+                    $(".total-price").text(response[2])
                 }
-                $(".quantity-" + productId).text(response[0]);
-                $(".total-" + productId).text(response[1])
-                $(".total-price").text(response[2])
-            }
-        );
+            );
+        }
     })
 </script>
 </body>

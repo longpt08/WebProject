@@ -286,6 +286,7 @@ session()->put(['current' => 'index']);
                                         </li>
                                     </ul>
                                 </div>
+                                <input type="hidden" id="productQuantity-{{$trendyProduct->id}}" value="{{$trendyProduct->quantity}}">
                             </div>
                             <div class="product-content">
                                 @if($trendyProduct->quantity == 0)
@@ -439,18 +440,25 @@ Start Call To Action
     })
     $('.cart-button').click(function() {
         let productId = $(this).attr('id')
-        $.get(
-            '/add-cart-by-button/' + productId,
-            function (response) {
-                console.log(response)
-                if (response[3] != null) {
-                    $(".cart-dropdown").prepend(response[3])
+        let quantityInCart = $(".quantity-" + productId).text();
+        let productQuantity = $("#productQuantity-" + productId).val();
+        console.log(quantityInCart, productQuantity);
+        if (productQuantity == 0 || (quantityInCart >= productQuantity)) {
+            alert('Sản phẩm đã đạt số lượng tối đa!')
+        } else {
+            $.get(
+                '/add-cart-by-button/' + productId,
+                function (response) {
+                    console.log(response)
+                    if (response[3] != null) {
+                        $(".cart-dropdown").prepend(response[3])
+                    }
+                    $(".quantity-" + productId).text(response[0]);
+                    $(".total-" + productId).text(response[1])
+                    $(".total-price").text(response[2])
                 }
-                $(".quantity-" + productId).text(response[0]);
-                $(".total-" + productId).text(response[1])
-                $(".total-price").text(response[2])
-            }
-        );
+            );
+        }
     })
 </script>
 </body>

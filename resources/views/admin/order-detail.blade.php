@@ -62,7 +62,7 @@
                                                     <option value="1" {{$order->status != 1 ?:"selected='true'"}}>Confirmed</option>
                                                     <option value="2" {{$order->status != 2 ?: "selected='true'"}}>Shipping</option>
                                                     <option value="3" {{$order->status != 3 ?: "selected='true'"}}>Completed</option>
-                                                    <option value="0" {{$order->status != 0 ?: "selected='true'"}}>Canceled</option>
+                                                    <option value="4" {{$order->status != 0 ?: "selected='true'"}}>Canceled</option>
                                                 </select>
                                             </div>
                                         </div>

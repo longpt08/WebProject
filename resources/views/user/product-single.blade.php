@@ -52,8 +52,9 @@ session()->put('current', 'product-single')
             </div>
         </div>
         <div class="row mt-20">
-                <div class="col-md-5" style="width: 480px; height: 650px;">
-                <img src="{{asset('images/shop/products/'.$product->image_url)}}" style="width: 100%; height: 100%; object-fit: contain">
+            <div class="col-md-5" style="width: 480px; height: 650px;">
+                <img src="{{asset('images/shop/products/'.$product->image_url)}}"
+                     style="width: 100%; height: 100%; object-fit: contain">
             </div>
             <div class="col-md-7">
                 <div class="single-product-details">
@@ -74,7 +75,7 @@ session()->put('current', 'product-single')
                             <div class="product-quantity-slider">
                                 <input id="product-quantity" type="text" value="1" name="product-quantity"
                                        oninput="this.value = this.value > {{$product->quantity}} ? {{$product->quantity}} : Math.abs(this.value)">
-                                <input name="id" value="{{$product->id}}" hidden>
+                                <input name="id" id="product-id" value="{{$product->id}}" hidden>
                                 <input id="limit-quantity" value="{{$product->quantity}}" hidden>
                             </div>
                         </div>
@@ -86,7 +87,8 @@ session()->put('current', 'product-single')
                                 @endforeach
                             </ul>
                         </div>
-                        <input {{$product->quantity != 0 ? '': 'disabled'}} type="submit" id="add-cart" class="btn btn-main mt-20" value="Thêm vào giỏ hàng">
+                        <input {{$product->quantity != 0 ? '': 'disabled'}} type="submit" id="add-cart"
+                               class="btn btn-main mt-20" value="Thêm vào giỏ hàng">
                     </form>
                 </div>
             </div>
@@ -98,71 +100,73 @@ session()->put('current', 'product-single')
                         <li class=""><a href="#reviews" aria-expanded="true">Đánh giá
                                 ({{$comments->count()}})</a></li>
                     </ul>
-                    <div style="display:flex; justify-content: space-between" >
-                    <div style="width: 48%">
-                        <form action="/comment/post" method="post">
-                            @csrf
-                            <div class="rate">
-                                <input type="radio" id="star5" name="rate" value="5"/>
-                                <label for="star5" title="text">5 stars</label>
-                                <input type="radio" id="star4" name="rate" value="4"/>
-                                <label for="star4" title="text">4 stars</label>
-                                <input type="radio" id="star3" name="rate" value="3"/>
-                                <label for="star3" title="text">3 stars</label>
-                                <input type="radio" id="star2" name="rate" value="2"/>
-                                <label for="star2" title="text">2 stars</label>
-                                <input type="radio" id="star1" name="rate" value="1"/>
-                                <label for="star1" title="text">1 star</label>
-                            </div>
-                            <div class="product-single-comments">
+                    <div style="display:flex; justify-content: space-between">
+                        <div style="width: 48%">
+                            <form action="/comment/post" method="post">
+                                @csrf
+                                <div class="rate">
+                                    <input type="radio" id="star5" name="rate" value="5"/>
+                                    <label for="star5" title="text">5 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4"/>
+                                    <label for="star4" title="text">4 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3"/>
+                                    <label for="star3" title="text">3 stars</label>
+                                    <input type="radio" id="star2" name="rate" value="2"/>
+                                    <label for="star2" title="text">2 stars</label>
+                                    <input type="radio" id="star1" name="rate" value="1"/>
+                                    <label for="star1" title="text">1 star</label>
+                                </div>
+                                <div class="product-single-comments">
 
-                                <input type="text" name="content" placeholder="Viết nhận xét...">
-                            </div>
-                            <div class="product-single-submit">
-                                <input  type="submit">
+                                    <input type="text" name="content" placeholder="Viết nhận xét...">
+                                </div>
+                                <div class="product-single-submit">
+                                    <input type="submit">
 
-                            </div>
-                            <input name="product-id" value="{{$product->id}}" hidden="true">
+                                </div>
+                                <input name="product-id" value="{{$product->id}}" hidden="true">
 
-                        </form>
-                    </div>
+                            </form>
+                        </div>
 
-                    <div class="tab-content patternbg" style="width: 48%">
-                        <div id="reviews">
-                            <div class="post-comments">
-                                <ul class="media-list comments-list m-bot-50 clearlist">
-                                @foreach($comments as $comment)
-                                    <!-- Comment Item start-->
-                                        <li class="media">
+                        <div class="tab-content patternbg" style="width: 48%">
+                            <div id="reviews">
+                                <div class="post-comments">
+                                    <ul class="media-list comments-list m-bot-50 clearlist">
+                                    @foreach($comments as $comment)
+                                        <!-- Comment Item start-->
+                                            <li class="media">
 
-                                            <a class="pull-left" href="#!">
-                                                <img class="media-object comment-avatar" src="{{asset('images/users/' . $comment->user->img_url)}}"
-                                                     alt="" width="50" height="50" style="object-fit: contain"/>
-                                            </a>
+                                                <a class="pull-left" href="#!">
+                                                    <img class="media-object comment-avatar"
+                                                         src="{{asset('images/users/' . $comment->user->img_url)}}"
+                                                         alt="" width="50" height="50" style="object-fit: contain"/>
+                                                </a>
 
-                                            <div class="media-body">
-                                                <div class="comment-info">
-                                                    <h4 class="comment-author">
-                                                        <a href="#!">{{$comment->user->first_name . " " . $comment->user->last_name}}</a>
+                                                <div class="media-body">
+                                                    <div class="comment-info">
+                                                        <h4 class="comment-author">
+                                                            <a href="#!">{{$comment->user->first_name . " " . $comment->user->last_name}}</a>
 
-                                                    </h4>
-                                                    <time datetime="">{{$comment->updated_at}}</time>
-                                                    <span class="comment-button"><i
-                                                            class="tf-ion-star"></i>{{$comment->rating}}</span>
+                                                        </h4>
+                                                        <time datetime="">{{$comment->updated_at}}</time>
+                                                        <span class="comment-button"><i
+                                                                class="tf-ion-star"></i>{{$comment->rating}}</span>
+                                                    </div>
+
+                                                    <p>
+                                                        {{$comment->content}}
+                                                    </p>
                                                 </div>
 
-                                                <p>
-                                                    {{$comment->content}}
-                                                </p>
-                                            </div>
-
-                                        </li>
-                                        <!-- End Comment Item -->
-                                    @endforeach
-                                </ul>
+                                            </li>
+                                            <!-- End Comment Item -->
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -198,15 +202,21 @@ session()->put('current', 'product-single')
 <!-- Main Js File -->
 <script src="../js/script.js"></script>
 <script>
-    $("#product-quantity").change(function() {
-                let quantity = $(this).val();
-        if (quantity == $("#limit-quantity").val()) {
+    $("#product-quantity").change(function () {
+        let quantity = parseInt($(this).val());
+        let productId = $("#product-id").val();
+        let limitQuantity = parseInt($("#limit-quantity").val());
+        let quantityInCart = $(".quantity-" + productId).text();
+        if ((quantity + quantityInCart) > limitQuantity) {
             $(".bootstrap-touchspin-up").prop('disabled', true);
-        }
-        else {
+            $(this).val(limitQuantity - quantityInCart);
+
+            alert('Sản phẩm đã đạt số lượng tối đa!');
+            $("#add-cart").attr('disable', true);
+        } else {
             $(".bootstrap-touchspin-up").prop('disabled', false);
         }
-        if (quantity == 0) {
+        if (quantity <= 0) {
             $("#add-cart").prop('disabled', true);
         } else {
             $("#add-cart").prop('disabled', false);

@@ -66,7 +66,7 @@ class AdminController extends Controller
     public function listOrder()
     {
         $orders = Order::query()
-            ->orderByDesc('status')
+            ->orderBy('status')
             ->orderBy('id')
             ->get();
         return view('admin.order', ['orders' => $orders]);

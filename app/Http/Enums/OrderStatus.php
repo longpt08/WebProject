@@ -9,7 +9,7 @@ class OrderStatus
     const CONFIRMED = 1;
     const SHIPPING = 2;
     const COMPLETED = 3;
-    const CANCELED = 0;
+    const CANCELED = 4;
 
     public static function convert($status): string
     {

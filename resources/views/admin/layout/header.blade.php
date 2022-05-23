@@ -14,7 +14,7 @@
                 <li class="icons dropdown">
                     <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                         <span class="activity active"></span>
-                        <img src="{{asset('images/user/1.png')}}" height="40" width="40" alt="">
+                        <img src="{{asset('images/users/' . \Illuminate\Support\Facades\Auth::user()->getImageUrl())}}" height="40" width="40" alt="">
                     </div>
                     <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                         <div class="dropdown-content-body">
