@@ -14,11 +14,11 @@ class CommentStatus
     {
         switch ($status) {
             case self::ACTIVE:
-                return 'Active';
+                return 'Hiển thị';
             case self::PENDING:
-                return 'Pending';
+                return 'Chờ duyệt';
             case self::HIDDEN:
-                return 'Hidden';
+                return 'Bị ẩn';
         }
         return '';
     }

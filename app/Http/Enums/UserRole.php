@@ -12,11 +12,11 @@ class UserRole
     {
         switch ($role) {
             case self::USER:
-                return 'User';
+                return 'Người dùng';
             case self::ADMIN:
-                return 'Admin';
+                return 'Quản lý';
             case self::STAFF:
-                return 'Staff';
+                return 'Nhân viên';
         }
     }
 }

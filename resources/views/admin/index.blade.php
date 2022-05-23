@@ -23,7 +23,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="card gradient-1">
                         <div class="card-body">
-                            <h3 class="card-title text-white">Products</h3>
+                            <h3 class="card-title text-white">SẢN PHẨM</h3>
                             <div class="d-inline-block">
                                 <h2 class="text-white">{{$productCount}}</h2>
                                 <p class="text-white mb-0"></p>
@@ -35,7 +35,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="card gradient-2">
                         <div class="card-body">
-                            <h3 class="card-title text-white">Net Profit</h3>
+                            <h3 class="card-title text-white">DOANH THU</h3>
                             <div class="d-inline-block">
                                 <h2 class="text-white">{{$profit}}</h2>
                                 <p class="text-white mb-0"></p>
@@ -47,7 +47,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="card gradient-3">
                         <div class="card-body">
-                            <h3 class="card-title text-white">Customers</h3>
+                            <h3 class="card-title text-white">KHÁCH HÀNG</h3>
                             <div class="d-inline-block">
                                 <h2 class="text-white">{{$userCount}}</h2>
                                 <p class="text-white mb-0"></p>
@@ -59,7 +59,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="card gradient-4">
                         <div class="card-body">
-                            <h3 class="card-title text-white">Orders</h3>
+                            <h3 class="card-title text-white">ĐƠN HÀNG</h3>
                             <div class="d-inline-block">
                                 <h2 class="text-white">{{$orderCount}}</h2>
                                 <p class="text-white mb-0"></p>

@@ -43,13 +43,13 @@
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                <th>Invoice ID</th>
-                                                <th>Owner</th>
-                                                <th>Order ID</th>
-                                                <th>Total</th>
-                                                <th>Description</th>
-                                                <th>Status</th>
-                                                <th>Date</th>
+                                                <th>ID</th>
+                                                <th>Người Dùng</th>
+                                                <th>Mã Đơn Hàng</th>
+                                                <th>Tổng</th>
+                                                <th>Chi Tiết</th>
+                                                <th>Trạng Thái</th>
+                                                <th>Ngày Hóa Đơn</th>
                                             </tr>
                                         </thead>
                                         <tbody>

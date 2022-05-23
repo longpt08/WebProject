@@ -42,12 +42,12 @@
                                     <table class="table table-bordered verticle-middle">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Order ID</th>
-                                                <th scope="col">Owner</th>
-                                                <th scope="col">Invoice ID</th>
-                                                <th scope="col">Description</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Người Dùng</th>
+                                                <th scope="col">Mã Hóa Đơn</th>
+                                                <th scope="col">Mô Tả</th>
+                                                <th scope="col">Trạng Thái</th>
+                                                <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody>

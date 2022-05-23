@@ -13,9 +13,9 @@ class ProductStatus
     {
         switch ($status) {
             case self::ACTIVE:
-                return 'Active';
+                return 'Hoạt động';
             case self::INACTIVE:
-                return 'Inactive';
+                return 'Không hoạt động';
         }
         return '';
     }

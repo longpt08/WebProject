@@ -14,11 +14,11 @@ class InvoiceStatus
     {
         switch ($status) {
             case self::UNPAID:
-                return 'Unpaid';
+                return 'Chưa thanh toán';
             case self::PAID:
-                return 'Paid';
+                return 'Đã thanh toán';
             case self::VOID:
-                return 'Void';
+                return 'Bị hủy';
         }
         return '';
     }
