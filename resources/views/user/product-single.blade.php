@@ -202,24 +202,42 @@ session()->put('current', 'product-single')
 <!-- Main Js File -->
 <script src="../js/script.js"></script>
 <script>
-    $("#product-quantity").change(function () {
-        let quantity = parseInt($(this).val());
+    $(document).ready(function() {
+        let currentQuantity = parseInt($("#product-quantity").val());
         let productId = $("#product-id").val();
         let limitQuantity = parseInt($("#limit-quantity").val());
         let quantityInCart = $(".quantity-" + productId).text();
-        if ((quantity + quantityInCart) > limitQuantity) {
-            $(".bootstrap-touchspin-up").prop('disabled', true);
-            $(this).val(limitQuantity - quantityInCart);
-
-            alert('Sản phẩm đã đạt số lượng tối đa!');
-            $("#add-cart").attr('disable', true);
+        if (quantityInCart == "") {
+            quantityInCart = 0;
         } else {
-            $(".bootstrap-touchspin-up").prop('disabled', false);
+            quantityInCart = parseInt(quantityInCart);
         }
-        if (quantity <= 0) {
-            $("#add-cart").prop('disabled', true);
+        if (currentQuantity + quantityInCart >= limitQuantity) {
+            $("#add-cart").attr('disabled', true)
         } else {
-            $("#add-cart").prop('disabled', false);
+            $("#add-cart").attr('disabled', false)
+        }
+    });
+</script>
+<script>
+    $("#product-quantity").change(function () {
+        let currentQuantity = parseInt($(this).val());
+        let productId = $("#product-id").val();
+        let limitQuantity = parseInt($("#limit-quantity").val());
+        let quantityInCart = $(".quantity-" + productId).text();
+        if (quantityInCart == "") {
+            quantityInCart = 0;
+        } else {
+            quantityInCart = parseInt(quantityInCart);
+        }
+        if (currentQuantity + quantityInCart > limitQuantity) {
+            alert('Sản phẩm đạt số lượng tối đa!')
+            $(this).val(limitQuantity - quantityInCart)
+            if (quantityInCart != 0) {
+                $("#add-cart").attr('disabled', true)
+            }
+        } else {
+            $("#add-cart").attr('disabled', false)
         }
     })
 </script>
