@@ -233,7 +233,7 @@ session()->put('current', 'product-single')
         if (currentQuantity + quantityInCart > limitQuantity) {
             alert('Sản phẩm đạt số lượng tối đa!')
             $(this).val(limitQuantity - quantityInCart)
-            if (quantityInCart != 0) {
+            if (limitQuantity - quantityInCart == 0) {
                 $("#add-cart").attr('disabled', true)
             }
         } else {
