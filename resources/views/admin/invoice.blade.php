@@ -38,7 +38,9 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Data Table</h4>
+                                <div>
+                                    <button class="btn btn-flat" data-toggle="modal" data-target="#reportModal">Xuất Báo Cáo</button>
+                                </div>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
@@ -72,6 +74,48 @@
                 </div>
             </div>
             <!-- #/ container -->
+            <div style="text-align: center">
+                <div class="bootstrap-modal">
+                    <div class="modal fade" id="reportModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">XUẤT BÁO CÁO DOANH THU</h5>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                                <div class="model-content">
+                                    <form method="post" action="">
+                                        @csrf
+                                        <label for="from">Từ ngày: </label>
+                                        <input id="from" type="date" name="from" value="{{\Carbon\Carbon::today()->format('Y-m-d')}}">
+                                        <label for="to">Đến ngày: </label>
+                                        <input id="to" type="date" name="to" value="{{\Carbon\Carbon::today()->format('Y-m-d')}}">
+                                        <div>
+                                            <label for="daily">Loại: </label>
+                                            <select name="type">
+                                                <option value="daily">Theo ngày</option>
+                                                <option value="weekly">Theo tuần</option>
+                                                <option value="monthly">Theo tháng</option>
+                                                <option value="yearly">Theo năm</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">
+                                        HỦY
+                                    </button>
+                                    <button type="button" id="yes" class="btn btn-primary" data-dismiss="modal">ĐỒNG Ý
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!--**********************************
             Content body end
@@ -83,7 +127,29 @@
         Main wrapper end
     ***********************************-->
 @include('admin.layout.include-bottom')
-
+<script>
+    $("#from").change(function() {
+        let from = $(this).val();
+        let today = new Date().toISOString().slice(0, 10)
+        if (from > today) {
+            alert("Không thể xuất báo cáo trong tương lai!")
+            $(this).val(today)
+        }
+    })
+    $("#to").change(function() {
+        let to = $(this).val();
+        let from = $("#from").val();
+        let today = new Date().toISOString().slice(0, 10)
+        if (to > today) {
+            alert("Không thể xuất báo cáo trong tương lai!")
+            $(this).val(today)
+        }
+        if (from > to) {
+            alert("Ngày xuất báo cáo không hợp lệ!")
+            $(this).val(from)
+        }
+    })
+</script>
 </body>
 
 </html>
