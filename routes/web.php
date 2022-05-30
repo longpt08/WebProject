@@ -121,6 +121,7 @@ Route::group([
             return view('admin.create-category');
         });
         Route::post('category/create', [\App\Http\Controllers\CategoryController::class, 'createCategory']);
+        Route::post('generate-report', [\App\Http\Controllers\InvoiceController::class, 'generateReport']);
     });
 });
 

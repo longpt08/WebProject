@@ -92,15 +92,6 @@
                                         <input id="from" type="date" name="from" value="{{\Carbon\Carbon::today()->format('Y-m-d')}}">
                                         <label for="to">Đến ngày: </label>
                                         <input id="to" type="date" name="to" value="{{\Carbon\Carbon::today()->format('Y-m-d')}}">
-                                        <div>
-                                            <label for="daily">Loại: </label>
-                                            <select name="type">
-                                                <option value="daily">Theo ngày</option>
-                                                <option value="weekly">Theo tuần</option>
-                                                <option value="monthly">Theo tháng</option>
-                                                <option value="yearly">Theo năm</option>
-                                            </select>
-                                        </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -129,11 +120,16 @@
 @include('admin.layout.include-bottom')
 <script>
     $("#from").change(function() {
+        let to = $("#to").val();
         let from = $(this).val();
         let today = new Date().toISOString().slice(0, 10)
         if (from > today) {
             alert("Không thể xuất báo cáo trong tương lai!")
             $(this).val(today)
+        }
+        if (from > to) {
+            alert("Ngày xuất báo cáo không hợp lệ!")
+            $(this).val(to)
         }
     })
     $("#to").change(function() {
@@ -148,6 +144,23 @@
             alert("Ngày xuất báo cáo không hợp lệ!")
             $(this).val(from)
         }
+    })
+    $("#yes").click(function() {
+        let from = $("#from").val();
+        let to = $("#to").val();
+        let type = $("#type").val();
+        $.post(
+            '/admin/generate-report',
+            {
+                __token: "{{csrf_token()}}",
+                from: from,
+                to: to,
+                type: type,
+            },
+            function(response) {
+
+            }
+        )
     })
 </script>
 </body>

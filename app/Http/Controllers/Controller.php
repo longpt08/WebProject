@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\CategoryService;
+use App\Http\Services\InvoiceService;
 use App\Http\Services\OrderService;
 use App\Http\Services\ProductService;
 use App\Http\Services\UserService;
@@ -35,11 +36,17 @@ class Controller extends BaseController
      */
     public $orderService;
 
+    /**
+     * @var InvoiceService
+     */
+    public $invoiceService;
+
     public function __construct()
     {
         $this->userService = new UserService();
         $this->productService = new ProductService();
         $this->categoryService = new CategoryService();
         $this->orderService = new OrderService();
+        $this->invoiceService = new InvoiceService();
     }
 }
