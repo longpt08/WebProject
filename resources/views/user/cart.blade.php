@@ -89,6 +89,7 @@ $user = Auth::user();
                                     <tbody>
                                     @if($productCarts)
                                         @foreach($productCarts as $productCart)
+                                            <input type="hidden" id="limit-quantity-{{$productCart['product']->getId()}}" value="{{$productCart['product']->getQuantity()}}">
                                             <tr class="product-rows product-{{$productCart['product']->getId()}}">
                                                 <td class="">
                                                     <div class="product-info">
@@ -107,7 +108,7 @@ $user = Auth::user();
                                                               id="plus-{{$productCart['product']->getId()}}"><i
                                                                 class="tf tf-ion-plus"></i></span>
                                                         <span
-                                                            class="quantity-{{$productCart['product']->getId()}}">{{$productCart['quantity']}}</span>
+                                                            class="cart-quantity-{{$productCart['product']->getId()}}">{{$productCart['quantity']}}</span>
                                                         <span class="button"
                                                               id="minus-{{$productCart['product']->getId()}}"><i
                                                                 class="tf tf-ion-minus"></i></span>
@@ -167,20 +168,28 @@ $user = Auth::user();
         const id = $(this).attr('id').split('-');
         const action = id[0];
         const productId = id[1];
+        let quantity = $(".cart-quantity-" + productId).text()
+        let limitQuantity = $("#limit-quantity-" + productId).val()
         switch (action) {
             case 'plus':
-                $.get(
-                    '/plus/' + productId,
-                    function (response) {
-                        $(".quantity-" + productId).text(response[0]);
-                        $(".total-" + productId).text(response[1])
-                        $(".total-price").text(response[2])
-                    }
-                );
+                if (parseInt(quantity) >= parseInt(limitQuantity)) {
+                    alert('Số lượng đã đạt giới hạn!')
+                    $(".quantity-" + productId).text(limitQuantity)
+                    $(".cart-quantity-" + productId).text(limitQuantity);
+                } else {
+                    $.get(
+                        '/plus/' + productId,
+                        function (response) {
+                            $(".quantity-" + productId).text(response[0]);
+                            $(".cart-quantity-" + productId).text(response[0]);
+                            $(".total-" + productId).text(response[1])
+                            $(".total-price").text(response[2])
+                        }
+                    );
+                }
                 break;
             case 'minus':
-                let quantity = $(".quantity-" + productId).text()
-                if (quantity[0] == 1) {
+                if (quantity == 1) {
                     $("#removeModal").modal('show');
                     $('#yes').click(function () {
                             $.get(
@@ -198,6 +207,7 @@ $user = Auth::user();
                         '/minus/' + productId,
                         function (response) {
                             $(".quantity-" + productId).text(response[0]);
+                            $(".cart-quantity-" + productId).text(response[0]);
                             $(".total-" + productId).text(response[1])
                             $(".total-price").text(response[2])
                         }

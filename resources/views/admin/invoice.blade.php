@@ -39,7 +39,14 @@
                         <div class="card">
                             <div class="card-body">
                                 <div>
-                                    <button class="btn btn-flat" data-toggle="modal" data-target="#reportModal">Xuất Báo Cáo</button>
+                                    <form method="post" action="/admin/generate-report">
+                                        @csrf
+                                        <label for="from">Từ ngày: </label>
+                                        <input id="from" type="date" name="from" value="{{\Carbon\Carbon::today()->format('Y-m-d')}}">
+                                        <label for="to">Đến ngày: </label>
+                                        <input id="to" type="date" name="to" value="{{\Carbon\Carbon::today()->format('Y-m-d')}}">
+                                        <input type="submit" id="yes" value="Xuất báo cáo" class="btn btn-primary" data-dismiss="modal">
+                                    </form>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered zero-configuration">
@@ -74,40 +81,6 @@
                 </div>
             </div>
             <!-- #/ container -->
-            <div style="text-align: center">
-                <div class="bootstrap-modal">
-                    <div class="modal fade" id="reportModal">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">XUẤT BÁO CÁO DOANH THU</h5>
-                                    <button type="button" class="close" data-dismiss="modal">
-                                        <span>&times;</span>
-                                    </button>
-                                </div>
-                                <div class="model-content">
-                                    <form method="post" action="">
-                                        @csrf
-                                        <label for="from">Từ ngày: </label>
-                                        <input id="from" type="date" name="from" value="{{\Carbon\Carbon::today()->format('Y-m-d')}}">
-                                        <label for="to">Đến ngày: </label>
-                                        <input id="to" type="date" name="to" value="{{\Carbon\Carbon::today()->format('Y-m-d')}}">
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">
-                                        HỦY
-                                    </button>
-                                    <button type="button" id="yes" class="btn btn-primary" data-dismiss="modal">ĐỒNG Ý
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!--**********************************
             Content body end
         ***********************************-->
@@ -127,7 +100,7 @@
             alert("Không thể xuất báo cáo trong tương lai!")
             $(this).val(today)
         }
-        if (from > to) {
+        else if (from > to) {
             alert("Ngày xuất báo cáo không hợp lệ!")
             $(this).val(to)
         }
@@ -144,23 +117,6 @@
             alert("Ngày xuất báo cáo không hợp lệ!")
             $(this).val(from)
         }
-    })
-    $("#yes").click(function() {
-        let from = $("#from").val();
-        let to = $("#to").val();
-        let type = $("#type").val();
-        $.post(
-            '/admin/generate-report',
-            {
-                __token: "{{csrf_token()}}",
-                from: from,
-                to: to,
-                type: type,
-            },
-            function(response) {
-
-            }
-        )
     })
 </script>
 </body>
