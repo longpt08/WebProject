@@ -29,6 +29,11 @@ class OrderService
     {
         $order = Order::query()->find($id);
         $order->status = OrderStatus::COMPLETED;
+
+        $invoice = $order->invoice;
+        $invoice->status = InvoiceStatus::PAID;
+        $invoice->save();
+        
         return $order->save();
     }
 }
