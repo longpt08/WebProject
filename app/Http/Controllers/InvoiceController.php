@@ -12,6 +12,10 @@ class InvoiceController extends Controller
         $from = Carbon::parse($request['from']);
         $to = Carbon::parse($request['to']);
 
-        $this->invoiceService->report($from, $to);
+        $data = $this->invoiceService->report($from, $to);
+        $data['title'] = "BÁO CÁO DOANH THU";
+        $data['subtitle'] = "Từ ngày " . $from->format('d/m/Y') . " đến ngày ". $to->format('d/m/Y');
+
+        return view('admin.report', ['data' => $data]);
     }
 }
